@@ -6,35 +6,31 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 16:31:11 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/02/04 12:21:37 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/02/05 13:41:56 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
 
-t_point	line_intersection(t_point p0, t_point p1, t_point p2, t_point p3)
+t_point	line_intersection(t_point r_start, t_point r_end,
+			t_point w_start, t_point w_end)
 {
-	int		A_ray;
-	int		B_ray;
-	int		C_ray;
-	int		A_wall;
-	int		B_wall;
-	int		C_wall;
-	int		denominator;
-	t_point	intersection;
+	int				denominator;
+	t_point			intersection;
+	t_intersection	p;
 
 	intersection.x = 0;
 	intersection.y = 0;
-	A_ray = p1.y - p0.y;
-	B_ray = p0.x - p1.x;
-	C_ray = A_wall * p0.x + B_ray * p0.y;
-	A_wall = p3.y - p2.y;
-	A_wall = p2.x - p3.x;
-	C_wall = A_wall * p2.x + B_wall * p2.y;
-	denominator = A_wall * B_wall - C_wall * B_wall;
+	p.a_ray = r_end.y - r_start.y;
+	p.b_ray = r_start.x - r_end.x;
+	p.c_ray = a_ray * r_start.x + b_ray * r_start.y;
+	p.a_wall = w_end.y - w_start.y;
+	p.b_wall = w_start.x - w_end.x;
+	p.c_wall = a_wall * w_start.x + b_wall * w_start.y;
+	denominator = A_ray * b_wall - a_wall * b_ray;
 	if (denominator == 0)
 		return (intersection);
-	intersection.x = (b2 * c1 - b1 * c2) / denominator;
-	intersection.y = (a1 * c2 - a2 * b1) / denominator;
+	intersection.x = (p.b_wall * p.c_ray - p.b_ray * p.c_wall) / denominator;
+	intersection.y = (p.a_ray * p.c_wall - p.a_wall * p.c_ray) / denominator;
 	return (intersection);
 }

@@ -6,7 +6,7 @@
 /*   By: jessicasmith <jessicasmith@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/02 09:32:32 by jessicasmit    #+#    #+#                */
-/*   Updated: 2020/02/04 12:27:01 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/02/05 13:03:59 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,15 @@ typedef struct	s_mlx
 	int			bits_ppixel;
 	int			size_line;
 	char		*addr_str;
+	char		*title;
 	double		max;
 	double		mid;
 	double		min;
 	t_events	*events;
 	t_color		color;
 }				t_mlx;
+
+int				mlx_setup(t_mlx *mlx)
 
 int				hsv_color(double calc_nb);
 int				rgb_color(t_mlx *mlx, double calc_nb);

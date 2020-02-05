@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         ::::::::             #
-#    MAKEFILE                                           :+:    :+:             #
+#    Makefile                                           :+:    :+:             #
 #                                                      +:+                     #
 #    By: mminkjan <mminkjan@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/02/03 20:54:24 by mminkjan       #+#    #+#                 #
-#    Updated: 2020/02/03 20:57:31 by mminkjan      ########   odam.nl          #
+#    Updated: 2020/02/05 13:44:23 by jesmith       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ LIBFT = libft/
 
 SRCS = ./srcs/
 
-SRCS_FILES = main init
+SRCS_FILES = main init_wolf line_intersection mlx_setup utilities \
+			validate_map
 
 CFILES = $(SRCS_FILES:%=$(SRCS)%.c)
 

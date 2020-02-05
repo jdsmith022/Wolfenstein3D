@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:12:46 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/02/04 11:17:23 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/02/05 13:38:17 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,16 @@
 # define USAGE_ERR "usage: inpult valid wolf3d map"
 # define MALLOC_ERR "error: malloc"
 
+typedef struct	s_intersection
+{
+	int			a_ray;
+	int			b_ray;
+	int			c_ray;
+	int			a_wall;
+	int			b_wall;
+	int			c_wall;
+}				t_intersection;
+
 typedef	struct	s_point {
 	int			x;
 	int			y;
@@ -30,6 +40,7 @@ typedef	struct	s_line {
 	t_point		start;
 	t_point		end;
 	int			texture;
+	s_line		*next;
 }				t_line;
 
 typedef struct	s_wolf3d {
@@ -40,12 +51,17 @@ typedef struct	s_wolf3d {
 	int			bpp;
 	int			size_line;
 	int			**map;
+	double		win_height;
+	double		win_width;
+	int			fd;
 	t_point		point;
-	t_line		line;
+	t_line		*line;
 }				t_wolf;
 
-void			init_mlx(t_wolf *wolf);
+void			mlx_setup(t_wolf *wolf);
 void			init_wolf(t_wolf *wolf);
-void			wolf_exit(char *error);
+
+void			wolf_success_exit(t_wolf *wolf);
+void			wolf_failure_exit(t_wolf *wolf, char *exit_message);
 
 #endif
