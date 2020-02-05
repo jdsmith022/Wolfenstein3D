@@ -6,7 +6,7 @@
 #    By: mminkjan <mminkjan@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/02/03 20:54:24 by mminkjan       #+#    #+#                 #
-#    Updated: 2020/02/05 13:44:23 by jesmith       ########   odam.nl          #
+#    Updated: 2020/02/05 18:27:27 by jesmith       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ LIBFT = libft/
 
 SRCS = ./srcs/
 
-SRCS_FILES = main init_wolf line_intersection mlx_setup utilities \
+SRCS_FILES = main init_wolf mlx_setup utilities \
 			validate_map
 
 CFILES = $(SRCS_FILES:%=$(SRCS)%.c)
@@ -31,7 +31,7 @@ OFILES = $(CFILES:%.c=%.o)
 
 HEADERS = includes/wolf3d.h
 
-ADD_FILES = Makefile author
+ADD_FILES = Makefile author ./maps
 
 all: $(NAME)
 

@@ -29,9 +29,10 @@ SRCS := lstmap lstdelone lstiter lstadd lstnew islower \
 		foreach range sqrt recursive_factorial \
 		div_mod swap is_negative print_alphabet \
 		print_numbers strclen ull_length atoi_base \
-		itoa_base exit isnumber_base has_prefix isdigit_base
+		itoa_base exit isnumber_base has_prefix isdigit_base \
+		iswhitespace 
 
-CFILES := $(SRCS:%=./ft_%.c)
+CFILES := $(SRCS:%=./ft_%.c) get_next_line.c
 SRCO := $(CFILES:%.c=%.o)
 
 NORM := norminette $(HEAD) $(CFILES) | grep -e "Warning" -e "Error" -B 1

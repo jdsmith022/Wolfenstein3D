@@ -1,29 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_isdigit_base.c                                  :+:    :+:            */
+/*   get_next_line.h                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/01/08 10:12:40 by jesmith        #+#    #+#                */
-/*   Updated: 2020/02/05 17:00:20 by jesmith       ########   odam.nl         */
+/*   Created: 2020/02/05 14:57:18 by jesmith        #+#    #+#                */
+/*   Updated: 2020/02/05 16:04:13 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+# include "libft.h"
+# define BUFF_SIZE 400
 
-int		ft_isdigit_base(char c, int base)
-{
-	const char	*digits;
-	int			index;
+int get_next_line(const int fd, char **line);
 
-	digits = "0123456789ABCDEF";
-	index = 0;
-	while (index < base)
-	{
-		if (digits[index] == ft_toupper(c))
-			return (index);
-		index++;
-	}
-	return (-1);
-}
+#endif

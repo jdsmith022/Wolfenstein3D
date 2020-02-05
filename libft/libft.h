@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/01/13 12:48:31 by jesmith        #+#    #+#                */
-/*   Updated: 2020/02/02 09:28:31 by jessicasmit   ########   odam.nl         */
+/*   Updated: 2020/02/05 15:15:52 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stddef.h>
 # include <unistd.h>
 # include <string.h>
+# include "get_next_line.h"
 
 void				ft_bzero(void *s, size_t n);
 void				*ft_memset(void *str, int c, size_t n);
@@ -109,6 +110,8 @@ void				ft_div_mod(int a, int b, int *div, int *mod);
 void				ft_swap(int *a, int *b);
 void				ft_print_numbers(void);
 void				ft_print_alphabet(void);
+
+int					get_next_line(const int fd, char **line);
 
 typedef struct		s_list
 {

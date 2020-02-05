@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:12:46 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/02/05 13:38:17 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/02/05 18:18:20 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include "../minilibx_macos/mlx.h"
 # include <math.h>
 # include <fcntl.h>
+
+# include <stdio.h> //remove later
 
 # define USAGE_ERR "usage: inpult valid wolf3d map"
 # define MALLOC_ERR "error: malloc"
@@ -40,7 +42,7 @@ typedef	struct	s_line {
 	t_point		start;
 	t_point		end;
 	int			texture;
-	s_line		*next;
+	struct s_line		*next;
 }				t_line;
 
 typedef struct	s_wolf3d {
@@ -53,6 +55,8 @@ typedef struct	s_wolf3d {
 	int			**map;
 	double		win_height;
 	double		win_width;
+	int			max_x;
+	int			max_y;
 	int			fd;
 	t_point		point;
 	t_line		*line;
@@ -63,5 +67,10 @@ void			init_wolf(t_wolf *wolf);
 
 void			wolf_success_exit(t_wolf *wolf);
 void			wolf_failure_exit(t_wolf *wolf, char *exit_message);
+// void			lst_del(t_points **points, void (ft_del)(void*, size_t));
+
+int				**validate_map(t_wolf *wolf, char *file_name);
+
+void	print_map(int **map_values, t_wolf *wolf); //delete later
 
 #endif

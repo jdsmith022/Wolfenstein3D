@@ -6,13 +6,13 @@
 /*   By: jessicasmith <jessicasmith@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/13 21:02:41 by jessicasmit    #+#    #+#                */
-/*   Updated: 2020/01/08 10:19:47 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/02/05 17:10:32 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int					ft_isnumber(char *str, int base)
+int					ft_isnumber_base(char *str, int base)
 {
 	size_t		index;
 	size_t		digits;
@@ -29,7 +29,7 @@ int					ft_isnumber(char *str, int base)
 		index++;
 	else if (base == 10 && (str[index] == '-' || str[index] == '+'))
 		index++;
-	while (ft_isdigit_base(str[index], base) >= 0)
+	while (ft_isdigit_base(str[index], base) >= 0 && str[index])
 	{
 		index++;
 		digits++;
