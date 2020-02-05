@@ -6,7 +6,7 @@
 #    By: mminkjan <mminkjan@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/02/03 20:54:24 by mminkjan       #+#    #+#                 #
-#    Updated: 2020/02/05 18:27:27 by jesmith       ########   odam.nl          #
+#    Updated: 2020/02/05 18:38:13 by jesmith       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,11 +36,11 @@ ADD_FILES = Makefile author ./maps
 all: $(NAME)
 
 %.o: %.c
-	@gcc -c $(FLAGS) $@ $<
+	@gcc -g -c $(FLAGS) $@ $<
 
 $(NAME) : $(OFILES)
 	@make re -C $(LIBFT)
-	@gcc -I $(MLX) -L $(MLX) $(MLXFLAGS) -I $(LIBFT) -L $(LIBFT) -lft \
+	@gcc -g -I $(MLX) -L $(MLX) $(MLXFLAGS) -I $(LIBFT) -L $(LIBFT) -lft \
 	$(CFILES) $(FLAGS) $(NAME)
 
 clean :

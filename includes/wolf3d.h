@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:12:46 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/02/05 18:28:34 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/02/05 18:45:36 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ typedef struct	s_wolf {
 }				t_wolf;
 
 void			mlx_setup(t_wolf *wolf);
-void			init_wolf(t_wolf *wolf);
+t_wolf			init_wolf(void);
 
 void			wolf_success_exit(t_wolf *wolf);
 void			wolf_failure_exit(t_wolf *wolf, char *exit_message);
