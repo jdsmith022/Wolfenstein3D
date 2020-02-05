@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/05 13:35:03 by jesmith        #+#    #+#                */
-/*   Updated: 2020/02/05 18:27:02 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/02/05 18:29:34 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ static int		*validate_values(t_wolf *wolf, char **map_array, int **map_values)
 	// 	free_int(map_values);
 	// 	wolf_failure_exit(wolf, "error: reading file");
 	// }
-	// printf("uuh\n");
 	return (values);
 }
 
@@ -121,7 +120,7 @@ int		**validate_map(t_wolf *wolf, char *file_name)
 		index++;
 		ret_value = get_next_line(fd, &map_line);
 		free(map_line);
-		// wolf->max_y += 1;
+		wolf->max_y += 1;
 	}
 	return (map_values);
 }

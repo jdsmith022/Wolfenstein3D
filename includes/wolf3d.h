@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:12:46 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/02/05 18:18:20 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/02/05 18:28:34 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef	struct	s_line {
 	struct s_line		*next;
 }				t_line;
 
-typedef struct	s_wolf3d {
+typedef struct	s_wolf {
 	void		*mlx_ptr;
 	void		*win_ptr;
 	void		*img_ptr;
