@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/05 13:14:43 by jesmith        #+#    #+#                */
-/*   Updated: 2020/02/05 16:09:33 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/02/06 15:57:36 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,16 @@ void	wolf_failure_exit(t_wolf *wolf, char *exit_message)
 {
 	ft_putendl_fd(exit_message, wolf->fd);
 	close(wolf->fd);
-	if (wolf->line)
-	{
-		// lst_del(&wolf->line, &ft_del);
-		ft_bzero(wolf->line, sizeof(t_line));
-		free(wolf->line);
-	}
-	if (wolf != NULL)
-	{
-		ft_bzero(wolf, sizeof(t_wolf));
-		free(wolf);
-	}
+	// if (wolf->line)
+	// {
+	// 	// lst_del(&wolf->line, &ft_del);
+	// 	ft_bzero(wolf->line, sizeof(t_line));
+	// 	free(wolf->line);
+	// }
+	// if (wolf != NULL)
+	// {
+	// 	ft_bzero(wolf, sizeof(t_wolf));
+	// 	free(wolf);
+	// }
 	exit(EXIT_FAILURE);
 }

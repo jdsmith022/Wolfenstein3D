@@ -6,67 +6,69 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/05 13:35:03 by jesmith        #+#    #+#                */
-/*   Updated: 2020/02/05 20:00:20 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/02/06 18:42:09 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
 
-static void	free_values(int **map_values)
+static void	free_values(void **values)
 {
 	size_t	y;
 
 	y = 0;
-	while (map_values[y])
+	while (values[y] != NULL)
 	{
-		free(map_values[y]);
+		free(values[y]);
 		y++;
 	}
+	free(values);
 }
 
-static int	*validate_values(t_wolf *wolf, char **map_array)
+static int	validate_values(t_wolf *wolf, char **map_array,
+			int **values)
 {
-	size_t	index;
+	int		x;
 	int		width;
-	int		*values;
 	int		ret_value;
 
-	index = 0;
+	x = 0;
 	width = 0;
-	values = (int *)malloc(sizeof(int) * 100);
+	(*values) = (int *)malloc(sizeof(int) * 100);
 	if (values == NULL)
-		return (NULL);
-	while (map_array[index] != '\0')
+		return (-1);
+	while (map_array[x] != '\0')
 	{
-		ret_value = ft_isnumber_base(map_array[index], 10);
+		ret_value = ft_isnumber_base(map_array[x], 10);
 		if (ret_value == -1)
-			wolf_failure_exit(wolf, "error: reading file");
-		values[index] = ft_atoi_base(map_array[index], 10);
-		index++;
+			return (-1);
+		*values[x] = ft_atoi_base(map_array[x], 10);
+		printf("%d\n", *values[x]);
+		x++;
 		width++;
 	}
 	if (wolf->max_x == 0)
 		wolf->max_x = width;
 	if (width != wolf->max_x)
-		return (NULL);
-	return (values);
+		return (-1);
+	return (0);
 }
 
-int			*save_values(t_wolf *wolf, int **map_values,
-			char *map_line, size_t index)
+void		save_values(t_wolf *wolf, char *map_line, int **values)
 {
-	char **map_array;
+	char	**map_array;
+	int		valid;
 
 	map_array = ft_strsplit(map_line, ' ');
 	if (map_array == NULL)
 		wolf_failure_exit(wolf, "error: reading file");
-	map_values[index] = validate_values(wolf, map_array);
-	if (map_values[index] == NULL)
+	valid = validate_values(wolf, map_array, values);
+	if (valid == -1)
 	{
-		free_values(map_values);
+		free_values((void**)values);
 		wolf_failure_exit(wolf, "error: reading file");
 	}
-	return (map_values[index]);
+	free_values((void**)map_array);
 }
 
 int			**validate_map(t_wolf *wolf, char *file_name)
@@ -74,10 +76,8 @@ int			**validate_map(t_wolf *wolf, char *file_name)
 	int		ret_value;
 	char	*map_line;
 	int		**map_values;
-	size_t	index;
 	int		fd;
 
-	index = 0;
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
 		wolf_failure_exit(wolf, "error: opening file");
@@ -87,13 +87,15 @@ int			**validate_map(t_wolf *wolf, char *file_name)
 		wolf_failure_exit(wolf, "error: reading file");
 	while (ret_value > 0)
 	{
-		map_values[index] = save_values(wolf, map_values, map_line, index);
+		save_values(wolf, map_line, &map_values[wolf->max_y]);
 		ret_value = get_next_line(fd, &map_line);
 		if (ret_value == -1)
+		{
+			free(map_values);
 			wolf_failure_exit(wolf, "error: reading file");
+		}
 		free(map_line);
 		wolf->max_y++;
-		index++;
 	}
 	return (map_values);
 }
