@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:12:46 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/02/05 18:45:36 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/02/07 14:47:50 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void			wolf_success_exit(t_wolf *wolf);
 void			wolf_failure_exit(t_wolf *wolf, char *exit_message);
 // void			lst_del(t_points **points, void (ft_del)(void*, size_t));
 
-int				**validate_map(t_wolf *wolf, char *file_name);
+int				**save_map(t_wolf *wolf, char *file_name);
 
 void	print_map(int **map_values, t_wolf *wolf); //delete later
 

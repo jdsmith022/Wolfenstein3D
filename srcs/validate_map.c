@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/05 13:35:03 by jesmith        #+#    #+#                */
-/*   Updated: 2020/02/06 18:50:06 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/02/07 15:42:15 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,77 +25,56 @@ static void	free_values(void **values)
 	free(values);
 }
 
-static int	validate_values(t_wolf *wolf, char **map_array,
-			int *values)
-{
-	int		x;
-	int		width;
-	int		ret_value;
-
-	x = 0;
-	width = 0;
-	values = (int *)malloc(sizeof(int) * 100);
-	if (values == NULL)
-		return (-1);
-	while (map_array[x] != '\0')
-	{
-		ret_value = ft_isnumber_base(map_array[x], 10);
-		if (ret_value == -1)
-			return (-1);
-		values[x] = ft_atoi_base(map_array[x], 10);
-		printf("%d\n", values[x]);
-		x++;
-		width++;
-	}
-	if (wolf->max_x == 0)
-		wolf->max_x = width;
-	if (width != wolf->max_x)
-		return (-1);
-	return (0);
-}
-
-void		save_values(t_wolf *wolf, char *map_line, int *values)
+static int	*save_values(t_wolf *wolf, char *map_line)
 {
 	char	**map_array;
-	int		valid;
+	int		*values;
+	int		number;
+	int		x;
 
+	x = 0;
 	map_array = ft_strsplit(map_line, ' ');
 	if (map_array == NULL)
-		wolf_failure_exit(wolf, "error: reading file");
-	valid = validate_values(wolf, map_array, values);
-	if (valid == -1)
+		return (NULL);
+	values = malloc(sizeof(int) * 100);
+	while (map_array[x] != '\0' && ft_isnumber_base(map_array[x], 10) == 1)
 	{
-		free_values(values);
-		wolf_failure_exit(wolf, "error: reading file");
+		number = ft_atoi_base(map_array[x], 10);
+		values[x] = number;
+		x++;
 	}
-	free_values((void**)map_array);
+	if (wolf->max_x == 0)
+		wolf->max_x = x;
+	if (x == wolf->max_x)
+		return (values);
+	return (NULL);
 }
 
-int			**validate_map(t_wolf *wolf, char *file_name)
+int			**save_map(t_wolf *wolf, char *file_name)
 {
 	int		ret_value;
 	char	*map_line;
-	int		**map_values;
+	int		**values;
 	int		fd;
 
 	fd = open(file_name, O_RDONLY);
-	if (fd < 0)
-		wolf_failure_exit(wolf, "error: opening file");
+	values = (int**)malloc(sizeof(int*) * (100 * 100));
+	if (fd < 0 || values == NULL)
+		wolf_failure_exit(wolf, "error: saving file");
 	ret_value = get_next_line(fd, &map_line);
-	map_values = (int**)malloc(sizeof(int*) * (100 * 100));
-	if (map_values == NULL)
-		wolf_failure_exit(wolf, "error: reading file");
 	while (ret_value > 0)
 	{
-		save_values(wolf, map_line, map_values[wolf->max_y]);
-		ret_value = get_next_line(fd, &map_line);
-		if (ret_value == -1)
+		values[wolf->max_y] = save_values(wolf, map_line);
+		if (values[wolf->max_y] == NULL)
 		{
-			free(map_values);
+			free_values((void**)values);
 			wolf_failure_exit(wolf, "error: reading file");
 		}
 		free(map_line);
 		wolf->max_y++;
+		ret_value = get_next_line(fd, &map_line);
 	}
-	return (map_values);
+	if (ret_value < 0)
+		wolf_failure_exit(wolf, "error: reading file");
+	return (values);
 }
