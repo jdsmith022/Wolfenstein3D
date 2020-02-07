@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/05 13:35:03 by jesmith        #+#    #+#                */
-/*   Updated: 2020/02/07 15:42:15 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/02/07 15:53:57 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ static int	*save_values(t_wolf *wolf, char *map_line)
 	if (map_array == NULL)
 		return (NULL);
 	values = malloc(sizeof(int) * 100);
+	if (values == NULL)
+		return (NULL);
 	while (map_array[x] != '\0' && ft_isnumber_base(map_array[x], 10) == 1)
 	{
 		number = ft_atoi_base(map_array[x], 10);
@@ -68,7 +70,7 @@ int			**save_map(t_wolf *wolf, char *file_name)
 		if (values[wolf->max_y] == NULL)
 		{
 			free_values((void**)values);
-			wolf_failure_exit(wolf, "error: reading file");
+			wolf_failure_exit(wolf, "error: input valid map");
 		}
 		free(map_line);
 		wolf->max_y++;
