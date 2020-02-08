@@ -1,28 +1,56 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   validate_map.c                                     :+:    :+:            */
+/*   save_map_values.c                                  :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/05 13:35:03 by jesmith        #+#    #+#                */
-/*   Updated: 2020/02/07 15:53:57 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/02/08 15:05:37 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
 
-static void	free_values(void **values)
+static void	calculade_mod(t_wolf *wolf)
 {
-	size_t	y;
+	if (wolf->max_x > wolf->max_y)
+		wolf->module = wolf->win_width / wolf->max_x;
+	else
+		wolf->module = wolf->win_height / wolf->max_y;
+}
+
+static int	validate_map_size(t_wolf *wolf)
+{
+	if (wolf->max_x < 5 || wolf->max_y < 5)
+		return (-1);
+	if (wolf->max_x > MAX_SIZE || wolf->max_y > MAX_SIZE)
+		return (-1);
+}
+
+static int	validate_map_edges(t_wolf *wolf, int **values)
+{
+	int		x;
+	int		y;
 
 	y = 0;
-	while (values[y] != NULL)
+	while (y < wolf->max_y)
 	{
-		free(values[y]);
-		y++;
+		if (y == 0 || y == wolf->max_y)
+		{
+			x = 0;
+			while (x < wolf->max_x && values[y][x] > 0)
+				x++;
+			if (x != wolf->max_x)
+				return (-1);
+		}
+		while (y < wolf->max_y \
+			&& values[y][0] != 0 && values[y][wolf->max_x - 1] != 0)
+			y++;
+		if (y != wolf->max_y)
+			return (-1);
 	}
-	free(values);
+	return (0);
 }
 
 static int	*save_values(t_wolf *wolf, char *map_line)
@@ -36,12 +64,14 @@ static int	*save_values(t_wolf *wolf, char *map_line)
 	map_array = ft_strsplit(map_line, ' ');
 	if (map_array == NULL)
 		return (NULL);
-	values = malloc(sizeof(int) * 100);
+	values = malloc(sizeof(int) * MAX_SIZE);
 	if (values == NULL)
 		return (NULL);
 	while (map_array[x] != '\0' && ft_isnumber_base(map_array[x], 10) == 1)
 	{
 		number = ft_atoi_base(map_array[x], 10);
+		if (number > MAX_TEXTURES)
+			return (NULL);
 		values[x] = number;
 		x++;
 	}
@@ -60,23 +90,23 @@ int			**save_map(t_wolf *wolf, char *file_name)
 	int		fd;
 
 	fd = open(file_name, O_RDONLY);
-	values = (int**)malloc(sizeof(int*) * (100 * 100));
+	values = (int**)malloc(sizeof(int*) * (MAX_SIZE * MAX_SIZE));
 	if (fd < 0 || values == NULL)
-		wolf_failure_exit(wolf, "error: saving file");
+		wolf_failure_exit(wolf, values, "error: saving file");
 	ret_value = get_next_line(fd, &map_line);
 	while (ret_value > 0)
 	{
 		values[wolf->max_y] = save_values(wolf, map_line);
-		if (values[wolf->max_y] == NULL)
-		{
-			free_values((void**)values);
-			wolf_failure_exit(wolf, "error: input valid map");
-		}
 		free(map_line);
+		if (values[wolf->max_y] == NULL)
+			wolf_failure_exit(wolf, values, "error: input valid map");
 		wolf->max_y++;
 		ret_value = get_next_line(fd, &map_line);
 	}
 	if (ret_value < 0)
-		wolf_failure_exit(wolf, "error: reading file");
+		wolf_failure_exit(wolf, values, "error: reading file");
+	if (validate_map_edges(wolf, values) < 0 || validate_map_size(wolf) < 0)
+		wolf_failure_exit(wolf, values, "error: input valid map");
+	calculade_mod(wolf);
 	return (values);
 }

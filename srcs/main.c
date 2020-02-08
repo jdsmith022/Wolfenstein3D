@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:21:28 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/02/07 14:47:37 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/02/08 14:19:30 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ int		main(int argc, char **argv)
 	int		**map_values;
 
 	if (argc != 2)
-		wolf_failure_exit(&wolf, USAGE_ERR);
+		wolf_failure_exit(&wolf, NULL, USAGE_ERR);
 	wolf = init_wolf();
-	map_values = save_map(&wolf, argv[1]);
+	map_values = save_map_values(&wolf, argv[1]);
 	print_map(map_values, &wolf);
-	// mlx_setup(wolf);
-	// save_map(wolf, map_values);
+	mlx_setup(&wolf);
+	save_map_coordinates(wolf, map_values);
 	// wolf->title = ft_strdup(argv[1]);
 	// mlx_loop_hook(wolf->mlx_ptr, render_wolf, wolf);
 	// mlx_loop(wolf->mlx_ptr);
