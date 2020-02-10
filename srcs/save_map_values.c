@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/05 13:35:03 by jesmith        #+#    #+#                */
-/*   Updated: 2020/02/08 15:05:37 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/02/10 18:37:55 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,7 @@
 
 static void	calculade_mod(t_wolf *wolf)
 {
-	if (wolf->max_x > wolf->max_y)
-		wolf->module = wolf->win_width / wolf->max_x;
-	else
-		wolf->module = wolf->win_height / wolf->max_y;
+	wolf->module = wolf->win_width / (wolf->max_x - 1);
 }
 
 static int	validate_map_size(t_wolf *wolf)
@@ -26,6 +23,7 @@ static int	validate_map_size(t_wolf *wolf)
 		return (-1);
 	if (wolf->max_x > MAX_SIZE || wolf->max_y > MAX_SIZE)
 		return (-1);
+	return (0);
 }
 
 static int	validate_map_edges(t_wolf *wolf, int **values)
@@ -82,7 +80,7 @@ static int	*save_values(t_wolf *wolf, char *map_line)
 	return (NULL);
 }
 
-int			**save_map(t_wolf *wolf, char *file_name)
+int			**save_map_values(t_wolf *wolf, char *file_name)
 {
 	int		ret_value;
 	char	*map_line;

@@ -6,19 +6,34 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:21:28 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/02/08 14:19:30 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/02/10 19:05:40 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
 
+void	print_map_coordinates(t_object *object)
+{
+	while (object != NULL)
+	{
+		printf("texture = %d | start.x = %d	start.y = %d	|\
+		end.x = %d	end.y = %d\n", object->texture, object->start.x,\
+		object->start.y, object->end.x, object->end.y);
+		object = object->next;
+	}
+	printf("\n");
+}
+
 void	print_map(int **map_values, t_wolf *wolf)
 {
-	int y = 0;
+	int y;
+	int x;
+
 	(void)wolf;
+	y = 0;
 	while (y < 7)
 	{
-		int x = 0;
+		x = 0;
 		while (x < 12)
 		{
 			printf("|%d|", map_values[y][x]);
@@ -27,6 +42,7 @@ void	print_map(int **map_values, t_wolf *wolf)
 		printf("\n");
 		y++;
 	}
+	printf("\n");
 }
 
 int		main(int argc, char **argv)
@@ -39,10 +55,10 @@ int		main(int argc, char **argv)
 	wolf = init_wolf();
 	map_values = save_map_values(&wolf, argv[1]);
 	print_map(map_values, &wolf);
-	mlx_setup(&wolf);
-	save_map_coordinates(wolf, map_values);
-	// wolf->title = ft_strdup(argv[1]);
-	// mlx_loop_hook(wolf->mlx_ptr, render_wolf, wolf);
-	// mlx_loop(wolf->mlx_ptr);
+	save_map_coordinates(&wolf, map_values);
+	print_map_coordinates(wolf.object);
+	init_mlx(&wolf);
+	mlx_loop_hook(wolf.mlx_ptr, wolf_render, &wolf);
+	mlx_loop(wolf.mlx_ptr);
 	return (0);
 }
