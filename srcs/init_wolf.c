@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/05 13:14:09 by jesmith        #+#    #+#                */
-/*   Updated: 2020/02/10 21:26:12 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/02/11 12:12:00 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_wolf	init_wolf(void)
 	wolf.object = NULL;
 	wolf.pos.x = wolf.win_width / 2;
 	wolf.pos.y = wolf.win_height / 2;
-	wolf.dir_x = 0;
-	wolf.dir_y = 0;
+	wolf.dir.x = 0;
+	wolf.dir.y = 0;
 	return (wolf);
 }

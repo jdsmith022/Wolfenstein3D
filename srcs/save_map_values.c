@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/05 13:35:03 by jesmith        #+#    #+#                */
-/*   Updated: 2020/02/10 18:37:55 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/02/11 10:16:20 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	calculade_mod(t_wolf *wolf)
 {
-	wolf->module = wolf->win_width / (wolf->max_x - 1);
+	wolf->module = (wolf->win_width / (wolf->max_x - 1)) * 2;
 }
 
 static int	validate_map_size(t_wolf *wolf)

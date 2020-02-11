@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/08 14:14:17 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/02/10 18:35:25 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/02/11 11:05:33 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static void	horizontal_coordinates(t_wolf *wolf, int **values, int y)
 		{
 			start.x = x * wolf->module;
 			start.y = y * wolf->module;
-			while (x + 1 < wolf->max_x && values[y][x + 1] == texture)
+			while ((x + 1) < wolf->max_x && values[y][x + 1] == texture)
 			{
 				x++;
 				width++;

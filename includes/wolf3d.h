@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:12:46 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/02/10 21:27:39 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/02/11 12:16:39 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,17 +67,16 @@ typedef struct		s_wolf {
 	int				fd;
 	int				module;
 	t_point			pos;
+	t_point			dir;
 	t_object		*object;
 	t_form			form;
-	double			dir_x;
-	double			dir_y;
 }					t_wolf;
 
 void				mlx_setup(t_wolf *wolf);
 t_wolf				init_wolf(void);
 
-void				wolf_success_exit(t_wolf *wolf);
-void				wolf_failure_exit(t_wolf *wolf,\
+int					wolf_success_exit(t_wolf *wolf);
+int					wolf_failure_exit(t_wolf *wolf,\
 					int **map_values, char *exit_message);
 void				lst_del(t_object **object, void (ft_del)(void*, size_t));
 

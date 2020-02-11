@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/10 18:48:15 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/02/10 21:29:27 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/02/11 12:30:43 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ t_point			ray_intersection(t_wolf *wolf)
 	min_distance = wolf->win_width;
 	while (object != NULL)
 	{
-		//ray_end = ?\* 
-		intersect = line_intersection(wolf->pos, wolf->ray.end,\
+		intersect = line_intersection(wolf->pos, wolf->dir,\
 		object->start, object->end);
 		wolf->form.delta_x = intersect.x - wolf->pos.x;
 		wolf->form.delta_y = intersect.y - wolf->pos.y;
@@ -42,10 +41,11 @@ t_point			ray_intersection(t_wolf *wolf)
 
 void	line_render(t_wolf *wolf)
 {
+	t_point		ray;
 	t_point 	intersection;
-	t_object	ray;
-	t_object	object;
+	// t_object	object;
 
+	ray = set_ray(wolf)
 	intersection = ray_intersection(wolf);
 }
 
@@ -53,6 +53,6 @@ int		wolf_render(t_wolf *wolf)
 {
 	line_render(wolf);
 	mlx_hook(wolf->win_ptr, 2, 0, key_events, wolf);
-	mlx_loop(wolf->mlx_ptr);
+	mlx_hook(wolf->win_ptr, 17, 0, wolf_success_exit, wolf);
 	return (0);
 }
