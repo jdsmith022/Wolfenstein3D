@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:21:28 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/02/11 12:22:39 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/02/11 13:09:18 by JessicaSmit   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ void	print_map(int **map_values, t_wolf *wolf)
 
 	(void)wolf;
 	y = 0;
-	while (y < 7)
+	while (y < wolf->max_y)
 	{
 		x = 0;
-		while (x < 12)
+		while (x < wolf->max_x)
 		{
 			printf("|%d|", map_values[y][x]);
 			x++;
@@ -57,8 +57,8 @@ int		main(int argc, char **argv)
 	print_map(map_values, &wolf);
 	save_map_coordinates(&wolf, map_values);
 	print_map_coordinates(wolf.object);
-	init_mlx(&wolf);
-	mlx_loop_hook(wolf.mlx_ptr, wolf_render, &wolf);
-	mlx_loop(wolf.mlx_ptr);
+	// init_mlx(&wolf);
+	// mlx_loop_hook(wolf.mlx_ptr, wolf_render, &wolf);
+	// mlx_loop(wolf.mlx_ptr);
 	return (0);
 }
