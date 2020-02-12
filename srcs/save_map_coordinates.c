@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/08 14:14:17 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/02/11 15:01:12 by JessicaSmit   ########   odam.nl         */
+/*   Updated: 2020/02/12 14:43:16 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ static void	lst_addback(t_object **object_list, t_object *object)
 	temp->next = object;
 }
 
-static void	save_object(t_wolf *wolf, t_point start,
-				int x, int y, int **map_values, int texture)
+static void	save_vertical_object(t_wolf *wolf, t_point start,
+				t_point *i, int **map_values)
 {
 	t_object *object;
 
@@ -36,245 +36,101 @@ static void	save_object(t_wolf *wolf, t_point start,
 	if (object == NULL)
 		wolf_failure_exit(wolf, map_values, MALLOC_ERR);
 	object->start = start;
-	object->end.x = x * wolf->module;
-	object->end.y = y * wolf->module;
-	object->texture = texture;
+	object->end.y = (i->y + 1) * wolf->module;
+	object->end.x = i->x * wolf->module;
+	object->texture = map_values[i->y][i->x];
 	object->next = NULL;
 	lst_addback(&wolf->object, object);
 }
 
-static void	vertical_coordinates(t_wolf *wolf, int **values, int x)
+static void	vertical_coordinates(t_wolf *wolf, int **values, t_point *i)
 {
-	t_point		start;
-	int			texture;
-	int			height;
-	int			y;
+	t_point start;
+	int		hold_y;
 
-	y = 0;
-	while (y < wolf->max_y)
+	i->y = 0;
+	start.y = 1 * wolf->module;
+	hold_y = 0;
+	if (i->x == wolf->max_x - 1)
+		start.x = i->x * wolf->module;
+	else
+		start.x = (i->x + 1) * wolf->module;
+	while (i->y < wolf->max_y)
 	{
-		height = 0;
-		texture = values[y][x];
-		if (texture != 0)
+		if (values[i->y][i->x] > 0 && values[i->y][i->x] < 5)
 		{
-			start.x = x * wolf->module;
-			start.y = y * wolf->module;
-			while (y + 1 < wolf->max_y && values[y + 1][x] == texture)
-			{
-				height++;
-				y++;
-			}
-			if (height > 0)
-				save_object(wolf, start, x, y, values, texture);
+			while (i->y + 1 < wolf->max_y && \
+			values[i->y + 1][i->x] == values[i->y][i->x])
+				i->y++;
+			if ((i->y + 1 == wolf->max_y && hold_y + 1 != i->y) || \
+			(i->y > 0 && i->y + 1 < wolf->max_y && values[i->y - 1][i->x] != 0))
+				save_vertical_object(wolf, start, i, values);
 		}
-		y++;
+		hold_y = i->y;
+		i->y++;
+		start.y = i->y * wolf->module;
 	}
 }
 
-// static void	horizontal_coordinates(t_wolf *wolf, int **values, int y)
-// {
-// 	t_point start;
-// 	int		texture;
-// 	int		x;
-// 	int		width;
+static void	save_horizontal_object(t_wolf *wolf, t_point start,
+				t_point *i, int **map_values)
+{
+	t_object *object;
 
-// 	x = 0;
-// 	while (x < wolf->max_x)
-// 	{
-// 		texture = values[y][x];
-// 		width = 0;
-// 		if (texture != 0)
-// 		{
-// 			start.x = x * wolf->module;
-// 			start.y = y * wolf->module;
-// 			while (x + 1 < wolf->max_x && values[y][x + 1] == texture)
-// 			{
-// 				width++;
-// 				x++;
-// 			}
-// 			if (width == 0 && x > 0 && (y = 1 < wolf->max_y && values[y + 1][x] != texture))
-// 				x++;
-// 			if (x != 0 && x < wolf->max_x)
-// 				save_object(wolf, start, x, y, values, texture);
-// 		}
-// 		x++;
-// 	}
-// }
+	object = (t_object*)ft_memalloc(sizeof(t_object));
+	if (object == NULL)
+		wolf_failure_exit(wolf, map_values, MALLOC_ERR);
+	object->start = start;
+	if (map_values[i->y][i->x] > 4 || i->x + 1 == wolf->max_x)
+		object->end.x = i->x * wolf->module;
+	else
+		object->end.x = (i->x + 1) * wolf->module;
+	object->end.y = (i->y + 1) * wolf->module;
+	object->texture = map_values[i->y][i->x];
+	object->next = NULL;
+	lst_addback(&wolf->object, object);
+}
 
-static void	horizontal_coordinates(t_wolf *wolf, int **values, int y)
+static void	horizontal_coordinates(t_wolf *wolf, int **values, t_point *i)
 {
 	t_point start;
-	int		texture;
-	int		x;
-	int		start_x;
+	int		hold_x;
 
-	x = 0;
-	start.x = 0;
-	start_x = 0;
-	start.y = y * wolf->module;
-	while (x < wolf->max_x)
+	i->x = 0;
+	hold_x = 0;
+	start.x = 1 * wolf->module;
+	start.y = (i->y + 1) * wolf->module;
+	while (i->x < wolf->max_x - 1)
 	{
-		texture = values[y][x];
-		if (texture != 0)
+		if (values[i->y][i->x] != 0)
 		{
-			printf("texture: %d\n", texture);
-			while (values[y][x + 1] == texture)
-				x++;
-			if (x > 0 && x < wolf->max_x && x == start_x && texture < 5) //&& (y + 1 < wolf->max_y && values[y + 1][x] != texture))
-				x++;
-			if ((start_x != x && values[y][x - 1] != 0) || (start_x == x - 1 && texture > 4))
-			{
-				printf("x: %d, %d start: %d\n", x, y, start_x);
-				save_object(wolf, start, x, y, values, texture);
-			}
+			while (values[i->y][i->x + 1] == values[i->y][i->x])
+				i->x++;
+			if ((values[i->y][i->x - 1] < 5 && values[i->y][i->x - 1] > 0 \
+			&& values[i->y][i->x + 1] >= 0) || \
+			(values[i->y][i->x + 1] > 0 && values[i->y][i->x + 1] < 5))
+				save_horizontal_object(wolf, start, i, values);
 		}
-		// if (x == 0)
-		// 	x++;
-		printf("endx: %d and y: %d\n", x, y);
-		start.x = x * wolf->module;
-		if (x > 0)
-			start_x = x;
-		x++;
-		if (x == 0)
-			start_x = x;
-
+		hold_x = i->x;
+		i->x++;
+		start.x = i->x * wolf->module;
 	}
 }
 
 void		save_map_coordinates(t_wolf *wolf, int **map_values)
 {
-	t_object	*objects;
-	int			x;
-	int			y;
+	t_point		iterate;
 
-	x = 0;
-	y = 0;
-	printf("mod: %d\n", wolf->module);
-	printf("max_x: %d\n", wolf->max_x);
-	objects = (t_object*)ft_memalloc(sizeof(t_object));
-	if (objects == NULL)
-		wolf_failure_exit(wolf, map_values, MALLOC_ERR);
-	objects->next = NULL;
-	while (y < wolf->max_y)
+	iterate.y = 0;
+	while (iterate.y < wolf->max_y)
 	{
-		horizontal_coordinates(wolf, map_values, y);
-		y++;
+		horizontal_coordinates(wolf, map_values, &iterate);
+		iterate.y++;
 	}
-	while (x < wolf->max_x)
+	iterate.x = 0;
+	while (iterate.x < wolf->max_x)
 	{
-		vertical_coordinates(wolf, map_values, x);
-		x++;
+		vertical_coordinates(wolf, map_values, &iterate);
+		iterate.x++;
 	}
 }
-
-
-// static void	lst_addback(t_object **object_list, t_object *object)
-// {
-// 	t_object *temp;
-
-// 	temp = *object_list;
-// 	if (temp == NULL)
-// 	{
-// 		*object_list = object;
-// 		return ;
-// 	}
-// 	while (temp->next != NULL)
-// 		temp = temp->next;
-// 	temp->next = object;
-// }
-
-// static void	save_object(t_wolf *wolf, t_point start, int x, int y, int **map_values)
-// {
-// 	t_object *object;
-
-// 	object = (t_object*)ft_memalloc(sizeof(t_object));
-// 	if (object == NULL)
-// 		wolf_failure_exit(wolf, map_values, MALLOC_ERR);
-// 	object->start = start;
-// 	object->end.x = x * wolf->module;
-// 	object->end.y = y * wolf->module;
-// 	object->texture = map_values[y][x];
-// 	object->next = NULL;
-// 	lst_addback(&wolf->object, object);
-// }
-
-// static void	vertical_coordinates(t_wolf *wolf, int **values, int x)
-// {
-// 	t_point		start;
-// 	int			texture;
-// 	int			lenght;
-// 	int			y;
-
-// 	y = 0;
-// 	while (y < wolf->max_y)
-// 	{
-// 		texture = values[y][x];
-// 		lenght = 0;
-// 		if (texture != 0)
-// 		{
-// 			start.x = x * wolf->module;
-// 			start.y = x * wolf->module;
-// 			while (y + 1 < wolf->max_y && values[y + 1][x] == texture)
-// 			{
-// 				y++;
-// 				lenght++;
-// 			}
-// 			if (lenght > 0)
-// 				save_object(wolf, start, x, y, values);
-// 		}
-// 		y++;
-// 	}
-// }
-
-// static void	horizontal_coordinates(t_wolf *wolf, int **values, int y)
-// {
-// 	t_point start;
-// 	int		texture;
-// 	int		width;
-// 	int		x;
-
-// 	x = 0;
-// 	while (x < wolf->max_x)
-// 	{
-// 		texture = values[y][x];
-// 		width = 0;
-// 		if (texture != 0)
-// 		{
-// 			start.x = x * wolf->module;
-// 			start.y = y * wolf->module;
-// 			while ((x + 1) < wolf->max_x && values[y][x + 1] == texture)
-// 			{
-// 				x++;
-// 				width++;
-// 			}
-// 			if (width > 1 ||\
-// 				(values[y + 1][x] != texture && values[y - 1][x] != texture))
-// 				save_object(wolf, start, x, y, values);
-// 		}
-// 		x++;
-// 	}
-// }
-
-// void		save_map_coordinates(t_wolf *wolf, int **map_values)
-// {
-// 	t_object	*objects;
-// 	int			x;
-// 	int			y;
-
-// 	x = 0;
-// 	y = 0;
-// 	objects = (t_object*)ft_memalloc(sizeof(t_object));
-// 	if (objects == NULL)
-// 		wolf_failure_exit(wolf, map_values, MALLOC_ERR);
-// 	objects->next = NULL;
-// 	while (y < wolf->max_y)
-// 	{
-// 		horizontal_coordinates(wolf, map_values, y);
-// 		y++;
-// 	}
-// 	while (x < wolf->max_x)
-// 	{
-// 		vertical_coordinates(wolf, map_values, x);
-// 		x++;
-// 	}
-// }
