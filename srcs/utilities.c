@@ -6,29 +6,29 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/05 13:14:43 by jesmith        #+#    #+#                */
-/*   Updated: 2020/02/11 12:16:58 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/02/12 17:51:35 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
 
-void	lst_del(t_object **object, void (ft_del)(void*, size_t))
+void	lst_del(t_item **item, void (ft_del)(void*, size_t))
 {
-	t_object *list;
+	t_item *list;
 
 	(void)ft_del;
-	list = *object;
-	while ((*object)->next != 0)
+	list = *item;
+	while ((*item)->next != 0)
 	{
-		(*object) = (*object)->next;
-		if (*object != NULL)
-			free(*object);
-		list = (*object);
+		(*item) = (*item)->next;
+		if (*item != NULL)
+			free(*item);
+		list = (*item);
 	}
-	(*object) = (*object)->next;
-	if (*object != NULL)
-		free(*object);
-	(*object) = NULL;
+	(*item) = (*item)->next;
+	if (*item != NULL)
+		free(*item);
+	(*item) = NULL;
 }
 
 static void	free_values(void **values)
@@ -47,7 +47,7 @@ static void	free_values(void **values)
 int		wolf_success_exit(t_wolf *wolf)
 {
 	close(wolf->fd);
-	lst_del(&wolf->object, ft_del);
+	lst_del(&wolf->item, ft_del);
 	ft_bzero(wolf, sizeof(t_wolf));
 	exit(EXIT_SUCCESS);
 	return (0);
@@ -59,7 +59,7 @@ int		wolf_failure_exit(t_wolf *wolf, int **map_values, char *exit_message)
 	ft_putendl(exit_message);
 	if (map_values)
 		free_values((void**)map_values);
-	lst_del(&wolf->object, ft_del);
+	lst_del(&wolf->item, ft_del);
 	ft_bzero(wolf, sizeof(t_wolf));
 	exit(EXIT_FAILURE);
 	return (-1);

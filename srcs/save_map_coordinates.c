@@ -6,44 +6,44 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/08 14:14:17 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/02/12 14:43:16 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/02/12 17:44:55 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
 
-static void	lst_addback(t_object **object_list, t_object *object)
+static void	lst_addback(t_item **item_list, t_item *item)
 {
-	t_object *temp;
+	t_item *temp;
 
-	temp = *object_list;
+	temp = *item_list;
 	if (temp == NULL)
 	{
-		*object_list = object;
+		*item_list = item;
 		return ;
 	}
 	while (temp->next != NULL)
 		temp = temp->next;
-	temp->next = object;
+	temp->next = item;
 }
 
-static void	save_vertical_object(t_wolf *wolf, t_point start,
-				t_point *i, int **map_values)
+static void	save_vertical_item(t_wolf *wolf, t_point start,
+				t_i *i, int **map_values)
 {
-	t_object *object;
+	t_item *item;
 
-	object = (t_object*)ft_memalloc(sizeof(t_object));
-	if (object == NULL)
+	item = (t_item*)ft_memalloc(sizeof(t_item));
+	if (item == NULL)
 		wolf_failure_exit(wolf, map_values, MALLOC_ERR);
-	object->start = start;
-	object->end.y = (i->y + 1) * wolf->module;
-	object->end.x = i->x * wolf->module;
-	object->texture = map_values[i->y][i->x];
-	object->next = NULL;
-	lst_addback(&wolf->object, object);
+	item->start = start;
+	item->end.y = (i->y + 1) * wolf->module;
+	item->end.x = i->x * wolf->module;
+	item->texture = map_values[i->y][i->x];
+	item->next = NULL;
+	lst_addback(&wolf->item, item);
 }
 
-static void	vertical_coordinates(t_wolf *wolf, int **values, t_point *i)
+static void	vertical_coordinates(t_wolf *wolf, int **values, t_i *i)
 {
 	t_point start;
 	int		hold_y;
@@ -64,7 +64,7 @@ static void	vertical_coordinates(t_wolf *wolf, int **values, t_point *i)
 				i->y++;
 			if ((i->y + 1 == wolf->max_y && hold_y + 1 != i->y) || \
 			(i->y > 0 && i->y + 1 < wolf->max_y && values[i->y - 1][i->x] != 0))
-				save_vertical_object(wolf, start, i, values);
+				save_vertical_item(wolf, start, i, values);
 		}
 		hold_y = i->y;
 		i->y++;
@@ -72,26 +72,26 @@ static void	vertical_coordinates(t_wolf *wolf, int **values, t_point *i)
 	}
 }
 
-static void	save_horizontal_object(t_wolf *wolf, t_point start,
-				t_point *i, int **map_values)
+static void	save_horizontal_item(t_wolf *wolf, t_point start,
+				t_i *i, int **map_values)
 {
-	t_object *object;
+	t_item *item;
 
-	object = (t_object*)ft_memalloc(sizeof(t_object));
-	if (object == NULL)
+	item = (t_item*)ft_memalloc(sizeof(t_item));
+	if (item == NULL)
 		wolf_failure_exit(wolf, map_values, MALLOC_ERR);
-	object->start = start;
+	item->start = start;
 	if (map_values[i->y][i->x] > 4 || i->x + 1 == wolf->max_x)
-		object->end.x = i->x * wolf->module;
+		item->end.x = i->x * wolf->module;
 	else
-		object->end.x = (i->x + 1) * wolf->module;
-	object->end.y = (i->y + 1) * wolf->module;
-	object->texture = map_values[i->y][i->x];
-	object->next = NULL;
-	lst_addback(&wolf->object, object);
+		item->end.x = (i->x + 1) * wolf->module;
+	item->end.y = (i->y + 1) * wolf->module;
+	item->texture = map_values[i->y][i->x];
+	item->next = NULL;
+	lst_addback(&wolf->item, item);
 }
 
-static void	horizontal_coordinates(t_wolf *wolf, int **values, t_point *i)
+static void	horizontal_coordinates(t_wolf *wolf, int **values, t_i *i)
 {
 	t_point start;
 	int		hold_x;
@@ -102,14 +102,14 @@ static void	horizontal_coordinates(t_wolf *wolf, int **values, t_point *i)
 	start.y = (i->y + 1) * wolf->module;
 	while (i->x < wolf->max_x - 1)
 	{
-		if (values[i->y][i->x] != 0)
+		if (values[(int)i->y][(int)i->x] != 0)
 		{
 			while (values[i->y][i->x + 1] == values[i->y][i->x])
 				i->x++;
 			if ((values[i->y][i->x - 1] < 5 && values[i->y][i->x - 1] > 0 \
 			&& values[i->y][i->x + 1] >= 0) || \
 			(values[i->y][i->x + 1] > 0 && values[i->y][i->x + 1] < 5))
-				save_horizontal_object(wolf, start, i, values);
+				save_horizontal_item(wolf, start, i, values);
 		}
 		hold_x = i->x;
 		i->x++;
@@ -119,7 +119,7 @@ static void	horizontal_coordinates(t_wolf *wolf, int **values, t_point *i)
 
 void		save_map_coordinates(t_wolf *wolf, int **map_values)
 {
-	t_point		iterate;
+	t_i		iterate;
 
 	iterate.y = 0;
 	while (iterate.y < wolf->max_y)

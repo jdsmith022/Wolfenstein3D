@@ -6,15 +6,18 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/05 13:35:03 by jesmith        #+#    #+#                */
-/*   Updated: 2020/02/11 10:16:20 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/02/12 17:23:21 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
 
-static void	calculade_mod(t_wolf *wolf)
+static void	set_max_ray(t_wolf *wolf)
 {
-	wolf->module = (wolf->win_width / (wolf->max_x - 1)) * 2;
+	if (wolf->max_x > wolf->max_y)
+		wolf->max_ray = wolf->module * wolf->max_x;
+	else
+		wolf->max_ray = wolf->module * wolf->max_y;
 }
 
 static int	validate_map_size(t_wolf *wolf)
@@ -105,6 +108,6 @@ int			**save_map_values(t_wolf *wolf, char *file_name)
 		wolf_failure_exit(wolf, values, "error: reading file");
 	if (validate_map_edges(wolf, values) < 0 || validate_map_size(wolf) < 0)
 		wolf_failure_exit(wolf, values, "error: input valid map");
-	calculade_mod(wolf);
+	set_max_ray(wolf);
 	return (values);
 }

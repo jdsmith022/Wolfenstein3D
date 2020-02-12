@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:12:46 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/02/11 12:16:39 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/02/12 17:44:35 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 
 # define USAGE_ERR "usage: input valid wolf3d map"
 # define MALLOC_ERR "error: malloc"
+
+# define WIDTH	1200
+# define HEIGHT 600
 
 # define MAX_SIZE 100
 # define MAX_TEXTURES 7
@@ -41,16 +44,22 @@ typedef struct		s_form
 }					t_form;
 
 typedef	struct		s_point {
-	int				x;
-	int				y;
+	double			x;
+	double			y;
+	int				texture;
 }					t_point;
 
-typedef	struct		s_object {
+typedef	struct		s_item {
 	t_point			start;
 	t_point			end;
 	int				texture;
-	struct s_object	*next;
-}					t_object;
+	struct s_item	*next;
+}					t_item;
+
+typedef struct		s_i {
+	int				x;
+	int				y;
+}					t_i;
 
 typedef struct		s_wolf {
 	void			*mlx_ptr;
@@ -60,15 +69,17 @@ typedef struct		s_wolf {
 	int				bpp;
 	int				size_line;
 	int				**map;
-	double			win_height;
-	double			win_width;
 	int				max_x;
 	int				max_y;
 	int				fd;
 	int				module;
+	int				wall_height;
+	double			max_ray;
 	t_point			pos;
 	t_point			dir;
-	t_object		*object;
+	t_point			plane;
+	t_point			ray;
+	t_item			*item;
 	t_form			form;
 }					t_wolf;
 
@@ -78,7 +89,7 @@ t_wolf				init_wolf(void);
 int					wolf_success_exit(t_wolf *wolf);
 int					wolf_failure_exit(t_wolf *wolf,\
 					int **map_values, char *exit_message);
-void				lst_del(t_object **object, void (ft_del)(void*, size_t));
+void				lst_del(t_item **item, void (ft_del)(void*, size_t));
 
 int					**save_map_values(t_wolf *wolf, char *file_name);
 void				save_map_coordinates(t_wolf *wolf, int **map_values);
@@ -92,6 +103,6 @@ t_point				line_intersection(t_point r_start, t_point r_end,\
 int					key_events(int key, t_wolf *wolf);
 
 void				print_map(int **map_values, t_wolf *wolf); //delete later
-void				print_map_coordinates(t_object *object); //delete later
+void				print_map_coordinates(t_item *item); //delete later
 
 #endif
