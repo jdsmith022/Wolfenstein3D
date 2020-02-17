@@ -6,7 +6,7 @@
 /*   By: jessicasmith <jessicasmith@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/02 09:32:32 by jessicasmit    #+#    #+#                */
-/*   Updated: 2020/02/05 13:03:59 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/02/13 15:25:39 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ typedef struct	s_mlx
 	t_color		color;
 }				t_mlx;
 
-int				mlx_setup(t_mlx *mlx)
+int				mlx_setup(t_mlx *mlx);
 
 int				hsv_color(double calc_nb);
 int				rgb_color(t_mlx *mlx, double calc_nb);

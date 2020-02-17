@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/10 18:48:15 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/02/12 17:56:25 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/02/13 15:38:47 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	ray_render(t_wolf *wolf)
 {
 	t_point		ray;
 	t_point		intersect;
+	t_item		item;
 	int			x;
 	double		camera_x;
 
@@ -54,7 +55,8 @@ void	ray_render(t_wolf *wolf)
 		wolf->ray.x = wolf->dir.x + wolf->plane.x * camera_x * wolf->max_ray;
 		wolf->ray.y = wolf->dir.y + wolf->plane.y * camera_x * wolf->max_ray;
 		intersect = ray_intersection(wolf);
-		draw_collllllllumn(wolf, intersect);
+
+		draw_column(wolf, intersect, x);
 		x++;
 	}
 }

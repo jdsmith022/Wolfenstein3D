@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/05 13:35:03 by jesmith        #+#    #+#                */
-/*   Updated: 2020/02/12 17:23:21 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/02/13 15:11:33 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 static void	set_max_ray(t_wolf *wolf)
 {
-	if (wolf->max_x > wolf->max_y)
-		wolf->max_ray = wolf->module * wolf->max_x;
-	else
-		wolf->max_ray = wolf->module * wolf->max_y;
+	int map_width;
+	int map_lenght;
+
+	map_width = wolf->max_x * wolf->module;
+	map_lenght = wolf->max_y * wolf->module;
+	wolf->max_ray = sqrt(map_width * map_width + map_lenght * map_lenght);
 }
 
 static int	validate_map_size(t_wolf *wolf)
