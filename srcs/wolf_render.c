@@ -6,11 +6,32 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/10 18:48:15 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/02/13 15:38:47 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/02/17 20:07:56 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
+
+t_item			calculate_wall_distance(t_wolf *wolf,
+					t_point intersect, double camera_x)
+{
+	t_item		wall;
+	double		wall_dist;
+	double		intersect_dist;
+	double		cam_dist;
+	double		h;
+
+	cam_dist = fabs(intersect.x - camera_x);
+	intersect_dist = sqrt(wolf->form.delta_x + wolf->form.delta_y);
+	wall_dist = fabs(intersect_dist * intersect_dist - cam_dist * cam_dist);
+	wall_dist = sqrt(wall_dist);
+	h = wolf->wall_height / wall_dist;
+	wall.start.y = -h / 2 + wall_dist / 2;
+	wall.end.y = h / 2 + wall_dist / 2;
+	wall.texture = intersect.texture;
+	// printf("start = %f | end = %f\n", wall.start.y, wall.end.y);
+	return (wall);
+}
 
 t_point			ray_intersection(t_wolf *wolf)
 {
@@ -42,9 +63,8 @@ t_point			ray_intersection(t_wolf *wolf)
 
 void	ray_render(t_wolf *wolf)
 {
-	t_point		ray;
 	t_point		intersect;
-	t_item		item;
+	t_item		wall;
 	int			x;
 	double		camera_x;
 
@@ -55,8 +75,8 @@ void	ray_render(t_wolf *wolf)
 		wolf->ray.x = wolf->dir.x + wolf->plane.x * camera_x * wolf->max_ray;
 		wolf->ray.y = wolf->dir.y + wolf->plane.y * camera_x * wolf->max_ray;
 		intersect = ray_intersection(wolf);
-
-		draw_column(wolf, intersect, x);
+		wall = calculate_wall_distance(wolf, intersect, camera_x);
+		draw_column(wolf, wall, x);
 		x++;
 	}
 }
@@ -66,5 +86,7 @@ int		wolf_render(t_wolf *wolf)
 	ray_render(wolf);
 	mlx_hook(wolf->win_ptr, 2, 0, key_events, wolf);
 	mlx_hook(wolf->win_ptr, 17, 0, wolf_success_exit, wolf);
+	mlx_put_image_to_window(wolf->mlx_ptr,
+		wolf->win_ptr, wolf->image_ptr, 0, 0);
 	return (0);
 }

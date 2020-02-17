@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:21:28 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/02/12 17:44:44 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/02/17 19:55:57 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,15 @@
 
 void	print_map_coordinates(t_item *item)
 {
-	while (item != NULL)
+	t_item	*temp;
+
+	temp = item;
+	while (temp != NULL)
 	{
 		printf("texture = %d | start.x = %f	start.y = %f	|\
-		end.x = %f	end.y = %f\n", item->texture, item->start.x,\
-		item->start.y, item->end.x, item->end.y);
-		item = item->next;
+		end.x = %f	end.y = %f\n", temp->texture, temp->start.x,\
+		temp->start.y, temp->end.x, temp->end.y);
+		temp = temp->next;
 	}
 	printf("\n");
 }

@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:12:46 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/02/13 15:22:55 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/02/17 19:44:25 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,17 +61,13 @@ typedef struct		s_i {
 	int				y;
 }					t_i;
 
-typedef	struct		s_mlx {
-	void			*mlx_ptr;
-	void			*win_ptr;
-	void			*img_ptr;
-	char			*addr_str;
-	int				bpp;
-	int				size_line;
-}					t_mlx;
-
 typedef struct		s_wolf {
-	t_mlx			mlx;
+	void			*win_ptr;
+	void			*mlx_ptr;
+	void			*image_ptr;
+	int				bits_ppixel;
+	int				size_line;
+	char			*addr_str;
 	int				**map;
 	int				max_x;
 	int				max_y;
@@ -87,8 +83,8 @@ typedef struct		s_wolf {
 	t_form			form;
 }					t_wolf;
 
-void				mlx_setup(t_wolf *wolf);
 t_wolf				init_wolf(void);
+void				init_mlx(t_wolf *wolf);
 
 int					wolf_success_exit(t_wolf *wolf);
 int					wolf_failure_exit(t_wolf *wolf,\
@@ -98,11 +94,11 @@ void				lst_del(t_item **item, void (ft_del)(void*, size_t));
 int					**save_map_values(t_wolf *wolf, char *file_name);
 void				save_map_coordinates(t_wolf *wolf, int **map_values);
 
-void				init_mlx(t_wolf *wolf);
-
 int					wolf_render(t_wolf *wolf);
 t_point				line_intersection(t_point r_start, t_point r_end,\
 					t_point o_start, t_point o_end);
+
+void				draw_column(t_wolf *wolf, t_item wall, int x);
 
 int					key_events(int key, t_wolf *wolf);
 

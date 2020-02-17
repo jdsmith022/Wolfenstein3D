@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/05 13:14:09 by jesmith        #+#    #+#                */
-/*   Updated: 2020/02/12 17:45:54 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/02/17 18:12:47 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ t_wolf	init_wolf(void)
 	wolf.plane.x = 0;
 	wolf.plane.y = 0.66;
 	wolf.module = 300;
-	wolf.height_wall = 300
+	wolf.wall_height = 300;
 	return (wolf);
 }
