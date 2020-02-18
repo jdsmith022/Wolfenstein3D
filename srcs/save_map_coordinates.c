@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/08 14:14:17 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/02/18 10:16:32 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/02/18 11:08:16 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	save_vertical_item(t_wolf *wolf, t_point start,
 	if (item == NULL)
 		wolf_failure_exit(wolf, map_values, MALLOC_ERR);
 	item->start = start;
-	item->end.y = i->y * wolf->module;
+	item->end.y = (i->y + 1) * wolf->module;
 	if (i->x == 0)
 		item->end.x = (i->x + 1) * wolf->module;
 	else

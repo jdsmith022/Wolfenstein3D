@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/10 18:48:15 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/02/17 20:07:56 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/02/18 12:44:29 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@ t_item			calculate_wall_distance(t_wolf *wolf,
 
 	cam_dist = fabs(intersect.x - camera_x);
 	intersect_dist = sqrt(wolf->form.delta_x + wolf->form.delta_y);
-	wall_dist = fabs(intersect_dist * intersect_dist - cam_dist * cam_dist);
+	wall_dist = fabs(intersect_dist * intersect_dist + cam_dist * cam_dist);
 	wall_dist = sqrt(wall_dist);
+	// wall_dist = (wolf->pos.y - camera_x) / wolf->ray.y;
 	h = wolf->wall_height / wall_dist;
 	wall.start.y = -h / 2 + wall_dist / 2;
 	wall.end.y = h / 2 + wall_dist / 2;
@@ -45,10 +46,11 @@ t_point			ray_intersection(t_wolf *wolf)
 	min_distance = INFINITY;
 	while (item != NULL)
 	{
+		// printf("while %f, %f\n", item->start.x, item->start.y);
 		intersect = line_intersection(wolf->pos, wolf->ray,\
 		item->start, item->end);
-		wolf->form.delta_x = intersect.x - wolf->pos.x;
-		wolf->form.delta_y = intersect.y - wolf->pos.y;
+		wolf->form.delta_x = sqrt(1 + (intersect.y * intersect.y) / (intersect.x * intersect.x));//fabs(1 / intersect.x - wolf->pos.x); 
+		wolf->form.delta_y = sqrt(1 + (intersect.x * intersect.x) / (intersect.y * intersect.y));//fabs(1 / intersect.y - wolf->pos.y); //
 		distance = sqrt(wolf->form.delta_x + wolf->form.delta_y);
 		if (distance < min_distance)
 		{

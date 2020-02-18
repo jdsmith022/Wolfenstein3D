@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 16:31:11 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/02/10 21:19:26 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/02/18 10:41:28 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_point	line_intersection(t_point r_start, t_point r_end,
 
 	intersection.x = 0;
 	intersection.y = 0;
+	// printf("start: %f, %f end:  %f, %f\n", o_start.x, o_start.y, o_end.x, o_end.y);
 	st.a_ray = r_end.y - r_start.y;
 	st.b_ray = r_start.x - r_end.x;
 	st.c_ray = st.a_ray * r_start.x + st.b_ray * r_start.y;

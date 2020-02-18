@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/12 17:56:58 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/02/17 20:01:10 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/02/18 12:30:12 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,24 @@ static void	put_pixel(t_wolf *wolf, int color, int x, int y)
 	}
 }
 
+static void	draw_object(t_wolf *wolf, int x, int y)
+{
+	put_pixel(wolf, 0xffffff, x, y); //white
+}
+
 static void	draw_floor(t_wolf *wolf, int x, int y)
 {
-	put_pixel(wolf, 0x51636c, x, y);
+	put_pixel(wolf, 0x51636c, x, y); //gray-blue
 }
 
 static void	draw_item(t_wolf *wolf, int x, int y)
 {
-	put_pixel(wolf, 0x0000ff, x, y);
+	put_pixel(wolf, 0x0000ff, x, y); //blue
 }
 
 static void	draw_ceiling(t_wolf *wolf, int x, int y)
 {
-	put_pixel(wolf, 0xd57016, x, y);
+	put_pixel(wolf, 0xd57016, x, y); //orange
 }
 
 void	draw_column(t_wolf *wolf, t_item wall, int x)
@@ -48,12 +53,17 @@ void	draw_column(t_wolf *wolf, t_item wall, int x)
 	y = 0;
 	while (y < HEIGHT)
 	{
-		if (y < wall.start.y)
-			draw_ceiling(wolf, x, y);
-		else if (y >= wall.start.y && y <= wall.end.y)
-			draw_item(wolf, x, y);
-		else
-			draw_floor(wolf, x, y);
+		if (wall.texture < 5)
+		{
+			if (y < wall.start.y)
+				draw_ceiling(wolf, x, y);
+			else if (y >= wall.start.y && y <= wall.end.y)
+				draw_item(wolf, x, y);
+			else
+				draw_floor(wolf, x, y);
+		}
+		if (wall.texture > 4)
+			draw_object(wolf, x, y);
 		y++;
 	}
 }
