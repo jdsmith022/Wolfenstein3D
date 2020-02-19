@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:21:28 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/02/17 19:55:57 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/02/19 15:31:22 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int		main(int argc, char **argv)
 	save_map_coordinates(&wolf, map_values);
 	print_map_coordinates(wolf.item);
 	init_mlx(&wolf);
-	mlx_loop_hook(wolf.mlx_ptr, wolf_render, &wolf);
+	mlx_loop_hook(wolf.mlx_ptr, wolf_render2, &wolf);
 	mlx_loop(wolf.mlx_ptr);
 	return (0);
 }

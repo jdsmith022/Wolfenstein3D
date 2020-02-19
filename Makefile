@@ -6,7 +6,7 @@
 #    By: mminkjan <mminkjan@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/02/03 20:54:24 by mminkjan       #+#    #+#                 #
-#    Updated: 2020/02/17 19:00:54 by mminkjan      ########   odam.nl          #
+#    Updated: 2020/02/19 15:31:03 by jesmith       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,8 @@ LIBFT = libft/
 SRCS = ./srcs/
 
 SRCS_FILES = main init_wolf utilities init_mlx \
-			save_map_values save_map_coordinates wolf_render \
-			line_intersection draw_column key_events
+			save_map_values save_map_coordinates wolf_render2 \
+			line_intersection draw_column2 key_events
 
 CFILES = $(SRCS_FILES:%=$(SRCS)%.c)
 
