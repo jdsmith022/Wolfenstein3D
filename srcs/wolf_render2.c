@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 11:40:53 by jesmith        #+#    #+#                */
-/*   Updated: 2020/02/19 16:05:48 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/02/19 16:30:38 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,17 +118,17 @@ static void			render_wolf(t_wolf *wolf)
 	while (x < WIDTH)
 	{
 		plane_x = 2 * x / (double)WIDTH - 1;
-		ray.start.x = wolf->dir.x + wolf->plane.x * plane_x + 300;
-		ray.start.y = wolf->dir.y + wolf->plane.y * plane_x + 300; 
-		ray.end.x = wolf->dir.x + wolf->plane.x * plane_x * wolf->max_ray + 300;
-		ray.end.y = wolf->dir.y + wolf->plane.y * plane_x * wolf->max_ray + 300;
+		ray.start.x = wolf->dir.x + wolf->plane.x * plane_x;
+		ray.start.y = wolf->dir.y + wolf->plane.y * plane_x;
+		ray.end.x = wolf->dir.x + wolf->plane.x * plane_x * wolf->max_ray;
+		ray.end.y = wolf->dir.y + wolf->plane.y * plane_x * wolf->max_ray;
 		intersect = find_intersect(wolf, ray, wolf->height);
 		// if (intersect.texture <= 4)
 		// 	wolf->height = wolf->wall_height;
 		// else
 		// 	wolf->height = wolf->obj_height; //func for different obj height alter width of  object here too
 		plane_intersect = intersect_distance(wolf, ray, intersect);
-		// printf("%f, %f\n", plane_intersect.y_start, plane_intersect.y_end);
+		printf("%f, %f\n", ray.start.y, ray.end.y);
 		draw_column2(wolf, plane_intersect, x);
 		// if (wolf->height == wolf->wall_height)
 			x++;
