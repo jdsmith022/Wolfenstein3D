@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:34:26 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/02/22 16:26:24 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/02/22 20:49:48 by jessicasmit   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	init_mlx(t_wolf *wolf)
 	endian = 0;
 	wolf->mlx_ptr = mlx_init();
 	wolf->win_ptr = mlx_new_window(wolf->mlx_ptr, \
-		WIDTH + WIDTH, HEIGHT, "Wolf3d");
+		WIDTH + WIDTH / 2, HEIGHT, "Wolf3d");
 	if (wolf->win_ptr == NULL)
 		wolf_failure_exit(wolf, NULL, MALLOC_ERR);
 	wolf->image_ptr = mlx_new_image(wolf->mlx_ptr, WIDTH, HEIGHT);
