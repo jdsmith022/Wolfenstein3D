@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 11:40:53 by jesmith        #+#    #+#                */
-/*   Updated: 2020/02/22 14:35:46 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/02/22 16:35:59 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ static	t_height	intersect_distance(t_wolf *wolf, t_item ray, t_point intersect)
 	// if (intersect.texture < 5)
 	height = obj_dist * 0.577F;//wolf->wall_height / (obj_dist / 1.5);
 	// else
-	// 	height = wolf->obj_height 
-	camera_plane.y_start = -height / 2 + obj_dist / 2;
-	camera_plane.y_end = height / 2 + obj_dist / 2;
+	// 	height = wolf->obj_height
+	camera_plane.y_start = -height / 2 + (obj_dist / 2 + wolf->player.y);
+	camera_plane.y_end = height / 5 + (obj_dist / 5 - wolf->player.y);
 	camera_plane.texture = intersect.texture;
 	return (camera_plane);
 }
@@ -113,11 +113,12 @@ static void			render_wolf(t_wolf *wolf)
 	x = 0;
 	while (x < WIDTH)
 	{
-		plane_x = 2 * x / (double)WIDTH - 1;
+		plane_x = 2 * x / (double)WIDTH - 1 + wolf->player.x;
 		ray.start.x = wolf->dir.x + wolf->plane.x * plane_x + wolf->pos.x;
 		ray.start.y = wolf->dir.y + wolf->plane.y * plane_x + wolf->pos.y;
 		ray.end.x = wolf->dir.x + wolf->plane.x * plane_x * wolf->max_ray + wolf->pos.x;
 		ray.end.y = wolf->dir.y + wolf->plane.y * plane_x * wolf->max_ray + wolf->pos.y;
+		draw_ray(wolf, ray.start, ray.end);
 		intersect = find_intersect(wolf, ray, wolf->height);
 		// if (intersect.texture <= 4)
 		// 	wolf->height = wolf->wall_height;
@@ -137,6 +138,9 @@ int				wolf_render(t_wolf *wolf)
 	mlx_hook(wolf->win_ptr, 17, 0, wolf_success_exit, wolf);
 	mlx_put_image_to_window(wolf->mlx_ptr,
 		wolf->win_ptr, wolf->image_ptr, 0, 0);
+	flat_draw(wolf);
+	mlx_put_image_to_window(wolf->mlx_ptr2,
+		wolf->win_ptr, wolf->image_ptr2, WIDTH, 0);
 	ft_bzero(wolf->addr_str, wolf->size_line * (wolf->bits_ppixel / 8));
 	return (0);
 }

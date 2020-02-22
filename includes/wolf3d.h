@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:12:46 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/02/22 14:34:39 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/02/22 16:40:14 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@
 # define MAX_TEXTURES 7
 
 # define ESC 53
+# define W 13
+# define S 1
+# define A 0
+# define D 2
 
 typedef struct		s_form
 {
@@ -43,7 +47,7 @@ typedef struct		s_form
 	double			delta_y;
 }					t_form;
 
-typedef struct 		s_height
+typedef struct		s_height
 {
 	double			y_start;
 	double			y_end;
@@ -69,7 +73,28 @@ typedef struct		s_i {
 	int				y;
 }					t_i;
 
+typedef struct		s_player
+{
+	double			x;
+	double			y;
+}					t_player;
+
+typedef	struct			s_line //delete later
+{
+	double				delta_x;
+	double				delta_y;
+	double				delta_x_abs;
+	double				delta_y_abs;
+	double				error_x;
+	double				error_y;
+	double				delta_alt;
+}						t_line;
+
 typedef struct		s_wolf {
+	void			*win_ptr2; //remove from here
+	void			*mlx_ptr2;
+	void			*image_ptr2;
+	char			*addr_str2; // to here
 	void			*win_ptr;
 	void			*mlx_ptr;
 	void			*image_ptr;
@@ -85,6 +110,7 @@ typedef struct		s_wolf {
 	int				wall_height;
 	int				obj_height;
 	double			max_ray;
+	t_player		player;
 	t_point			pos;
 	t_point			dir;
 	t_point			plane;
@@ -113,5 +139,10 @@ int					key_events(int key, t_wolf *wolf);
 
 void				print_map(int **map_values, t_wolf *wolf); //delete later
 void				print_map_coordinates(t_item *item); //delete later
+int					flat_draw(t_wolf *wolf); // remove later
+void				draw_line(t_wolf *wolf, t_point start, t_point end); //remove
+void				draw_ray(t_wolf *wolf, t_point r_start, t_point r_end);
+void				init_mlx2(t_wolf *wolf); //remove
+
 
 #endif
