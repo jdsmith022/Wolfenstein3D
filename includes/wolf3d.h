@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:12:46 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/02/22 17:52:09 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/02/22 17:59:44 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ int					key_events(int key, t_wolf *wolf);
 void				print_map(int **map_values, t_wolf *wolf); //delete later
 void				print_map_coordinates(t_item *item); //delete later
 int					flat_draw(t_wolf *wolf); // remove later
-void				draw_line(t_wolf *wolf, t_point start, t_point end); //remove
+void				draw_line(t_wolf *wolf, t_point start, t_point end, int color); //remove
 void				draw_ray(t_wolf *wolf, t_point r_start, t_point r_end);
 void				init_mlx2(t_wolf *wolf); //remove
 

@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 11:40:53 by jesmith        #+#    #+#                */
-/*   Updated: 2020/02/22 16:35:59 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/02/22 19:39:53 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ static	t_height	intersect_distance(t_wolf *wolf, t_item ray, t_point intersect)
 
 	(void)wolf;
 	difference = ray.start.x - intersect.x;
-	plane_x = fabs(ray.start.x + difference);
-	obj_dist = fabs(intersect.obj_dist * intersect.obj_dist - plane_x * plane_x);
+	plane_x = ray.start.x + difference;
+	obj_dist = intersect.obj_dist * intersect.obj_dist - plane_x * plane_x;
 	obj_dist = sqrt(obj_dist);
 	// if (intersect.texture < 5)
 	height = obj_dist * 0.577F;//wolf->wall_height / (obj_dist / 1.5);
@@ -113,11 +113,12 @@ static void			render_wolf(t_wolf *wolf)
 	x = 0;
 	while (x < WIDTH)
 	{
-		plane_x = 2 * x / (double)WIDTH - 1 + wolf->player.x;
-		ray.start.x = wolf->dir.x + wolf->plane.x * plane_x + wolf->pos.x;
-		ray.start.y = wolf->dir.y + wolf->plane.y * plane_x + wolf->pos.y;
-		ray.end.x = wolf->dir.x + wolf->plane.x * plane_x * wolf->max_ray + wolf->pos.x;
-		ray.end.y = wolf->dir.y + wolf->plane.y * plane_x * wolf->max_ray + wolf->pos.y;
+		plane_x = 2 * x / (double)WIDTH - 1;
+		ray.start.x = wolf->dir.x - wolf->plane.x * plane_x + wolf->pos.x;
+		ray.start.y = wolf->dir.y - wolf->plane.y * plane_x + wolf->pos.y;
+		ray.end.x = ray.start.x * plane_x - wolf->pos.x + wolf->max_ray * (wolf->dir.x + wolf->dir.x);
+		ray.end.y = ray.start.y * plane_x - wolf->pos.y + wolf->max_ray * wolf->dir.y;
+		printf("%f - %f		%f - %f \n", ray.start.x, ray.start.y, ray.end.x, ray.end.y);
 		draw_ray(wolf, ray.start, ray.end);
 		intersect = find_intersect(wolf, ray, wolf->height);
 		// if (intersect.texture <= 4)
@@ -141,6 +142,6 @@ int				wolf_render(t_wolf *wolf)
 	flat_draw(wolf);
 	mlx_put_image_to_window(wolf->mlx_ptr2,
 		wolf->win_ptr, wolf->image_ptr2, WIDTH, 0);
-	ft_bzero(wolf->addr_str, wolf->size_line * (wolf->bits_ppixel / 8));
+	// ft_bzero(wolf->addr_str, wolf->size_line * (wolf->bits_ppixel / 8));
 	return (0);
 }
