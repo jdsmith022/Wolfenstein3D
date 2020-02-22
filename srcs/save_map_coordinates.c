@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/08 14:14:17 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/02/19 16:12:36 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/02/22 11:07:50 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ static void	vertical_coordinates(t_wolf *wolf, int **values, t_i *i)
 	i->y = 0;
 	start.y = 0;
 	hold_y = 0;
-	start.x = (i->x + 1) * wolf->module;
+	if (i->x == 0)
+		start.x = 0;
+	else
+		start.x = (i->x + 1) * wolf->module;
 	while (i->y < wolf->max_y)
 	{
 		if (values[i->y][i->x] > 0 && values[i->y][i->x] < 5)
