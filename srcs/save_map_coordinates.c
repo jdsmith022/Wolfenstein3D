@@ -6,26 +6,11 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/08 14:14:17 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/02/22 17:10:35 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/02/22 17:56:29 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
-
-static void	lst_addback(t_item **item_list, t_item *item)
-{
-	t_item *temp;
-
-	temp = *item_list;
-	if (temp == NULL)
-	{
-		*item_list = item;
-		return ;
-	}
-	while (temp->next != NULL)
-		temp = temp->next;
-	temp->next = item;
-}
 
 static void	save_vertical_item(t_wolf *wolf, t_point start,
 				t_i *i, int **map_values)
@@ -49,11 +34,9 @@ static void	vertical_coordinates(t_wolf *wolf, int **values, t_i *i)
 	int		hold_y;
 
 	i->y = 0;
-	start.y = 0;
 	hold_y = 0;
-	if (i->x == 0)
-		start.x = 0;
-	else
+	ft_bzero(&start, sizeof(t_point));
+	if (i->x != 0)
 		start.x = i->x * wolf->module;
 	while (i->y < wolf->max_y)
 	{
@@ -81,7 +64,7 @@ static void	save_horizontal_item(t_wolf *wolf, t_point start,
 	if (item == NULL)
 		wolf_failure_exit(wolf, map_values, MALLOC_ERR);
 	item->start = start;
-	if (i->x != 0 && i->y != 0 && i->y != wolf->max_y - 1)
+	if (i->y != 0 && i->x + 1 != wolf->max_x)
 		item->end.x = (i->x + 1) * wolf->module;
 	else if (map_values[i->y][i->x] > 4)
 		item->end.x = (i->x + 1) * 70;
@@ -100,10 +83,8 @@ static void	horizontal_coordinates(t_wolf *wolf, int **values, t_i *i)
 
 	i->x = 0;
 	hold_x = 0;
-	start.x = 0;// * wolf->module;
-	if (i->y == 0)
-		start.y = 0;
-	else
+	ft_bzero(&start, sizeof(t_point));
+	if (i->y != 0)
 		start.y = i->y * wolf->module;
 	while (i->x < wolf->max_x - 1)
 	{
@@ -117,9 +98,8 @@ static void	horizontal_coordinates(t_wolf *wolf, int **values, t_i *i)
 				save_horizontal_item(wolf, start, i, values);
 		}
 		hold_x = i->x;
-		// if (i->y != 0 || i->y != wolf->max_y)
-		// 	i->x++;
-		i->x++;
+		if (i->y != 0)
+			i->x++;
 		start.x = i->x * wolf->module;
 	}
 }

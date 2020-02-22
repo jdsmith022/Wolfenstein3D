@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:12:46 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/02/22 16:40:14 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/02/22 17:52:09 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ int					wolf_success_exit(t_wolf *wolf);
 int					wolf_failure_exit(t_wolf *wolf,\
 					int **map_values, char *exit_message);
 void				lst_del(t_item **item, void (ft_del)(void*, size_t));
+void				lst_addback(t_item **item_list, t_item *item);
 
 int					**save_map_values(t_wolf *wolf, char *file_name);
 void				save_map_coordinates(t_wolf *wolf, int **map_values);
