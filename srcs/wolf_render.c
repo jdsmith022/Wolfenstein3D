@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 11:40:53 by jesmith        #+#    #+#                */
-/*   Updated: 2020/02/22 19:39:53 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/02/24 17:07:03 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,21 +104,23 @@ static t_point		find_intersect(t_wolf *wolf, t_item ray, int prev_height)
 
 static void			render_wolf(t_wolf *wolf)
 {
-	double  	plane_x;
+	double  	ray_angle;
+	double		angle;
 	t_item		ray;
 	t_point		intersect;
 	t_height	plane_intersect;
 	int			x;
 
 	x = 0;
+	ray_angle = FOV / WIDTH;
+	angle = wolf->dir_angle - (FOV / 2);
 	while (x < WIDTH)
 	{
-		plane_x = 2 * x / (double)WIDTH - 1;
-		ray.start.x = wolf->dir.x - wolf->plane.x * plane_x + wolf->pos.x;
-		ray.start.y = wolf->dir.y - wolf->plane.y * plane_x + wolf->pos.y;
-		ray.end.x = ray.start.x * plane_x - wolf->pos.x + wolf->max_ray * (wolf->dir.x + wolf->dir.x);
-		ray.end.y = ray.start.y * plane_x - wolf->pos.y + wolf->max_ray * wolf->dir.y;
-		printf("%f - %f		%f - %f \n", ray.start.x, ray.start.y, ray.end.x, ray.end.y);
+		ray.start.x = wolf->pos.x;
+		ray.start.y = wolf->pos.y;
+		ray.end.x = ray.start.x + wolf->max_ray * cos(angle);
+		ray.end.y = ray.start.y + wolf->max_ray * sin(angle);
+		angle += ray_angle;
 		draw_ray(wolf, ray.start, ray.end);
 		intersect = find_intersect(wolf, ray, wolf->height);
 		// if (intersect.texture <= 4)
@@ -128,7 +130,7 @@ static void			render_wolf(t_wolf *wolf)
 		plane_intersect = intersect_distance(wolf, ray, intersect);
 		draw_column(wolf, plane_intersect, x);
 		// if (wolf->height == wolf->wall_height)
-			x++;
+		x++;
 	}
 }
 

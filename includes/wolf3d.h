@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:12:46 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/02/22 17:59:44 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/02/24 17:04:01 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 
 # define MAX_SIZE 100
 # define MAX_TEXTURES 7
+
+# define FOV 0.76
 
 # define ESC 53
 # define W 13
@@ -110,6 +112,7 @@ typedef struct		s_wolf {
 	int				wall_height;
 	int				obj_height;
 	double			max_ray;
+	double			dir_angle;
 	t_player		player;
 	t_point			pos;
 	t_point			dir;

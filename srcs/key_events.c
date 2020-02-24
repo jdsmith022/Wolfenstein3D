@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/10 19:09:56 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/02/22 16:00:42 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/02/24 17:01:13 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 
 static void	key_player_movement(t_wolf *wolf, int key)
 {
+	if (key == W)
+	{
+		wolf->dir_angle += 0.1;
+		printf("%f\n", wolf->dir_angle);
+	}
 	if (key == W && wolf->pos.y < HEIGHT && wolf->pos.y > 10)
 		wolf->player.y -= 10;
 	else if (key == S && wolf->pos.y < HEIGHT && wolf->pos.y > 0)
