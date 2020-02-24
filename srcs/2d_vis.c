@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/22 14:10:44 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/02/22 18:25:28 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/02/24 18:52:38 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,16 +118,6 @@ void		draw_ray(t_wolf *wolf, t_point r_start, t_point r_end)
 	end.x = (int)r_end.x / 3;
 	end.y = (int)r_end.y / 3;
 	draw_line(wolf, start, end, 0x00ffff);
-	start.x = wolf->pos.x / 3;
-	start.y = wolf->pos.y / 3;
-	end.x = wolf->pos.x / 3 + 5;
-	end.y = wolf->pos.y / 3;
-	draw_line(wolf, start, end, 0xff0000);
-	start.x = wolf->pos.x / 3;
-	start.y = wolf->pos.y / 3;
-	end.x = wolf->dir.x / 3 * wolf->max_ray;
-	end.y = wolf->dir.y / 3 * wolf->max_ray;
-	draw_line(wolf, start, end, 0x00ff00);
 }
 
 void		draw_map(t_wolf *wolf, t_item *item)
@@ -149,5 +139,8 @@ void		draw_map(t_wolf *wolf, t_item *item)
 int			flat_draw(t_wolf *wolf)
 {
 	draw_map(wolf, wolf->item);
+	mlx_put_image_to_window(wolf->mlx_ptr2,
+		wolf->win_ptr, wolf->image_ptr2, WIDTH, 0);
+	ft_bzero(wolf->addr_str, wolf->size_line * (wolf->bits_ppixel / 8));
 	return (0);
 }

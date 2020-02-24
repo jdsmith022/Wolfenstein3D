@@ -6,13 +6,13 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 11:40:53 by jesmith        #+#    #+#                */
-/*   Updated: 2020/02/24 17:11:15 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/02/24 18:54:51 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
 
-static	t_height	intersect_distance(t_wolf *wolf, 
+static	t_height	intersect_distance(t_wolf *wolf,
 						t_item ray, t_point intersect)
 {
 	double		difference;
@@ -138,13 +138,11 @@ static void			render_wolf(t_wolf *wolf)
 int				wolf_render(t_wolf *wolf)
 {
 	render_wolf(wolf);
-	mlx_hook(wolf->win_ptr, 2, 0, key_events, wolf);
-	mlx_hook(wolf->win_ptr, 17, 0, wolf_success_exit, wolf);
+	mlx_key(wolf);
+	mlx_mouse(wolf);
+	flat_draw(wolf);
 	mlx_put_image_to_window(wolf->mlx_ptr,
 		wolf->win_ptr, wolf->image_ptr, 0, 0);
-	flat_draw(wolf);
-	mlx_put_image_to_window(wolf->mlx_ptr2,
-		wolf->win_ptr, wolf->image_ptr2, WIDTH, 0);
 	ft_bzero(wolf->addr_str, wolf->size_line * (wolf->bits_ppixel / 8));
 	return (0);
 }

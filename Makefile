@@ -6,7 +6,7 @@
 #    By: mminkjan <mminkjan@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/02/03 20:54:24 by mminkjan       #+#    #+#                 #
-#    Updated: 2020/02/22 16:14:34 by jesmith       ########   odam.nl          #
+#    Updated: 2020/02/24 17:31:15 by jesmith       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SRCS = ./srcs/
 
 
 SRCS_FILES = main init_wolf utilities init_mlx \
-			save_map_values save_map_coordinates wolf_render \
+			save_map_values save_map_coordinates wolf_render mouse_events \
 			line_intersection draw_column key_events 2d_vis mlx_init2
 
 PRINT = ./printers/ #remove

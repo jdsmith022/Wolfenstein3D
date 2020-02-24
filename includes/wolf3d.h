@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:12:46 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/02/24 17:04:01 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/02/24 18:34:37 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 # define S 1
 # define A 0
 # define D 2
+# define MOUSE_PRESS 1
 
 typedef struct		s_form
 {
@@ -69,6 +70,13 @@ typedef	struct		s_item {
 	int				texture;
 	struct s_item	*next;
 }					t_item;
+
+typedef	struct		s_event {
+	int				key_press;
+	int				mouse_press;
+	int				hold_x;
+	int				hold_y; // needed?
+}					t_event;
 
 typedef struct		s_i {
 	int				x;
@@ -113,6 +121,7 @@ typedef struct		s_wolf {
 	int				obj_height;
 	double			max_ray;
 	double			dir_angle;
+	t_event			event;
 	t_player		player;
 	t_point			pos;
 	t_point			dir;
@@ -139,7 +148,8 @@ t_point				line_intersection(t_point r_start, t_point r_end,\
 
 void				draw_column(t_wolf *wolf, t_height wall, int x);
 
-int					key_events(int key, t_wolf *wolf);
+void				mlx_mouse(t_wolf *wolf);
+void				mlx_key(t_wolf *wolf);
 
 void				print_map(int **map_values, t_wolf *wolf); //delete later
 void				print_map_coordinates(t_item *item); //delete later

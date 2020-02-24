@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/05 13:14:09 by jesmith        #+#    #+#                */
-/*   Updated: 2020/02/24 17:03:00 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/02/24 17:40:06 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,12 @@ t_wolf	init_wolf(void)
 {
 	t_wolf wolf;
 
+	ft_bzero(&wolf, sizeof(t_wolf));
 	wolf.max_x = 0;
 	wolf.max_y = 0;
 	wolf.item = NULL;
-	wolf.pos.x = 300;
-	wolf.pos.y = 600;
+	wolf.pos.x = 500;
+	wolf.pos.y = 150;
 	wolf.dir_angle = -0.45;
 	wolf.dir.x = 0;
 	wolf.dir.y = -1;
