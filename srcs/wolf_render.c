@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 11:40:53 by jesmith        #+#    #+#                */
-/*   Updated: 2020/02/25 15:14:12 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/02/25 15:35:00 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static t_point		intersect_point(t_point r_start, t_point r_end,
 	t_point intersect;
 	// double	angle;
 	double	denominator;
-
+	(void)wolf;
 	intersect.x = 0;
 	intersect.y = 0;
 	double r_x;
@@ -86,25 +86,10 @@ static t_point		intersect_point(t_point r_start, t_point r_end,
 		intersect.x = r_start.x + (t * r_x);
 		intersect.y = r_start.y + (t * r_y);
 	}
-	draw_ray(wolf, r_start, intersect, 0xfc03ad);// red
 	return (intersect);
-// 	// (void)wolf;
-// 	// angle = wolf->dir_angle - (FOV / 2);
-// 	// calc.a_ray = r_end.y - r_start.y;
-// 	// calc.b_ray = r_end.x - r_start.x;
-// 	// calc.c_ray = calc.a_ray * r_start.x + calc.b_ray * r_start.y;
-// 	// calc.a_obj = o_end.y - o_start.y;
-// 	// calc.b_obj = o_start.x - o_end.x;
-// 	// calc.c_obj = calc.a_obj * o_start.x + calc.b_obj * o_start.y;
-// 	// denominator = calc.a_ray * calc.b_obj - calc.a_obj * calc.b_ray;
-// 	// if (denominator == 0)
-// 	// 	return (intersect);
-// 	// intersect.x = (calc.b_obj * calc.c_ray - calc.b_ray * calc.c_obj) / denominator;
-// 	// intersect.y = (calc.a_ray * calc.c_obj - calc.a_obj * calc.c_ray) / denominator;
-// 	return (intersect);
 }
 
-static t_point		find_intersect(t_wolf *wolf, t_item ray, int prev_height, double angle)
+static t_point		find_intersect(t_wolf *wolf, t_item ray, int prev_height)
 {
 	t_point intersect;
 	t_point	min_intersect;
@@ -119,17 +104,18 @@ static t_point		find_intersect(t_wolf *wolf, t_item ray, int prev_height, double
 	{
 		intersect = \
 			intersect_point(ray.start, ray.end, object->start, object->end, wolf);
-		distance = fabs(ray.start.x - intersect.x) / cos(angle);
+		distance = fabs(ray.start.x - intersect.x) / cos(FOV / 2);
 		// distance = ray_distance(ray, intersect);
 		if (distance < min_distance)
 		{
 			min_distance = distance;
-			printf("min: %f\n", min_distance);
+			// printf("min: %f\n", min_distance);
 			// printf("%f, %f	%f, %f\n", object->start.x, object->start.y, object->end.x, object->end.y);
 			min_intersect.x = intersect.x;
 			min_intersect.y = intersect.y;
 			min_intersect.obj_dist = distance;
 			min_intersect.texture = object->texture;
+			draw_ray(wolf, ray.start, intersect, 0xfc03ad);// red
 		}
 		object = object->next;
 	}
@@ -156,7 +142,7 @@ static void			render_wolf(t_wolf *wolf)
 		ray.end.x = ray.start.x + wolf->max_ray * cos(angle);
 		ray.end.y = ray.start.y + wolf->max_ray * sin(angle);
 		angle += ray_angle;
-		intersect = find_intersect(wolf, ray, wolf->height, angle);
+		intersect = find_intersect(wolf, ray, wolf->height);
 		// draw_ray(wolf, ray.start, ray.end, 0xfcd303); //tellow
 		// draw_intercept(wolf, ray.start, intersect.x, intersect.y); // electric
 		if (angle < wolf->dir_angle)
