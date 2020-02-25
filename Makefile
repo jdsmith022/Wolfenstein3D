@@ -6,7 +6,7 @@
 #    By: mminkjan <mminkjan@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/02/03 20:54:24 by mminkjan       #+#    #+#                 #
-#    Updated: 2020/02/24 17:31:15 by jesmith       ########   odam.nl          #
+#    Updated: 2020/02/25 14:36:21 by mminkjan      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ $(NAME) : $(OFILES)
 	@make re -C $(LIBFT)
 	@gcc -g -I $(MLX) -L $(MLX) $(MLXFLAGS) -I $(LIBFT) -L $(LIBFT) -lft \
 	$(CFILES) $(FLAGS) $(NAME)
+	@rm -f $(OFILES)
 
 clean :
 	@make clean -C $(LIBFT)
