@@ -6,41 +6,49 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 11:40:53 by jesmith        #+#    #+#                */
-/*   Updated: 2020/02/25 17:00:07 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/02/25 18:58:04 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
 
-static t_point		intersect_point(t_point r_start, t_point r_end,
-						t_point o_start, t_point o_end)
+static t_point		calculate_intersect(t_point startA, t_point startB, t_point slopeA, t_point slopeB)
+{
+	t_point		intersect;
+	double 		denominator;
+	double		t;
+	double		s;
+
+	intersect.x = NAN;
+	intersect.y = NAN;
+	denominator = (-slopeB.x * slopeA.y + slopeA.x * slopeB.y);
+	if (denominator == 0)
+		return(intersect);
+	s = (-slopeA.y * (startA.x - startB.x) + slopeA.x * (startA.y - startB.y)) / denominator;
+	t = ( slopeB.x * (startA.y - startB.y) - slopeB.y * (startA.x - startB.x)) / denominator;
+	if (s > 0 && s < 1 && t > 0 && t < 1)
+	{
+		intersect.x = startA.x + (t * slopeA.x);
+		intersect.y = startA.y + (t * slopeA.y);
+	}
+	return (intersect);
+
+}
+
+static t_point		intersect_point(t_point startA, t_point endA,
+						t_point startB, t_point endB)
 {
 	t_point intersect;
-	double	denominator;
-	double r_x;
-	double r_y;
-	double o_x;
-	double o_y;
-	double t;
-	double s;
+	t_point slopeA;
+	t_point slopeB;
 
 	intersect.x = 0;
 	intersect.y = 0;
-	r_x = r_end.x - r_start.x;
-	r_y = r_end.y - r_start.y;
-	o_x = o_end.x - o_start.x;
-	o_y = o_end.y - o_start.y;
-	denominator = (-o_x * r_y + r_x * o_y);
-	if (denominator == 0)
-		return (intersect);
-	s = (-r_y * (r_start.x - o_start.x) + r_x * (r_start.y - o_start.y)) / denominator;
-	t = ( o_x * (r_start.y - o_start.y) - o_y * (r_start.x - o_start.x)) / denominator;
-	if (s > 0 && s < 1 && t > 0 && t < 1)
-	{
-		intersect.x = r_start.x + (t * r_x);
-		intersect.y = r_start.y + (t * r_y);
-	}
-	return (intersect);
+	slopeA.x = endA.x - startA.x;
+	slopeA.y = endA.y - startA.y;
+	slopeB.x = endB.x - startB.x;
+	slopeB.y = endB.y - startB.y;
+	return(calculate_intersect(startA, startB, slopeA, slopeB));
 }
 
 static t_point		find_intersect(t_wolf *wolf, t_item ray, int prev_height)
@@ -79,7 +87,7 @@ static void			render_wolf(t_wolf *wolf)
 	double		angle;
 	t_item		ray;
 	t_point		intersect;
-	t_height	plane_intersect;
+	t_height	plane_project;
 	int			x;
 	double		height;
 
@@ -87,7 +95,7 @@ static void			render_wolf(t_wolf *wolf)
 	ray_angle = FOV / WIDTH;
 	angle = wolf->dir_angle - (FOV / 2);
 	while (x < WIDTH)
-	{
+	{ 
 		ray.start.x = wolf->pos.x;
 		ray.start.y = wolf->pos.y;
 		ray.end.x = ray.start.x + wolf->max_ray * cos(angle);
@@ -99,9 +107,9 @@ static void			render_wolf(t_wolf *wolf)
 		else
 			intersect.obj_dist *= cos(ray_angle);
 		height = wolf->wall_height / intersect.obj_dist * 255;
-		plane_intersect.y_start = wolf->wall_height / 2 - height / 2;
-		plane_intersect.y_end = wolf->wall_height / 2 + height / 2;
-		draw_column(wolf, plane_intersect, x);
+		plane_project.y_start = wolf->wall_height / 2 - height / 2;
+		plane_project.y_end = wolf->wall_height / 2 + height / 2;
+		draw_column(wolf, plane_project, x);
 		x++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/10 19:09:56 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/02/25 11:35:52 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/02/25 14:00:02 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static void	key_player_position(t_wolf *wolf, int key)
 {
 	wolf->event.hold_angle = wolf->dir_angle;
 	// dependant on direction as well......another check in if statement
-	printf("angle: %f\n", wolf->dir_angle);
 	if (key == W)
 	{
 		if (wolf->pos.y >= 10)
