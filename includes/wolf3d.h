@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:12:46 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/02/24 18:34:37 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/02/25 12:18:25 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ typedef	struct		s_item {
 typedef	struct		s_event {
 	int				key_press;
 	int				mouse_press;
+	int				hold_angle;
 	int				hold_x;
 	int				hold_y; // needed?
 }					t_event;
@@ -155,7 +156,8 @@ void				print_map(int **map_values, t_wolf *wolf); //delete later
 void				print_map_coordinates(t_item *item); //delete later
 int					flat_draw(t_wolf *wolf); // remove later
 void				draw_line(t_wolf *wolf, t_point start, t_point end, int color); //remove
-void				draw_ray(t_wolf *wolf, t_point r_start, t_point r_end);
+void				draw_intercept(t_wolf *wolf, t_point r_start, int x, int y);
+void				draw_ray(t_wolf *wolf, t_point r_start, t_point r_end, int color);
 void				init_mlx2(t_wolf *wolf); //remove
 
 
