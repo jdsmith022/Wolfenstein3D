@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 11:40:53 by jesmith        #+#    #+#                */
-/*   Updated: 2020/02/25 09:36:38 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/02/25 10:42:03 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,18 @@
 static	double		ray_distance(t_item ray, t_point intersect)
 {
 	double	distance;
-	double	delta_x;
-	double	delta_y;
-	double	delta_pwr_x;
-	double	delta_pwr_y;
 
-	delta_x = intersect.x - ray.start.x;
-	delta_y = intersect.y - ray.start.y;
-	delta_pwr_x = delta_x * delta_x;
-	delta_pwr_y = delta_y * delta_y;
-	distance = sqrt(delta_pwr_x + delta_pwr_y);
+	distance = fabs(ray.start.x - intersect.x) / cos(FOV / WIDTH);
+	// double	delta_x;
+	// double	delta_y;
+	// double	delta_pwr_x;
+	// double	delta_pwr_y;
+
+	// delta_x = fabs(intersect.x - ray.start.x);
+	// delta_y = fabs(intersect.y - ray.start.y);
+	// delta_pwr_x = delta_x * delta_x;
+	// delta_pwr_y = delta_y * delta_y;
+	// distance = sqrt(delta_pwr_x + delta_pwr_y);
 	return (distance);
 }
 
@@ -105,7 +107,7 @@ static t_point		find_intersect(t_wolf *wolf, t_item ray, int prev_height)
 
 static void			render_wolf(t_wolf *wolf)
 {
-	double  	ray_angle;
+	double	 	ray_angle;
 	double		angle;
 	t_item		ray;
 	t_point		intersect;
@@ -125,11 +127,11 @@ static void			render_wolf(t_wolf *wolf)
 		angle += ray_angle;
 		draw_ray(wolf, ray.start, ray.end);
 		intersect = find_intersect(wolf, ray, wolf->height);
-		intersect.obj_dist *= cos(FOV / 2);
+		intersect.obj_dist *= cos(ray_angle);
 		printf("%f\n", intersect.obj_dist);
-		height = wolf->obj_height / intersect.obj_dist * 0.66;
-		plane_intersect.y_start = height / 2 - (HEIGHT / 2);
-		plane_intersect.y_end = height / 2 + (HEIGHT / 2);
+		height = wolf->wall_height / intersect.obj_dist * 255;
+		plane_intersect.y_start = wolf->wall_height / 2 - height / 2;
+		plane_intersect.y_end = wolf->wall_height / 2 + height / 2;
 		draw_column(wolf, plane_intersect, x);
 		x++;
 	}
