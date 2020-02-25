@@ -6,35 +6,35 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 11:40:53 by jesmith        #+#    #+#                */
-/*   Updated: 2020/02/24 19:04:38 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/02/25 09:36:38 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
 
-static	t_height	intersect_distance(t_wolf *wolf,
-						t_item ray, t_point intersect)
-{
-	double		difference;
-	double		plane_x;
-	double		obj_dist;
-	double		height;
-	t_height	camera_plane;
+// static	t_height	intersect_distance(t_wolf *wolf,
+// 						t_item ray, t_point intersect)
+// {
+// 	double		difference;
+// 	double		plane_x;
+// 	double		obj_dist;
+// 	double		height;
+// 	t_height	camera_plane;
 
-	(void)wolf;
-	difference = ray.start.x - intersect.x;
-	plane_x = ray.start.x + difference;
-	obj_dist = intersect.obj_dist * intersect.obj_dist - plane_x * plane_x;
-	obj_dist = sqrt(obj_dist);
-	// if (intersect.texture < 5)
-	height = obj_dist * 0.577F;//wolf->wall_height / (obj_dist / 1.5);
-	// else
-	// 	height = wolf->obj_height
-	camera_plane.y_start = -height / 2 + (obj_dist / 2 + wolf->player.y);
-	camera_plane.y_end = height / 5 + (obj_dist / 5 - wolf->player.y);
-	camera_plane.texture = intersect.texture;
-	return (camera_plane);
-}
+// 	(void)wolf;
+// 	difference = ray.start.x - intersect.x;
+// 	plane_x = ray.start.x + difference;
+// 	obj_dist = intersect.obj_dist * intersect.obj_dist - plane_x * plane_x;
+// 	obj_dist = sqrt(obj_dist);
+// 	// if (intersect.texture < 5)
+// 	height = obj_dist * 0.577F;//wolf->wall_height / (obj_dist / 1.5);
+// 	// else
+// 	// 	height = wolf->obj_height
+// 	camera_plane.y_start = -height / 2 + (obj_dist / 2 + wolf->player.y);
+// 	camera_plane.y_end = height / 5 + (obj_dist / 5 - wolf->player.y);
+// 	camera_plane.texture = intersect.texture;
+// 	return (camera_plane);
+// }
 
 static	double		ray_distance(t_item ray, t_point intersect)
 {
@@ -111,6 +111,7 @@ static void			render_wolf(t_wolf *wolf)
 	t_point		intersect;
 	t_height	plane_intersect;
 	int			x;
+	double		height;
 
 	x = 0;
 	ray_angle = FOV / WIDTH;
@@ -124,13 +125,12 @@ static void			render_wolf(t_wolf *wolf)
 		angle += ray_angle;
 		draw_ray(wolf, ray.start, ray.end);
 		intersect = find_intersect(wolf, ray, wolf->height);
-		// if (intersect.texture <= 4)
-		// 	wolf->height = wolf->wall_height;
-		// else
-		// 	wolf->height = wolf->obj_height; //func for different obj height alter width of  object here too
-		plane_intersect = intersect_distance(wolf, ray, intersect);
+		intersect.obj_dist *= cos(FOV / 2);
+		printf("%f\n", intersect.obj_dist);
+		height = wolf->obj_height / intersect.obj_dist * 0.66;
+		plane_intersect.y_start = height / 2 - (HEIGHT / 2);
+		plane_intersect.y_end = height / 2 + (HEIGHT / 2);
 		draw_column(wolf, plane_intersect, x);
-		// if (wolf->height == wolf->wall_height)
 		x++;
 	}
 }
