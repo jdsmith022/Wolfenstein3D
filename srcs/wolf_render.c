@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 11:40:53 by jesmith        #+#    #+#                */
-/*   Updated: 2020/02/25 14:11:48 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/02/25 15:14:12 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ static t_point		intersect_point(t_point r_start, t_point r_end,
 	double t;
 	double s;
 	denominator = (-o_x * r_y + r_x * o_y);
+	if (denominator == 0)
+		return (intersect);
 	s = (-r_y * (r_start.x - o_start.x) + r_x * (r_start.y - o_start.y)) / denominator;
 	t = ( o_x * (r_start.y - o_start.y) - o_y * (r_start.x - o_start.x)) / denominator;
 	if (s > 0 && s < 1 && t > 0 && t < 1)
@@ -102,7 +104,7 @@ static t_point		intersect_point(t_point r_start, t_point r_end,
 // 	return (intersect);
 }
 
-static t_point		find_intersect(t_wolf *wolf, t_item ray, int prev_height)
+static t_point		find_intersect(t_wolf *wolf, t_item ray, int prev_height, double angle)
 {
 	t_point intersect;
 	t_point	min_intersect;
@@ -117,10 +119,13 @@ static t_point		find_intersect(t_wolf *wolf, t_item ray, int prev_height)
 	{
 		intersect = \
 			intersect_point(ray.start, ray.end, object->start, object->end, wolf);
-		distance = fabs(intersect.x - ray.start.x) / cos(FOV / WIDTH);
+		distance = fabs(ray.start.x - intersect.x) / cos(angle);
 		// distance = ray_distance(ray, intersect);
 		if (distance < min_distance)
 		{
+			min_distance = distance;
+			printf("min: %f\n", min_distance);
+			// printf("%f, %f	%f, %f\n", object->start.x, object->start.y, object->end.x, object->end.y);
 			min_intersect.x = intersect.x;
 			min_intersect.y = intersect.y;
 			min_intersect.obj_dist = distance;
@@ -151,10 +156,13 @@ static void			render_wolf(t_wolf *wolf)
 		ray.end.x = ray.start.x + wolf->max_ray * cos(angle);
 		ray.end.y = ray.start.y + wolf->max_ray * sin(angle);
 		angle += ray_angle;
-		intersect = find_intersect(wolf, ray, wolf->height);
+		intersect = find_intersect(wolf, ray, wolf->height, angle);
 		// draw_ray(wolf, ray.start, ray.end, 0xfcd303); //tellow
 		// draw_intercept(wolf, ray.start, intersect.x, intersect.y); // electric
-		intersect.obj_dist *= cos(FOV / 2);
+		if (angle < wolf->dir_angle)
+			intersect.obj_dist *= cos(-ray_angle);
+		else
+			intersect.obj_dist *= cos(ray_angle);
 		// printf("%f\n", intersect.obj_dist);
 		height = wolf->wall_height / intersect.obj_dist * 255;
 		plane_intersect.y_start = wolf->wall_height / 2 - height / 2;
