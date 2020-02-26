@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 11:40:53 by jesmith        #+#    #+#                */
-/*   Updated: 2020/02/26 13:29:59 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/02/26 14:27:05 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,17 @@ static t_point		find_intersect(t_wolf *wolf, t_item ray, int prev_height, double
 	{
 		intersect = \
 			intersect_point(ray.start, ray.end, object->start, object->end);
-		if (angle < wolf->dir_angle)
-			distance = fabs(ray.start.x - intersect.x) / cos(-angle);
-		else
-			distance = fabs(ray.start.x - intersect.x) / cos(angle);
+		// if (ray.end.y <= ray.start.y)
+		// {
+		// 	printf("there\n");
+		// 	distance = fabs(ray.end.x - intersect.x) / cos(angle);
+		// 	// distance = fabs(ray.start.y - intersect.y) / sin(angle);
+		// }
+		// else
+		// {
+		// 	printf("here\n");
+			distance = (intersect.x - ray.start.x) / cos(angle);
+		// }
 		if (distance < min_distance)
 		{
 			min_distance = distance;
@@ -107,7 +114,7 @@ static void			render_wolf(t_wolf *wolf)
 
 	x = 0;
 	ray_angle = FOV / WIDTH;
-	angle = wolf->dir_angle - (FOV / 2);
+	angle = wolf->dir_angle - ray_angle;
 	while (x < WIDTH)
 	{
 		angle = clerp_angle(angle);
@@ -120,7 +127,7 @@ static void			render_wolf(t_wolf *wolf)
 		// if (angle < wolf->dir_angle)
 		// 	intersect.obj_dist *= cos(-angle);
 		// else
-		// 	intersect.obj_dist *= cos(-angle);
+		// intersect.obj_dist *= cos(ray_angle);
 		height = wolf->wall_height / intersect.obj_dist * 255;
 		plane_project.y_start = wolf->wall_height / 2 - height / 2;
 		plane_project.y_end = wolf->wall_height / 2 + height / 2;
