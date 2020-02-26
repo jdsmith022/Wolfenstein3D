@@ -6,49 +6,51 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 11:40:53 by jesmith        #+#    #+#                */
-/*   Updated: 2020/02/25 18:58:04 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/02/26 10:08:50 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
 
-static t_point		calculate_intersect(t_point startA, t_point startB, t_point slopeA, t_point slopeB)
+static t_point		calculate_intersect(t_point start_a, t_point start_b,
+						t_point slope_a, t_point slope_b)
 {
 	t_point		intersect;
-	double 		denominator;
+	double		denominator;
 	double		t;
 	double		s;
 
 	intersect.x = NAN;
 	intersect.y = NAN;
-	denominator = (-slopeB.x * slopeA.y + slopeA.x * slopeB.y);
+	denominator = (-slope_b.x * slope_a.y + slope_a.x * slope_b.y);
 	if (denominator == 0)
-		return(intersect);
-	s = (-slopeA.y * (startA.x - startB.x) + slopeA.x * (startA.y - startB.y)) / denominator;
-	t = ( slopeB.x * (startA.y - startB.y) - slopeB.y * (startA.x - startB.x)) / denominator;
+		return (intersect);
+	s = (-slope_a.y * (start_a.x - start_b.x) + slope_a.x * \
+		(start_a.y - start_b.y)) / denominator;
+	t = (slope_b.x * (start_a.y - start_b.y) - slope_b.y * \
+		(start_a.x - start_b.x)) / denominator;
 	if (s > 0 && s < 1 && t > 0 && t < 1)
 	{
-		intersect.x = startA.x + (t * slopeA.x);
-		intersect.y = startA.y + (t * slopeA.y);
+		intersect.x = start_a.x + (t * slope_a.x);
+		intersect.y = start_a.y + (t * slope_a.y);
 	}
 	return (intersect);
-
 }
 
-static t_point		intersect_point(t_point startA, t_point endA,
-						t_point startB, t_point endB)
+static t_point		intersect_point(t_point start_a, t_point end_a,
+						t_point start_b, t_point end_b)
 {
 	t_point intersect;
-	t_point slopeA;
-	t_point slopeB;
+	t_point slope_a;
+	t_point slope_b;
 
 	intersect.x = 0;
 	intersect.y = 0;
-	slopeA.x = endA.x - startA.x;
-	slopeA.y = endA.y - startA.y;
-	slopeB.x = endB.x - startB.x;
-	slopeB.y = endB.y - startB.y;
-	return(calculate_intersect(startA, startB, slopeA, slopeB));
+	slope_a.x = end_a.x - start_a.x;
+	slope_a.y = end_a.y - start_a.y;
+	slope_b.x = end_b.x - start_b.x;
+	slope_b.y = end_b.y - start_b.y;
+	return (calculate_intersect(start_a, start_b, slope_a, slope_b));
 }
 
 static t_point		find_intersect(t_wolf *wolf, t_item ray, int prev_height)
@@ -95,7 +97,7 @@ static void			render_wolf(t_wolf *wolf)
 	ray_angle = FOV / WIDTH;
 	angle = wolf->dir_angle - (FOV / 2);
 	while (x < WIDTH)
-	{ 
+	{
 		ray.start.x = wolf->pos.x;
 		ray.start.y = wolf->pos.y;
 		ray.end.x = ray.start.x + wolf->max_ray * cos(angle);
