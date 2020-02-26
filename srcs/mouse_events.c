@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 17:15:28 by jesmith        #+#    #+#                */
-/*   Updated: 2020/02/25 18:30:18 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/02/26 12:55:38 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,27 @@
 
 static int	mouse_move(int x, int y, t_wolf *wolf)
 {
+	double radian;
+
+	radian = PI / 180;
 	y = 0;
-	if (wolf->dir_angle < 0.0)
-		wolf->dir_angle = 6.3;
-	else if (wolf->dir_angle > 6.3)
-		wolf->dir_angle = 0.0;
 	if (wolf->event.mouse_press == 1)
 	{
 		if (x > wolf->event.hold_x)
 		{
-			wolf->dir_angle += 0.05;
+			wolf->dir_angle += 2 * radian;
+			if (wolf->dir_angle > 360 * radian)
+				wolf->dir_angle -= 360 * radian;
 		}
 		else if (x < wolf->event.hold_x)
 		{
-			wolf->dir_angle -= 0.05;
+			wolf->dir_angle -= 2 * radian;
+			if (wolf->dir_angle < 0)
+				wolf->dir_angle += 360 * radian;
 		}
 	}
 	wolf->event.hold_x = x;
+	printf("%f\n", wolf->dir_angle);
 	return (0);
 }
 

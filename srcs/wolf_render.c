@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 11:40:53 by jesmith        #+#    #+#                */
-/*   Updated: 2020/02/25 18:58:04 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/02/26 13:26:14 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static t_point		calculate_intersect(t_point startA, t_point startB, t_point slop
 	intersect.y = NAN;
 	denominator = (-slopeB.x * slopeA.y + slopeA.x * slopeB.y);
 	if (denominator == 0)
-		return(intersect);
+		return (intersect);
 	s = (-slopeA.y * (startA.x - startB.x) + slopeA.x * (startA.y - startB.y)) / denominator;
 	t = ( slopeB.x * (startA.y - startB.y) - slopeB.y * (startA.x - startB.x)) / denominator;
 	if (s > 0 && s < 1 && t > 0 && t < 1)
@@ -32,7 +32,6 @@ static t_point		calculate_intersect(t_point startA, t_point startB, t_point slop
 		intersect.y = startA.y + (t * slopeA.y);
 	}
 	return (intersect);
-
 }
 
 static t_point		intersect_point(t_point startA, t_point endA,
@@ -51,7 +50,7 @@ static t_point		intersect_point(t_point startA, t_point endA,
 	return(calculate_intersect(startA, startB, slopeA, slopeB));
 }
 
-static t_point		find_intersect(t_wolf *wolf, t_item ray, int prev_height)
+static t_point		find_intersect(t_wolf *wolf, t_item ray, int prev_height, double angle)
 {
 	t_point intersect;
 	t_point	min_intersect;
@@ -66,7 +65,10 @@ static t_point		find_intersect(t_wolf *wolf, t_item ray, int prev_height)
 	{
 		intersect = \
 			intersect_point(ray.start, ray.end, object->start, object->end);
-		distance = fabs(ray.start.x - intersect.x) / cos(FOV / 2);
+		if (angle < wolf->dir_angle)
+			distance = fabs(ray.start.x - intersect.x) / cos(-angle);
+		else
+			distance = fabs(ray.start.x - intersect.x) / cos(angle);
 		if (distance < min_distance)
 		{
 			min_distance = distance;
@@ -79,6 +81,15 @@ static t_point		find_intersect(t_wolf *wolf, t_item ray, int prev_height)
 		object = object->next;
 	}
 	return (min_intersect);
+}
+
+static double		clerp_angle(double angle)
+{
+	if (angle > 360 * (PI / 180))
+		angle -= 360 * (PI / 180);
+	else if (angle < 0)
+		angle += 360 * (PI / 180);
+	return (angle);
 }
 
 static void			render_wolf(t_wolf *wolf)
@@ -95,17 +106,18 @@ static void			render_wolf(t_wolf *wolf)
 	ray_angle = FOV / WIDTH;
 	angle = wolf->dir_angle - (FOV / 2);
 	while (x < WIDTH)
-	{ 
+	{
+		angle = clerp_angle(angle);
 		ray.start.x = wolf->pos.x;
 		ray.start.y = wolf->pos.y;
 		ray.end.x = ray.start.x + wolf->max_ray * cos(angle);
 		ray.end.y = ray.start.y + wolf->max_ray * sin(angle);
 		angle += ray_angle;
-		intersect = find_intersect(wolf, ray, wolf->height);
-		if (angle < wolf->dir_angle)
-			intersect.obj_dist *= cos(-ray_angle);
-		else
-			intersect.obj_dist *= cos(ray_angle);
+		intersect = find_intersect(wolf, ray, wolf->height, angle);
+		// if (angle < wolf->dir_angle)
+		// 	intersect.obj_dist *= cos(-angle);
+		// else
+		// 	intersect.obj_dist *= cos(-angle);
 		height = wolf->wall_height / intersect.obj_dist * 255;
 		plane_project.y_start = wolf->wall_height / 2 - height / 2;
 		plane_project.y_end = wolf->wall_height / 2 + height / 2;

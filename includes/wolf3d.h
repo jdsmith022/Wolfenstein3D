@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:12:46 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/02/25 18:32:03 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/02/26 12:25:05 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@
 # define MAX_SIZE 100
 # define MAX_TEXTURES 7
 
-# define FOV 0.60
+# define PI 3.14159265359
+# define FOV 60 * (PI / 180)
 
 # define ESC 53
 # define W 13
