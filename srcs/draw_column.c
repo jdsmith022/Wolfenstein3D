@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 14:46:31 by jesmith        #+#    #+#                */
-/*   Updated: 2020/02/22 14:35:41 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/02 19:15:32 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	draw_ceiling(t_wolf *wolf, int x, int y)
 	put_pixel(wolf, 0xd57016, x, y); //orange
 }
 
-void	draw_column(t_wolf *wolf, t_height plane_intersect, int x)
+void	draw_column(t_wolf *wolf, t_project plane_intersect, int x)
 {
 	int y;
 

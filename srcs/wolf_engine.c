@@ -6,28 +6,24 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 11:40:53 by jesmith        #+#    #+#                */
-/*   Updated: 2020/02/28 16:53:32 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/03/02 20:12:37 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
 
-static double		correct_distortion(t_wolf *wolf, double angle,
-						double distance, int x)
+static void			project_on_plane(t_wolf *wolf, t_point intersect,
+	t_project *plane, int x)
 {
-	double a;
-	double c;
-	double b;
-	(void)angle;
-	(void)wolf;
+	double			height;
 
-	a = (WIDTH / 2 - x) * (WIDTH / 2 - x);
-	c = distance * distance;
-	b = c - a;
-	return (sqrt(b));
+	intersect.obj_dist *= cos(wolf->ray_angle * x - FOV / 2);
+	height = wolf->wall_height / intersect.obj_dist * wolf->dist_to_plane;
+	plane->y_start = HEIGHT / 2 - height / 2;
+	plane->y_end = HEIGHT / 2 + height / 2;
 }
 
-static double		clerp_angle(double angle)
+static double		clamp_angle(double angle)
 {
 	if (angle > 360 * (PI / 180))
 		angle -= 360 * (PI / 180);
@@ -38,36 +34,24 @@ static double		clerp_angle(double angle)
 
 static void			wolf_render(t_wolf *wolf)
 {
-	double		ray_angle;
 	double		angle;
 	t_item		ray;
-	t_point		intersect;
-	t_height	plane_project;
+	t_project	plane;
 	int			x;
-	double		height;
 
 	x = 0;
-	ray_angle = FOV / WIDTH;
 	angle = wolf->dir_angle - (FOV / 2);
+	ray.start.x = wolf->pos.x;
+	ray.start.y = wolf->pos.y;
 	while (x < WIDTH)
 	{
-		angle = clerp_angle(angle);
-		ray.start.x = wolf->pos.x;
-		ray.start.y = wolf->pos.y;
+		angle = clamp_angle(angle);
 		ray.end.x = ray.start.x + wolf->max_ray * cos(angle);
 		ray.end.y = ray.start.y + wolf->max_ray * sin(angle);
-		if (ray.start.x == ray.end.x || ray.start.y == ray.end.y)
-		{
-			ray.end.y = 600;
-			ray.end.x = 1200;
-		}
-		angle += ray_angle;
-		intersect = find_intersect(wolf, ray, wolf->height, angle);
-		intersect.obj_dist = correct_distortion(wolf, angle, intersect.obj_dist, x);
-		height = wolf->wall_height / intersect.obj_dist * 255;
-		plane_project.y_start = wolf->wall_height / 2 - height / 2;
-		plane_project.y_end = wolf->wall_height / 2 + height / 2;
-		draw_column(wolf, plane_project, x);
+		wolf->intersect = find_intersect(wolf, ray, wolf->height, angle);
+		project_on_plane(wolf, wolf->intersect, &plane, x);
+		draw_column(wolf, plane, x);
+		angle += wolf->ray_angle;
 		x++;
 	}
 }
