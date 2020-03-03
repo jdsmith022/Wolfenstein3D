@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/08 14:14:17 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/03/03 12:37:03 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/03/03 15:36:31 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ static void	save_vertical_item(t_wolf *wolf, t_point start,
 	if (item == NULL)
 		wolf_failure_exit(wolf, map_values, MALLOC_ERR);
 	item->start = start;
-	item->end.y = i->y * wolf->module;
+	if (i->y + 1 == wolf->max_y)
+		item->end.y = (i->y - 1) * wolf->module;
+	else
+		item->end.y = i->y * wolf->module;
 	item->end.x = start.x;
 	item->texture = map_values[i->y][i->x];
 	item->next = NULL;
@@ -37,7 +40,7 @@ static void	vertical_coordinates(t_wolf *wolf, int **values, t_i *i)
 	hold_y = 0;
 	ft_bzero(&start, sizeof(t_point));
 	if (i->x != 0)
-		start.x = i->x * wolf->module;
+		start.x = (i->x - 1) * wolf->module;
 	while (i->y < wolf->max_y)
 	{
 		if (values[i->y][i->x] > 0 && values[i->y][i->x] < 5)
@@ -64,12 +67,14 @@ static void	save_horizontal_item(t_wolf *wolf, t_point start,
 	if (item == NULL)
 		wolf_failure_exit(wolf, map_values, MALLOC_ERR);
 	item->start = start;
-	if (i->y != 0 && i->x + 1 != wolf->max_x)
-		item->end.x = (i->x + 1) * wolf->module;
+	if (i->x + 1 == wolf->max_x)
+		item->end.x = (i->x - 1) * wolf->module;
+	else if (i->x + 2 == wolf->max_x)
+		item->end.x = i->x * wolf->module;
 	else if (map_values[i->y][i->x] > 4)
 		item->end.x = (i->x + 1) * 70;
-	else
-		item->end.x = i->x * wolf->module;
+	else if (i->y != 0 && i->x + 1 != wolf->max_x)
+		item->end.x = (i->x + 1) * wolf->module;
 	item->end.y = start.y;
 	item->texture = map_values[i->y][i->x];
 	item->next = NULL;
@@ -84,8 +89,10 @@ static void	horizontal_coordinates(t_wolf *wolf, int **values, t_i *i)
 	i->x = 0;
 	hold_x = 0;
 	ft_bzero(&start, sizeof(t_point));
-	if (i->y != 0)
+	if (i->y != 0 && i->y + 1 != wolf->max_y)
 		start.y = i->y * wolf->module;
+	if (i->y + 1 == wolf->max_y)
+		start.y = (i->y - 1) * wolf->module;
 	while (i->x < wolf->max_x - 1)
 	{
 		if (values[(int)i->y][(int)i->x] != 0)
@@ -98,9 +105,9 @@ static void	horizontal_coordinates(t_wolf *wolf, int **values, t_i *i)
 				save_horizontal_item(wolf, start, i, values);
 		}
 		hold_x = i->x;
+		start.x = i->x * wolf->module;
 		if (i->y != 0)
 			i->x++;
-		start.x = i->x * wolf->module;
 	}
 }
 
