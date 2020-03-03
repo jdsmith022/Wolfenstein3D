@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 11:40:53 by jesmith        #+#    #+#                */
-/*   Updated: 2020/03/02 20:12:37 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/03/03 10:50:59 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static void			project_on_plane(t_wolf *wolf, t_point intersect,
 	double			height;
 
 	intersect.obj_dist *= cos(wolf->ray_angle * x - FOV / 2);
+	if (intersect.obj_dist < 20)
+		wolf->bound = 1;
 	height = wolf->wall_height / intersect.obj_dist * wolf->dist_to_plane;
 	plane->y_start = HEIGHT / 2 - height / 2;
 	plane->y_end = HEIGHT / 2 + height / 2;

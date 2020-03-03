@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/10 19:09:56 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/03/02 20:10:18 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/03/03 11:07:14 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,26 @@
 static void	key_player_position(t_wolf *wolf, int key)
 {
 	wolf->event.hold_angle = wolf->dir_angle;
-	// dependant on direction as well......another check in if statement
-	if (key == W && wolf->bound == 0)
+	if (key == W)
 	{
 		wolf->pos.x += SPEED * cos(wolf->dir_angle);
 		wolf->pos.y += SPEED * sin(wolf->dir_angle);
 	}
-	if (key == S && wolf->bound == 0)
+	if (key == S)
 	{
 		wolf->pos.x -= SPEED * cos(wolf->dir_angle);
 		wolf->pos.y -= SPEED * sin(wolf->dir_angle);
 	}
 	if (key == A && wolf->pos.x >= 10)
-		wolf->pos.x -= 10;
+	{
+		wolf->pos.x += SPEED * cos(wolf->dir_angle - (90 * PI / 180));
+		wolf->pos.y += SPEED * sin(wolf->dir_angle - (90 * PI / 180));
+	}
 	else if (key == D)
-		wolf->pos.x += 10;
+	{
+		wolf->pos.x += SPEED * cos(wolf->dir_angle + (90 * PI / 180));
+		wolf->pos.y += SPEED * sin(wolf->dir_angle + (90 * PI / 180));
+	}
 }
 
 static void	key_window_handling(t_wolf *wolf, int key)
