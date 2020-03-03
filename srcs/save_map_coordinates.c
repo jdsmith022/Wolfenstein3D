@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/08 14:14:17 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/03/03 18:17:55 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/03 20:19:00 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,12 @@ static void	vertical_coordinates(t_wolf *wolf, int **values, t_i *i)
 	{
 		if (values[i->y][i->x] > 0 && values[i->y][i->x] < 5)
 		{
-			while (i->y + 1 < wolf->max_y && \
-			values[i->y + 1][i->x] == values[i->y][i->x])
+			while (i->y + 1 < wolf->max_y && values[i->y + 1][i->x] == values[i->y][i->x])
 				i->y++;
-			if ((i->y + 1 == wolf->max_y && hold_y + 1 != i->y) || \
-			(i->y > 0 && i->y + 1 < wolf->max_y && values[i->y - 1][i->x] != 0))
+			if ((i->y + 1 < wolf->max_y && i->y - 1 > 0 && \
+				values[i->y + 1][i->x] < 5 && values[i->y - 1][i->x] > 0) || \
+				(i->y + 1 == wolf->max_y && values[i->y - 1][i->x] != 0) || \
+				(i->y - 1 == 0 && values[i->y + 1][i->x] > 0))
 				save_vertical_item(wolf, start, i, values);
 		}
 		hold_y = i->y;
@@ -66,7 +67,7 @@ static void	save_horizontal_item(t_wolf *wolf, t_point start,
 	if (item == NULL)
 		wolf_failure_exit(wolf, map_values, MALLOC_ERR);
 	item->start = start;
-	if (i->y != 0)// && i->x + 1 != wolf->max_x)
+	if (i->y != 0)
 		item->end.x = (i->x + 1) * wolf->module;
 	else if (map_values[i->y][i->x] > 4)
 		item->end.x = (i->x + 1) * 70;
@@ -92,9 +93,13 @@ static void	horizontal_coordinates(t_wolf *wolf, int **values, t_i *i)
 		{
 			while (values[i->y][i->x + 1] == values[i->y][i->x])
 				i->x++;
-			if ((values[i->y][i->x + 1] > 0 && values[i->y][i->x + 1] < 5) || (i->x + 1 == wolf->max_x))
+			printf("%d, %d\n", i->x, i->y);
+		if ((values[i->y][i->x + 1] > 0 && values[i->y][i->x + 1] < 5) || (i->x + 1 == wolf->max_x) || (i->x != 0))
+			{
+				printf("in  %d, %d\n", i->x, i->y);
 				if ((i->y + 1 < wolf->max_y && values[i->y + 1][i->x] == 0) || (i->y + 1 == wolf->max_y) || (i->y == 0))
 					save_horizontal_item(wolf, start, i, values);
+			}
 		}
 		if (i->y != 0)
 			i->x++;
