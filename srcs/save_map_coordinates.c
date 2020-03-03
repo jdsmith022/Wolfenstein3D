@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/08 14:14:17 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/03/03 15:43:43 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/03 15:58:00 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,10 @@ static void	vertical_coordinates(t_wolf *wolf, int **values, t_i *i)
 	i->y = 0;
 	hold_y = 0;
 	ft_bzero(&start, sizeof(t_point));
-	if (i->x != 0)
+	if ((i->x + 1 == wolf->max_x) || (i->x != 1))
 		start.x = (i->x - 1) * wolf->module;
+	else
+		start.x = i->x * wolf->module;
 	while (i->y < wolf->max_y)
 	{
 		if (values[i->y][i->x] > 0 && values[i->y][i->x] < 5)
@@ -69,12 +71,10 @@ static void	save_horizontal_item(t_wolf *wolf, t_point start,
 	item->start = start;
 	if (i->x + 1 == wolf->max_x)
 		item->end.x = (i->x - 1) * wolf->module;
-	else if (i->x + 2 == wolf->max_x)
-		item->end.x = i->x * wolf->module;
 	else if (map_values[i->y][i->x] > 4)
 		item->end.x = (i->x + 1) * 70;
-	else if (i->y != 0 && i->x + 1 != wolf->max_x)
-		item->end.x = (i->x + 1) * wolf->module;
+	else
+		item->end.x = i->x * wolf->module;
 	item->end.y = start.y;
 	item->texture = map_values[i->y][i->x];
 	item->next = NULL;
