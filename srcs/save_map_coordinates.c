@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/08 14:14:17 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/03/03 15:36:31 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/03 15:43:43 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,8 @@ static void	save_horizontal_item(t_wolf *wolf, t_point start,
 static void	horizontal_coordinates(t_wolf *wolf, int **values, t_i *i)
 {
 	t_point start;
-	int		hold_x;
 
 	i->x = 0;
-	hold_x = 0;
 	ft_bzero(&start, sizeof(t_point));
 	if (i->y != 0 && i->y + 1 != wolf->max_y)
 		start.y = i->y * wolf->module;
@@ -104,7 +102,6 @@ static void	horizontal_coordinates(t_wolf *wolf, int **values, t_i *i)
 			(values[i->y][i->x + 1] > 0 && values[i->y][i->x + 1] < 5))
 				save_horizontal_item(wolf, start, i, values);
 		}
-		hold_x = i->x;
 		start.x = i->x * wolf->module;
 		if (i->y != 0)
 			i->x++;
