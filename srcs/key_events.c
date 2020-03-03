@@ -6,40 +6,42 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/10 19:09:56 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/03/03 12:58:52 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/03/03 13:34:01 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
 
-static t_point	check_collision(t_wolf *wolf, int key)
-{
+// static t_point	check_collision(t_wolf *wolf, int key)
+// {
 	
 
-	pos = wolf->pos;
-	hold = wolf->pos;
-	if (key == W)
-	{
-		pos.x += SPEED * cos(wolf->dir_angle);
-		pos.y += SPEED * sin(wolf->dir_angle);
-	}
-	else if (key == S)
-	{
-		pos.x -= SPEED * cos(wolf->dir_angle);
-		pos.y -= SPEED * sin(wolf->dir_angle);if 
+// 	pos = wolf->pos;
+// 	hold = wolf->pos;
+// 	if (key == W)
+// 	{
+// 		pos.x += SPEED * cos(wolf->dir_angle);
+// 		pos.y += SPEED * sin(wolf->dir_angle);
+// 	}
+// 	else if (key == S)
+// 	{
+// 		pos.x -= SPEED * cos(wolf->dir_angle);
+// 		pos.y -= SPEED * sin(wolf->dir_angle);if 
 
-	}
-	if (wolf->map[(int)pos.y / wolf->module][(int)pos.x / wolf->module] != 0)
-		return (hold);
-	return (pos);
+// 	}
+// 	if (wolf->map[(int)pos.y / wolf->module][(int)pos.x / wolf->module] != 0)
+// 		return (hold);
+// 	return (pos);
 
-}
+// }
 
 static void	key_player_position(t_wolf *wolf, int key)
 {
 	t_point pos;
+	double	radian;
 
 	pos = wolf->pos;
+	radian = 90 * PI / 180;
 	if (key == W)
 	{
 		pos.x += SPEED * cos(wolf->dir_angle);
@@ -52,15 +54,16 @@ static void	key_player_position(t_wolf *wolf, int key)
 	}
 	if (key == A && wolf->pos.x >= 10)
 	{
-		pos.x += SPEED * cos(wolf->dir_angle - (90 * PI / 180));
-		pos.y += SPEED * sin(wolf->dir_angle - (90 * PI / 180));
+		pos.x += SPEED * cos(wolf->dir_angle - radian);
+		pos.y += SPEED * sin(wolf->dir_angle - radian);
 	}
-	else if (key == D)
+	if (key == D)
 	{
-		pos.x += SPEED * cos(wolf->dir_angle + (90 * PI / 180));
-		pos.y += SPEED * sin(wolf->dir_angle + (90 * PI / 180));
+		pos.x += SPEED * cos(wolf->dir_angle + radian);
+		pos.y += SPEED * sin(wolf->dir_angle + radian);
 	}
-	if (wolf->map[(int)pos.y / wolf->module][(int)pos.x / wolf->module] != 0)
+	printf("pos: %d     %d, %d\n", wolf->map[(int)round(pos.y / wolf->module)][(int)round(pos.x / wolf->module)], (int)round(pos.x / wolf->module), (int)round(pos.y / wolf->module));
+	if (wolf->map[(int)round(pos.y / wolf->module)][(int)round(pos.x / wolf->module)] == 0)
 		wolf->pos = pos;
 }
 
