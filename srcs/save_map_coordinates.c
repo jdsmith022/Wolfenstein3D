@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/08 14:14:17 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/03/03 20:19:00 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/03 22:13:39 by jessicasmit   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,12 @@ static void	save_horizontal_item(t_wolf *wolf, t_point start,
 	if (item == NULL)
 		wolf_failure_exit(wolf, map_values, MALLOC_ERR);
 	item->start = start;
-	if (i->y != 0)
-		item->end.x = (i->x + 1) * wolf->module;
-	else if (map_values[i->y][i->x] > 4)
+	// if (i->y <= 1)
+	// 	item->end.x = i->x * wolf->module;
+	if (map_values[i->y][i->x] > 4)
 		item->end.x = (i->x + 1) * 70;
 	else
-		item->end.x = i->x * wolf->module;
+		item->end.x = (i->x + 1) * wolf->module;
 	item->end.y = start.y;
 	item->texture = map_values[i->y][i->x];
 	item->next = NULL;
@@ -101,7 +101,7 @@ static void	horizontal_coordinates(t_wolf *wolf, int **values, t_i *i)
 					save_horizontal_item(wolf, start, i, values);
 			}
 		}
-		if (i->y != 0)
+		if (i->y > 0)
 			i->x++;
 		start.x = i->x * wolf->module;
 	}
