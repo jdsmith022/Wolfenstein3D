@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:12:46 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/03/02 20:09:08 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/03/03 12:37:12 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,7 @@ void				lst_del(t_item **item, void (ft_del)(void*, size_t));
 void				lst_addback(t_item **item_list, t_item *item);
 
 int					**save_map_values(t_wolf *wolf, char *file_name);
-void				save_map_coordinates(t_wolf *wolf, int **map_values);
+void				save_map_coordinates(t_wolf *wolf);
 
 int					wolf_engine(t_wolf *wolf);
 t_point				find_intersect(t_wolf *wolf, t_item ray,\

@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/08 14:14:17 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/02/22 17:56:29 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/03 12:37:03 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,20 +104,20 @@ static void	horizontal_coordinates(t_wolf *wolf, int **values, t_i *i)
 	}
 }
 
-void		save_map_coordinates(t_wolf *wolf, int **map_values)
+void		save_map_coordinates(t_wolf *wolf)
 {
 	t_i		iterate;
 
 	iterate.y = 0;
 	while (iterate.y < wolf->max_y)
 	{
-		horizontal_coordinates(wolf, map_values, &iterate);
+		horizontal_coordinates(wolf, wolf->map, &iterate);
 		iterate.y++;
 	}
 	iterate.x = 0;
 	while (iterate.x < wolf->max_x)
 	{
-		vertical_coordinates(wolf, map_values, &iterate);
+		vertical_coordinates(wolf, wolf->map, &iterate);
 		iterate.x++;
 	}
 }
