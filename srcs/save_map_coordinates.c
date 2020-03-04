@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/08 14:14:17 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/03/04 13:07:13 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/04 13:08:33 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,8 @@ static void	horizontal_coordinates(t_wolf *wolf, int **values, t_i *i)
 			{
 				if ((i->y + 1 < wolf->max_y && values[i->y + 1][i->x] == 0 \
 					&& values[i->y][i->x + 1] != 0) || \
-					(i->x == 1 && values[i->y - 1][i->x] == 0))
+					(i->x == 1 && values[i->y - 1][i->x] == 0) || \
+					(i->y + 1 == wolf->max_y) || (i->y == 0))
 					save_horizontal_item(wolf, start, i, values);
 			}
 		}
