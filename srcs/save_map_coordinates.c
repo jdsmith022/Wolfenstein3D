@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/08 14:14:17 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/03/04 13:51:20 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/04 14:11:53 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	save_vertical_item(t_wolf *wolf, t_point start,
 		wolf_failure_exit(wolf, map_values, MALLOC_ERR);
 	item->start = start;
 	if (i->y + 1 == wolf->max_y)
-		item->end.y = (i->y - 2) * wolf->module;
+		item->end.y = (i->y - 1) * wolf->module;
 	else
 		item->end.y = i->y * wolf->module;
 	item->end.x = start.x;
@@ -85,12 +85,12 @@ static void	save_horizontal_item(t_wolf *wolf, t_point start,
 static void	horizontal_coordinates(t_wolf *wolf, int **values, t_i *i)
 {
 	t_point start;
+	int		hold_x;
 
 	i->x = 0;
+	hold_x = 0;
 	ft_bzero(&start, sizeof(t_point));
 	if (i->y + 1 == wolf->max_y)
-		start.y = (i->y - 2) * wolf->module;
-	else if (i->y != 0)
 		start.y = (i->y - 1) * wolf->module;
 	else
 		start.y = i->y * wolf->module;
@@ -100,19 +100,19 @@ static void	horizontal_coordinates(t_wolf *wolf, int **values, t_i *i)
 		{
 			while (values[i->y][i->x + 1] == values[i->y][i->x])
 				i->x++;
-			if ((values[i->y][i->x + 1] > 0 && values[i->y][i->x + 1] < 5) \
-				|| (i->x + 1 == wolf->max_x) || (i->x != 0))
-			{
-				if ((i->y + 1 < wolf->max_y && values[i->y + 1][i->x] == 0 \
-					&& values[i->y][i->x + 1] != 0) || \
+			// if ((values[i->y][i->x + 1] > 0 && values[i->y][i->x + 1] < 5) \
+			// 	|| (i->x + 1 == wolf->max_x) || (i->x != 0))
+			// {
+				if ((i->y + 1 < wolf->max_y && values[i->y + 1][i->x] == 0 && values[i->y][i->x + 1] != 0) || \
 					(i->x == 1 && values[i->y - 1][i->x] == 0) || \
-					(i->y + 1 == wolf->max_y) || (i->y == 0))
+					(i->y + 1 == wolf->max_y) || (i->y == 0) || (hold_x != i->x))
 					save_horizontal_item(wolf, start, i, values);
-			}
+			// }
 		}
 		start.x = i->x * wolf->module;
 		if (i->y != 0)
 			i->x++;
+		hold_x = i->x;
 	}
 }
 
