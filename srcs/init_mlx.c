@@ -6,13 +6,27 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:34:26 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/02/22 20:49:48 by jessicasmit   ########   odam.nl         */
+/*   Updated: 2020/03/04 14:54:29 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
 
-void	init_mlx(t_wolf *wolf)
+static void	load_textures(t_wolf *wolf)
+{
+	int		endian;
+
+	endian = 0;
+	wolf->img.image_ptr = mlx_xpm_file_to_image(wolf->mlx_ptr,\
+		"pictures/labyrinth.xpm", &wolf->module, &wolf->wall_height);
+	if (wolf->img.image_ptr == NULL)
+		wolf_failure_exit(wolf, NULL, MALLOC_ERR);
+	wolf->img.addr_str = mlx_get_data_addr(wolf->img.image_ptr, &wolf->img.bits_ppixel, &wolf->size_line, &endian);
+	if (wolf->img.addr_str == NULL)
+		wolf_failure_exit(wolf, NULL, MALLOC_ERR);
+}
+
+void		init_mlx(t_wolf *wolf)
 {
 	int		endian;
 
@@ -29,4 +43,5 @@ void	init_mlx(t_wolf *wolf)
 		&wolf->size_line, &endian);
 	if (wolf->addr_str == NULL)
 		wolf_failure_exit(wolf, NULL, MALLOC_ERR);
+	load_textures(wolf);
 }

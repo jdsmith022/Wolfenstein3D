@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:12:46 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/03/03 12:37:12 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/03/04 14:54:14 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,14 @@
 # define D 2
 
 # define MOUSE_PRESS 1
+
+typedef	struct		s_texture
+{
+	void			*image_ptr;
+	char			*addr_str;
+	int				bits_ppixel;
+	int				size_line;
+}					t_texture;
 
 typedef struct		s_form
 {
@@ -134,6 +142,7 @@ typedef struct		s_wolf {
 	t_event			event;
 	t_item			*item;
 	t_form			form;
+	t_texture		img;
 }					t_wolf;
 
 t_wolf				init_wolf(void);
