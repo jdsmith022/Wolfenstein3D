@@ -6,7 +6,7 @@
 #    By: mminkjan <mminkjan@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/02/03 20:54:24 by mminkjan       #+#    #+#                 #
-#    Updated: 2020/02/28 14:52:30 by mminkjan      ########   odam.nl          #
+#    Updated: 2020/03/04 19:12:59 by mminkjan      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,6 +70,6 @@ add : fclean
 
 push :
 ifdef MSG
-	@git commit -m MSG
+	@git commit -m "$(MSG)"
 	@git push
 endif
