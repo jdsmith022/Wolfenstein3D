@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/08 14:14:17 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/03/04 14:11:53 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/04 14:22:07 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,8 @@ static void	save_vertical_item(t_wolf *wolf, t_point start,
 static void	vertical_coordinates(t_wolf *wolf, int **values, t_i *i)
 {
 	t_point start;
-	int		hold_y;
 
 	i->y = 0;
-	hold_y = 0;
 	ft_bzero(&start, sizeof(t_point));
 	if ((i->x + 1 == wolf->max_x) || (i->x > 1))
 		start.x = (i->x - 1) * wolf->module;
@@ -55,7 +53,6 @@ static void	vertical_coordinates(t_wolf *wolf, int **values, t_i *i)
 				(i->x + 1 == wolf->max_x))
 				save_vertical_item(wolf, start, i, values);
 		}
-		hold_y = i->y;
 		start.y = i->y * wolf->module;
 		i->y++;
 	}
@@ -100,14 +97,10 @@ static void	horizontal_coordinates(t_wolf *wolf, int **values, t_i *i)
 		{
 			while (values[i->y][i->x + 1] == values[i->y][i->x])
 				i->x++;
-			// if ((values[i->y][i->x + 1] > 0 && values[i->y][i->x + 1] < 5) \
-			// 	|| (i->x + 1 == wolf->max_x) || (i->x != 0))
-			// {
-				if ((i->y + 1 < wolf->max_y && values[i->y + 1][i->x] == 0 && values[i->y][i->x + 1] != 0) || \
-					(i->x == 1 && values[i->y - 1][i->x] == 0) || \
-					(i->y + 1 == wolf->max_y) || (i->y == 0) || (hold_x != i->x))
-					save_horizontal_item(wolf, start, i, values);
-			// }
+			if ((i->y + 1 < wolf->max_y && values[i->y + 1][i->x] == 0 && values[i->y][i->x + 1] != 0) || \
+				(i->x == 1 && i->y + 1 < wolf->max_y && values[i->y - 1][i->x] == 0 && values[i->y + 1][i->x] == 0) || \
+				(i->y + 1 == wolf->max_y) || (i->y == 0) || (hold_x != i->x))
+				save_horizontal_item(wolf, start, i, values);
 		}
 		start.x = i->x * wolf->module;
 		if (i->y != 0)
