@@ -6,7 +6,7 @@
 #    By: mminkjan <mminkjan@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/02/03 20:54:24 by mminkjan       #+#    #+#                 #
-#    Updated: 2020/03/04 19:12:59 by mminkjan      ########   odam.nl          #
+#    Updated: 2020/03/09 14:18:13 by mminkjan      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ OFILES = $(CFILES:%.c=%.o)
 
 HEADERS = includes/wolf3d.h
 
-ADD_FILES = Makefile author ./maps
+ADD_FILES = Makefile author ./maps ./pictures
 
 all: $(NAME)
 
