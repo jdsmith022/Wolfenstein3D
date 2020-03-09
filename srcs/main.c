@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:21:28 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/03/09 13:23:13 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/03/09 14:35:58 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,20 @@ void	draw_picture(t_wolf *wolf)
 
 	y = 0;
 	x = 0;
-	// mlx_put_image_to_window(wolf->mlx_ptr, wolf->win_ptr, wolf->img.image_ptr, x, y);
 	while (y < wolf->wall_height)
 	{
 		x = 0;
 		while (x < wolf->module)
 		{
-			index = (y * wolf->module) + (x * wolf->bits_ppixel / 8);
-			i = (y * wolf->module) + (x * wolf->bits_ppixel / 8);
-			printf("%x\n", wolf->img.addr_str[index]);
-			wolf->addr_str[index] = wolf->img.addr_str[index];
+			index = (y * wolf->size_line) + (x * wolf->bits_ppixel / 8);
+			i = (y * wolf->img.size_line) + (x * wolf->img.bits_ppixel / 8);
+			wolf->addr_str[index] = wolf->img.addr_str[i];
+			printf("%x\n", wolf->addr_str[index]);
 			x++;
 		}
 		y++;
 	}
+	mlx_put_image_to_window(wolf->mlx_ptr, wolf->win_ptr, wolf->image_ptr, 0, 0);
 }
 
 void	print_map_coordinates(t_item *item)
