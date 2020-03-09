@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 11:40:53 by jesmith        #+#    #+#                */
-/*   Updated: 2020/03/03 10:50:59 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/03/09 13:20:48 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void			project_on_plane(t_wolf *wolf, t_point intersect,
 	plane->y_end = HEIGHT / 2 + height / 2;
 }
 
-static double		clamp_angle(double angle)
+double		clamp_angle(double angle)
 {
 	if (angle > 360 * (PI / 180))
 		angle -= 360 * (PI / 180);
@@ -52,7 +52,7 @@ static void			wolf_render(t_wolf *wolf)
 		ray.end.y = ray.start.y + wolf->max_ray * sin(angle);
 		wolf->intersect = find_intersect(wolf, ray, wolf->height, angle);
 		project_on_plane(wolf, wolf->intersect, &plane, x);
-		draw_column(wolf, plane, x);
+		// draw_column(wolf, plane, x);
 		angle += wolf->ray_angle;
 		x++;
 	}
@@ -64,8 +64,8 @@ int				wolf_engine(t_wolf *wolf)
 	mlx_key(wolf);
 	mlx_mouse(wolf);
 	flat_draw(wolf);
-	mlx_put_image_to_window(wolf->mlx_ptr,
-		wolf->win_ptr, wolf->image_ptr, 0, 0);
+	// mlx_put_image_to_window(wolf->mlx_ptr,
+	// 	wolf->win_ptr, wolf->image_ptr, 0, 0);
 	ft_bzero(wolf->addr_str, (wolf->bits_ppixel / 8) * HEIGHT * WIDTH);
 	return (0);
 }

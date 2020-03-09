@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:12:46 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/03/04 14:54:14 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/03/09 13:03:50 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,7 @@ int					**save_map_values(t_wolf *wolf, char *file_name);
 void				save_map_coordinates(t_wolf *wolf);
 
 int					wolf_engine(t_wolf *wolf);
+double				clamp_angle(double angle);
 t_point				find_intersect(t_wolf *wolf, t_item ray,\
 					int prev_height, double angle);
 
