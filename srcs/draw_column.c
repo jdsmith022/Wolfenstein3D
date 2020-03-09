@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 14:46:31 by jesmith        #+#    #+#                */
-/*   Updated: 2020/03/09 16:58:25 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/03/09 17:20:47 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,11 @@ void	draw_column(t_wolf *wolf, t_project plane, int x)
 	int y;
 	int	index;
 	int	wall_index;
+	int	wall_y;
+	int i;
 
 	y = 0;
+	i = 0;
 	while (y < HEIGHT)
 	{
 		index = (y * wolf->size_line) + (x * wolf->bits_ppixel / 8);
@@ -60,8 +63,11 @@ void	draw_column(t_wolf *wolf, t_project plane, int x)
 			draw_ceiling(wolf, x, y);
 		else if (y >= plane.y_start && y <= plane.y_end)
 		{
-			wall_index = (y * wolf->img.size_line) + (plane.offset * wolf->img.bits_ppixel / 8);
+			wall_y = (plane.height / wolf->wall_height) * i;
+			// printf("i = %d - wall_y = %d\n", i, wall_y);
+			wall_index = (wall_y * wolf->img.size_line) + (plane.offset * wolf->img.bits_ppixel / 8);
 			draw_wall(wolf, index, wall_index);
+			i++;
 		}
 		else if (y > plane.y_end)
 			draw_floor(wolf, x, y);
