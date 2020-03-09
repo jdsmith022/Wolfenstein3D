@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:12:46 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/03/09 17:10:04 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/03/09 18:58:11 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ typedef struct		s_wolf {
 	int				fd;
 	int				module;
 	int				height;
-	int				wall_height;
+	double			wall_height;
 	int				obj_height;
 	int				bound;
 	double			max_ray;

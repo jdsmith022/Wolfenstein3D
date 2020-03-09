@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:34:26 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/03/09 14:56:53 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/03/09 19:13:14 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	load_textures(t_wolf *wolf)
 
 	endian = 0;
 	wolf->img.image_ptr = mlx_xpm_file_to_image(wolf->mlx_ptr,\
-		"pictures/mesh.xpm", &width, &height);
+		"pictures/headd.xpm", &width, &height);
 	if (wolf->img.image_ptr == NULL)
 		wolf_failure_exit(wolf, NULL, MALLOC_ERR);
 	wolf->img.addr_str = mlx_get_data_addr(wolf->img.image_ptr, &wolf->img.bits_ppixel, &wolf->img.size_line, &endian);
