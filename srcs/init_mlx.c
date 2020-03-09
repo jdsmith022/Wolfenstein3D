@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:34:26 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/03/09 13:22:31 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/03/09 14:47:50 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,15 @@
 static void	load_textures(t_wolf *wolf)
 {
 	int		endian;
+	int		width = WIDTH;
+	int		height = HEIGHT;
 
 	endian = 0;
-
 	wolf->img.image_ptr = mlx_xpm_file_to_image(wolf->mlx_ptr,\
-		"pictures/mesh.xpm", &wolf->module, &wolf->wall_height);
+		"pictures/mesh.xpm", &width, &height);
 	if (wolf->img.image_ptr == NULL)
 		wolf_failure_exit(wolf, NULL, MALLOC_ERR);
-	wolf->img.addr_str = mlx_get_data_addr(wolf->img.image_ptr, &wolf->img.bits_ppixel, &wolf->size_line, &endian);
+	wolf->img.addr_str = mlx_get_data_addr(wolf->img.image_ptr, &wolf->img.bits_ppixel, &wolf->img.size_line, &endian);
 	if (wolf->img.addr_str == NULL)
 		wolf_failure_exit(wolf, NULL, MALLOC_ERR);
 }

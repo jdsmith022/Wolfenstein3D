@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/05 13:14:43 by jesmith        #+#    #+#                */
-/*   Updated: 2020/02/22 17:53:04 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/09 14:16:00 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,21 @@ void	lst_del(t_item **item, void (ft_del)(void*, size_t))
 	if (*item != NULL)
 		free(*item);
 	(*item) = NULL;
+}
+
+void	lst_addback(t_item **item_list, t_item *item)
+{
+	t_item *temp;
+
+	temp = *item_list;
+	if (temp == NULL)
+	{
+		*item_list = item;
+		return ;
+	}
+	while (temp->next != NULL)
+		temp = temp->next;
+	temp->next = item;
 }
 
 static void	free_values(void **values)
@@ -64,19 +79,4 @@ int		wolf_failure_exit(t_wolf *wolf, int **map_values, char *exit_message)
 	ft_bzero(wolf, sizeof(t_wolf));
 	exit(EXIT_FAILURE);
 	return (-1);
-}
-
-void	lst_addback(t_item **item_list, t_item *item)
-{
-	t_item *temp;
-
-	temp = *item_list;
-	if (temp == NULL)
-	{
-		*item_list = item;
-		return ;
-	}
-	while (temp->next != NULL)
-		temp = temp->next;
-	temp->next = item;
 }
