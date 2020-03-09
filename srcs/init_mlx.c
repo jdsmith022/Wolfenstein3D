@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:34:26 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/03/09 14:47:50 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/09 14:56:53 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 static void	load_textures(t_wolf *wolf)
 {
 	int		endian;
-	int		width = WIDTH;
-	int		height = HEIGHT;
+	int		width = wolf->module;
+	int		height = wolf->wall_height;
 
 	endian = 0;
 	wolf->img.image_ptr = mlx_xpm_file_to_image(wolf->mlx_ptr,\

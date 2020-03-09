@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 11:40:53 by jesmith        #+#    #+#                */
-/*   Updated: 2020/03/09 14:45:12 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/09 15:59:39 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@ static void			project_on_plane(t_wolf *wolf, t_point intersect,
 	height = wolf->wall_height / intersect.obj_dist * wolf->dist_to_plane;
 	plane->y_start = HEIGHT / 2 - height / 2;
 	plane->y_end = HEIGHT / 2 + height / 2;
+	if ((int)wolf->intersect.x % 300 == 0)
+		plane->offset = (int)wolf->intersect.y % 300;
+	else
+		plane->offset = (int)wolf->intersect.x % 300;
+
 }
 
 double		clamp_angle(double angle)

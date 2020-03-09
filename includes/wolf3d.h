@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:12:46 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/03/09 13:03:50 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/03/09 15:59:15 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ typedef struct		s_project
 	double			y_start;
 	double			y_end;
 	int				texture;
+	double			offset;
+	int				x;
 }					t_project;
 
 typedef	struct		s_point {
