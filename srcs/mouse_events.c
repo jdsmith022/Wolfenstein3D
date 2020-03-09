@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 17:15:28 by jesmith        #+#    #+#                */
-/*   Updated: 2020/02/26 14:58:51 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/03/09 19:32:06 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static int	mouse_move(int x, int y, t_wolf *wolf)
 		}
 	}
 	wolf->event.hold_x = x;
-	// printf("%f\n", wolf->dir_angle);
 	return (0);
 }
 

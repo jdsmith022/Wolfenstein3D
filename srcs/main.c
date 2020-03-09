@@ -6,36 +6,11 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:21:28 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/03/09 14:47:21 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/09 19:32:49 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
-
-// void	draw_picture(t_wolf *wolf)
-// {
-// 	int x;
-// 	int y;
-// 	int index;
-// 	int i;
-
-// 	y = 0;
-// 	x = 0;
-// 	while (y < wolf->wall_height)
-// 	{
-// 		x = 0;
-// 		while (x < wolf->module)
-// 		{
-// 			index = (y * wolf->size_line) + (x * wolf->bits_ppixel / 8);
-// 			i = (y * wolf->img.size_line) + (x * wolf->img.bits_ppixel / 8);
-// 			wolf->addr_str[index] = wolf->img.addr_str[i];
-// 			printf("%x\n", wolf->addr_str[index]);
-// 			x++;
-// 		}
-// 		y++;
-// 	}
-// 	mlx_put_image_to_window(wolf->mlx_ptr, wolf->win_ptr, wolf->image_ptr, 0, 0);
-// }
 
 void	print_map_coordinates(t_item *item)
 {
@@ -85,7 +60,6 @@ int		main(int argc, char **argv)
 	save_map_coordinates(&wolf);
 	print_map_coordinates(wolf.item);
 	init_mlx(&wolf);
-	// draw_picture(&wolf);
 	init_mlx2(&wolf); //remove later
 	mlx_loop_hook(wolf.mlx_ptr, wolf_engine, &wolf);
 	mlx_loop(wolf.mlx_ptr);
