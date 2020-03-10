@@ -6,20 +6,21 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/10 19:09:56 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/03/09 12:59:49 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/10 11:19:03 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
 
-static int		intersect_direction(t_wolf *wolf, t_point pos)
+static int		intersect_direction(t_wolf *wolf,
+					double move_angle, t_point pos)
 {
 	double		angle;
 	t_item		ray;
 	int			x;
 
 	x = 0;
-	angle = wolf->dir_angle - (FOV / 2);
+	angle = move_angle - (FOV / 2);
 	ray.start.x = pos.x;
 	ray.start.y = pos.y;
 	while (x < WIDTH)
@@ -31,7 +32,7 @@ static int		intersect_direction(t_wolf *wolf, t_point pos)
 		angle += wolf->ray_angle;
 		x++;
 	}
-	if (wolf->intersect.obj_dist < 20)
+	if (wolf->intersect.obj_dist <= 30)
 		return (1);
 	return (0);
 }
@@ -39,31 +40,11 @@ static int		intersect_direction(t_wolf *wolf, t_point pos)
 static void		key_player_position(t_wolf *wolf, int key)
 {
 	t_point pos;
-	double	radian;
+	double	move_angle;
 
 	pos = wolf->pos;
-	radian = 90 * PI / 180;
-	if (key == W)
-	{
-		pos.x += SPEED * cos(wolf->dir_angle);
-		pos.y += SPEED * sin(wolf->dir_angle);
-	}
-	if (key == S)
-	{
-		pos.x -= SPEED * cos(wolf->dir_angle);
-		pos.y -= SPEED * sin(wolf->dir_angle);
-	}
-	if (key == A && wolf->pos.x >= 10)
-	{
-		pos.x += SPEED * cos(wolf->dir_angle - radian);
-		pos.y += SPEED * sin(wolf->dir_angle - radian);
-	}
-	if (key == D)
-	{
-		pos.x += SPEED * cos(wolf->dir_angle + radian);
-		pos.y += SPEED * sin(wolf->dir_angle + radian);
-	}
-	if (intersect_direction(wolf, pos) == 0)
+	key_player_movement(wolf, key, pos, &move_angle);
+	if (intersect_direction(wolf, move_angle, pos) == 0)
 		wolf->pos = pos;
 }
 

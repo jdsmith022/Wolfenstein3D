@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:12:46 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/03/09 18:58:11 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/03/10 11:18:40 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define PI 3.14159265359
 # define FOV 60 * (PI / 180)
 
-# define SPEED 10
+# define SPEED 25
 
 # define ESC 53
 # define W 13
@@ -163,12 +163,14 @@ void				save_map_coordinates(t_wolf *wolf);
 int					wolf_engine(t_wolf *wolf);
 double				clamp_angle(double angle);
 t_point				find_intersect(t_wolf *wolf, t_item ray,\
-					int prev_height, double angle);
+						int prev_height, double angle);
 
 void				draw_column(t_wolf *wolf, t_project wall, int x);
 
 void				mlx_mouse(t_wolf *wolf);
 void				mlx_key(t_wolf *wolf);
+void				key_player_movement(t_wolf *wolf, int key, \
+						t_point pos, double *move_angle);
 
 void				print_map(int **map_values, t_wolf *wolf); //delete later
 void				print_map_coordinates(t_item *item); //delete later
