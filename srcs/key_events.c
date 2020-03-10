@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/10 19:09:56 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/03/10 11:29:53 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/10 18:00:00 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ static int		intersect_direction(t_wolf *wolf,
 		angle += wolf->ray_angle;
 		x++;
 	}
-	if (wolf->intersect.obj_dist <= 30)
+	printf("dis: %f	angle: %f\n", wolf->intersect.obj_dist, angle);
+	if (wolf->intersect.obj_dist <= 50 || pos.x < 0 || pos.y < 0 || pos.x > MAX_WIDTH|| pos.y > MAX_HEIGHT)
 		return (1);
 	return (0);
 }
@@ -44,8 +45,9 @@ static void		key_player_position(t_wolf *wolf, int key)
 
 	pos = wolf->pos;
 	key_player_movement(wolf, key, &pos, &move_angle);
-	if (intersect_direction(wolf, move_angle, pos) == 0)
-		wolf->pos = pos;
+	if (key == W || key == S || key == A || key == D)
+		if (intersect_direction(wolf, move_angle, pos) == 0)
+			wolf->pos = pos;
 }
 
 static void		key_window_handling(t_wolf *wolf, int key)

@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/10 11:15:21 by jesmith        #+#    #+#                */
-/*   Updated: 2020/03/10 11:25:45 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/10 17:01:40 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ static void		player_side_movement(t_wolf *wolf, int key,
 	{
 		pos->x += SPEED * cos(wolf->dir_angle - radian);
 		pos->y += SPEED * sin(wolf->dir_angle - radian);
-		*(move_angle) = wolf->dir_angle + radian + reverse_radian;
+		*(move_angle) = wolf->dir_angle + radian * reverse_radian;
 	}
 	if (key == D)
 	{
 		pos->x += SPEED * cos(wolf->dir_angle + radian);
 		pos->y += SPEED * sin(wolf->dir_angle + radian);
-		*(move_angle) = wolf->dir_angle - radian - reverse_radian;
+		*(move_angle) = wolf->dir_angle - radian * reverse_radian;
 	}
 }
 

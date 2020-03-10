@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:12:46 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/03/10 17:08:29 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/10 17:57:23 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
 
 # define MAX_SIZE 100
 # define MAX_TEXTURES 7
+# define MAX_WIDTH WIDTH * wolf->module
+# define MAX_HEIGHT HEIGHT * wolf->module
 
 # define PI 3.14159265359
 # define FOV 60 * (PI / 180)
