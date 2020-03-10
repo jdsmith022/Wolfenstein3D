@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:34:26 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/03/09 19:50:31 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/10 13:02:15 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,14 @@ static void	load_textures(t_wolf *wolf)
 	width = wolf->module;
 	height = wolf->wall_height;
 	wolf->img.image_ptr = mlx_xpm_file_to_image(wolf->mlx_ptr,\
-		"pictures/head.xpm", &width, &height);
+		"pictures/labyrinth.xpm", &width, &height);
 	if (wolf->img.image_ptr == NULL)
 		wolf_failure_exit(wolf, NULL, MALLOC_ERR);
 	wolf->img.addr_str = mlx_get_data_addr(wolf->img.image_ptr, \
 		&wolf->img.bits_ppixel, &wolf->img.size_line, &endian);
 	if (wolf->img.addr_str == NULL)
 		wolf_failure_exit(wolf, NULL, MALLOC_ERR);
+	printf("%x\n", (int)wolf->img.addr_str[0]);
 }
 
 void		init_mlx(t_wolf *wolf)

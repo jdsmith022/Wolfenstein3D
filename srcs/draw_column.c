@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 14:46:31 by jesmith        #+#    #+#                */
-/*   Updated: 2020/03/10 11:21:10 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/10 12:58:10 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,21 @@
 
 static void	draw_wall(t_wolf *wolf, int index, int wall_index)
 {
-	wolf->addr_str[index] = wolf->img.addr_str[wall_index];
+	int color;
+
+	color = (int)wolf->img.addr_str[wall_index];
+	wolf->addr_str[index] = color;
+	index++;
+	wolf->addr_str[index] = color >> 8;
+	index++;
+	wolf->addr_str[index] = color >> 16;
+	// wolf->addr_str[index >> 16] = wolf->img.addr_str[wall_index >> 16];
+	// // index++;
+	// // wall_index++;
+	// wolf->addr_str[index >> 8] = wolf->img.addr_str[wall_index >> 8];
+	// // index++;
+	// // wall_index++;
+	// wolf->addr_str[index] = wolf->img.addr_str[wall_index];
 }
 
 // static void	draw_ceiling(t_wolf *wolf, int x, int y)
