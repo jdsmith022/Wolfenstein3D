@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:12:46 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/03/10 11:25:57 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/10 12:43:42 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define WOLF3D_H
 
 # include "../libft/libft.h"
+# include "./printers.h"
 # include "../minilibx_macos/mlx.h"
 # include <math.h>
 # include <fcntl.h>
@@ -171,14 +172,5 @@ void				mlx_mouse(t_wolf *wolf);
 void				mlx_key(t_wolf *wolf);
 void				key_player_movement(t_wolf *wolf, int key, \
 						t_point *pos, double *move_angle);
-
-void				print_map(int **map_values, t_wolf *wolf); //delete later
-void				print_map_coordinates(t_item *item); //delete later
-int					flat_draw(t_wolf *wolf); // remove later
-void				draw_line(t_wolf *wolf, t_point start, t_point end, int color); //remove
-void				draw_intercept(t_wolf *wolf, t_point r_start, int x, int y);
-void				draw_ray(t_wolf *wolf, t_point r_start, t_point r_end, int color);
-void				init_mlx2(t_wolf *wolf); //remove
-
 
 #endif

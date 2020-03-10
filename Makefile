@@ -6,7 +6,7 @@
 #    By: mminkjan <mminkjan@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/02/03 20:54:24 by mminkjan       #+#    #+#                 #
-#    Updated: 2020/03/10 11:18:31 by jesmith       ########   odam.nl          #
+#    Updated: 2020/03/10 12:51:20 by jesmith       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,24 +18,25 @@ MLX = minilibx_macos/
 
 MLXFLAGS = -lmlx -framework OpenGL -framework AppKit
 
-LIBFT = libft/
+LIBFT = ./libft/
+
+PRINT = ./printers/
+
+PT_FILES =  printers
 
 SRCS = ./srcs/
-
 
 SRCS_FILES = main init_wolf utilities init_mlx \
 			save_map_values save_map_coordinates wolf_engine find_intersect \
 			mouse_events draw_column key_events key_player_movement\
 			2d_vis mlx_init2
 
-PRINT = ./printers/ #remove
-PT_FILES =  #remove 
 
-CFILES = $(SRCS_FILES:%=$(SRCS)%.c)
+CFILES = $(SRCS_FILES:%=$(SRCS)%.c) $(PT_FILES:%=$(PRINT)%.c) 
 
 OFILES = $(CFILES:%.c=%.o)
 
-HEADERS = includes/wolf3d.h
+HEADERS = includes/wolf3d.h includes/printers.h
 
 ADD_FILES = Makefile author ./maps ./pictures
 
