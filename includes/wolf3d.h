@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:12:46 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/03/10 17:57:23 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/10 18:03:52 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,17 +107,6 @@ typedef struct		s_player
 	double			x;
 	double			y;
 }					t_player;
-
-typedef	struct			s_line //delete later
-{
-	double				delta_x;
-	double				delta_y;
-	double				delta_x_abs;
-	double				delta_y_abs;
-	double				error_x;
-	double				error_y;
-	double				delta_alt;
-}						t_line;
 
 typedef struct		s_wolf {
 	void			*win_ptr2; //remove from here
