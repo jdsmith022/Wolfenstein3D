@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/10 19:09:56 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/03/10 11:19:03 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/10 11:27:02 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static int		intersect_direction(t_wolf *wolf,
 	t_item		ray;
 	int			x;
 
+	printf("move_angle2: %f\n", move_angle);
 	x = 0;
 	angle = move_angle - (FOV / 2);
 	ray.start.x = pos.x;
@@ -43,7 +44,7 @@ static void		key_player_position(t_wolf *wolf, int key)
 	double	move_angle;
 
 	pos = wolf->pos;
-	key_player_movement(wolf, key, pos, &move_angle);
+	key_player_movement(wolf, key, &pos, &move_angle);
 	if (intersect_direction(wolf, move_angle, pos) == 0)
 		wolf->pos = pos;
 }

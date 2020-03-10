@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:12:46 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/03/10 11:18:40 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/10 11:25:57 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,7 @@ void				draw_column(t_wolf *wolf, t_project wall, int x);
 void				mlx_mouse(t_wolf *wolf);
 void				mlx_key(t_wolf *wolf);
 void				key_player_movement(t_wolf *wolf, int key, \
-						t_point pos, double *move_angle);
+						t_point *pos, double *move_angle);
 
 void				print_map(int **map_values, t_wolf *wolf); //delete later
 void				print_map_coordinates(t_item *item); //delete later
