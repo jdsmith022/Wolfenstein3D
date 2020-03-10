@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:12:46 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/03/10 12:43:42 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/10 17:08:29 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,11 +146,13 @@ typedef struct		s_wolf {
 	t_event			event;
 	t_item			*item;
 	t_form			form;
-	t_texture		img;
+	t_texture		img[10];
 }					t_wolf;
 
 t_wolf				init_wolf(void);
 void				init_mlx(t_wolf *wolf);
+
+void				load_textures(t_wolf *wolf);
 
 int					wolf_success_exit(t_wolf *wolf);
 int					wolf_failure_exit(t_wolf *wolf,\

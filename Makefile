@@ -6,7 +6,7 @@
 #    By: mminkjan <mminkjan@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/02/03 20:54:24 by mminkjan       #+#    #+#                 #
-#    Updated: 2020/03/10 13:05:11 by jesmith       ########   odam.nl          #
+#    Updated: 2020/03/10 17:52:10 by jesmith       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,8 @@ SRCS = ./srcs/
 
 SRCS_FILES = main init_wolf utilities init_mlx \
 			save_map_values save_map_coordinates wolf_engine find_intersect \
-			mouse_events draw_column key_events key_player_movement\
+			mouse_events draw_column key_events key_player_movement \
+			load_textures
 
 
 CFILES = $(SRCS_FILES:%=$(SRCS)%.c) $(PT_FILES:%=$(PRINT)%.c) 
@@ -37,7 +38,7 @@ OFILES = $(CFILES:%.c=%.o)
 
 HEADERS = includes/wolf3d.h includes/printers.h
 
-ADD_FILES = Makefile author ./maps ./pictures
+ADD_FILES = Makefile author ./maps ./textures
 
 all: $(NAME)
 
