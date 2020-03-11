@@ -6,7 +6,7 @@
 #    By: mminkjan <mminkjan@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/02/03 20:54:24 by mminkjan       #+#    #+#                 #
-#    Updated: 2020/03/10 17:52:10 by jesmith       ########   odam.nl          #
+#    Updated: 2020/03/11 11:50:36 by jesmith       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ LIBFT = ./libft/
 
 PRINT = ./printers/
 
-PT_FILES =  printers 2d_vis mlx_init2 draw_line
+PT_FILES =  printers 2d_vis init_mlx_vis draw_line
 
 SRCS = ./srcs/
 

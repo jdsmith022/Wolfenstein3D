@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/10 12:57:12 by jesmith        #+#    #+#                */
-/*   Updated: 2020/03/11 11:40:43 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/11 11:48:54 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ static void		put_pixel(t_wolf *wolf, t_point point, int color)
 }
 
 static void		draw_y_dominant(t_wolf *wolf, t_line *line,
-					t_point start, t_point end, int color)
+					t_item ray, int color)
 {
 	t_point point;
 
-	point = start;
-	while (point.y < end.y)
+	point = ray.start;
+	while (point.y < ray.end.y)
 	{
 		if (line->error_y <= 0)
 			line->error_y += 2 * line->delta_x_abs;
@@ -54,12 +54,12 @@ static void		draw_y_dominant(t_wolf *wolf, t_line *line,
 }
 
 static void		draw_x_dominant(t_wolf *wolf, t_line *line,
-					t_point start, t_point end, int color)
+					t_item ray, int color)
 {
 	t_point point;
 
-	point = start;
-	while (point.x < end.x)
+	point = ray.start;
+	while (point.x < ray.end.x)
 	{
 		if (line->error_x < 0)
 			line->error_x += 2 * line->delta_y_abs;
@@ -78,32 +78,35 @@ static void		draw_x_dominant(t_wolf *wolf, t_line *line,
 }
 
 static void		set_direction(t_wolf *wolf, t_line *line,
-					t_point start, t_point end, int color)
+					t_item ray, int color)
 {
 	t_point hold;
 
 	if ((line->delta_x < 0 && line->delta_y_abs <= line->delta_x_abs) ||
 		(line->delta_y < 0 && line->delta_y_abs > line->delta_x_abs))
 	{
-		hold = start;
-		start = end;
-		end = hold;
+		hold = ray.start;
+		ray.start = ray.end;
+		ray.end = hold;
 	}
 	if (line->delta_y_abs <= line->delta_x_abs)
-		draw_x_dominant(wolf, line, start, end, color);
+		draw_x_dominant(wolf, line, ray, color);
 	else
-		draw_y_dominant(wolf, line, start, end, color);
+		draw_y_dominant(wolf, line, ray, color);
 }
 
 void			draw_line(t_wolf *wolf, t_point start, t_point end, int color)
 {
 	t_line line;
+	t_item ray;
 
+	ray.start = start;
+	ray.end = end;
 	line.delta_x = end.x - start.x;
 	line.delta_y = end.y - start.y;
 	line.delta_x_abs = abs((int)line.delta_x);
 	line.delta_y_abs = abs((int)line.delta_y);
 	line.error_x = 2 * line.delta_y_abs - line.delta_x_abs;
 	line.error_y = 2 * line.delta_x_abs - line.delta_y_abs;
-	set_direction(wolf, &line, start, end, color);
+	set_direction(wolf, &line, ray, color);
 }

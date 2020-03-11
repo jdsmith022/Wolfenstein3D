@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/10 12:34:56 by jesmith        #+#    #+#                */
-/*   Updated: 2020/03/11 11:32:22 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/11 11:51:32 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ typedef struct s_wolf	t_wolf;
 typedef struct s_point	t_point;
 typedef struct s_item	t_item;
 
-typedef	struct		s_line //delete later
+typedef	struct		s_line
 {
 	double			delta_x;
 	double			delta_y;
@@ -46,6 +46,6 @@ void				draw_line(t_wolf *wolf, t_point start, \
 void				draw_intercept(t_wolf *wolf, t_point r_start, int x, int y);
 void				draw_ray(t_wolf *wolf, t_point r_start, \
 						t_point r_end, int color);
-void				init_mlx2(t_wolf *wolf);
+void				init_mlx_vis(t_wolf *wolf);
 
 #endif
