@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 11:40:53 by jesmith        #+#    #+#                */
-/*   Updated: 2020/03/11 11:23:09 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/11 12:07:43 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ static size_t	texture_index(t_point intersect, t_point pos, int delta)
 	index = 0;
 	if (intersect.y > pos.y && delta == 0)
 		return (index);
-	if (intersect.y < pos.y && delta == 0)
+	else if (intersect.y < pos.y && delta == 0)
 		index = 1;
-	if (intersect.x > pos.x && delta == 1)
+	else if (intersect.x > pos.x && delta == 1)
 		index = 2;
-	if (intersect.x < pos.x && delta == 1)
+	else if (intersect.x < pos.x && delta == 1)
 		index = 3;
 	return (index);
 }
@@ -39,13 +39,13 @@ static void		project_on_plane(t_wolf *wolf, t_point intersect,
 		wolf->wall_height / intersect.obj_dist * wolf->dist_to_plane;
 	plane->y_start = HEIGHT / 2 - plane->height / 2;
 	plane->y_end = HEIGHT / 2 + plane->height / 2;
-	if ((int)wolf->intersect.x % 300 == 0)
+	if ((int)wolf->intersect.x % wolf->module == 0)
 	{
-		plane->offset = (int)wolf->intersect.y % 300;
+		plane->offset = (int)wolf->intersect.y % wolf->module;
 		plane->delta = 1;
 	}
 	else
-		plane->offset = (int)wolf->intersect.x % 300;
+		plane->offset = (int)wolf->intersect.x % wolf->module;
 }
 
 double			clamp_angle(double angle)
