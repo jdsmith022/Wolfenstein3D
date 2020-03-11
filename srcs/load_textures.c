@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/10 17:07:11 by jesmith        #+#    #+#                */
-/*   Updated: 2020/03/10 17:48:18 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/11 10:40:22 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	load_addr_str(t_wolf *wolf)
 static void	load_image_ptr(t_wolf *wolf, int width, int height)
 {
 	wolf->img[0].image_ptr = mlx_xpm_file_to_image(wolf->mlx_ptr,\
-		"textures/escher.XPM", &width, &height);
+		"textures/mesh.xpm", &width, &height);
 	wolf->img[1].image_ptr = mlx_xpm_file_to_image(wolf->mlx_ptr,\
 		"textures/escher2.XPM", &width, &height);
 	wolf->img[2].image_ptr = mlx_xpm_file_to_image(wolf->mlx_ptr,\

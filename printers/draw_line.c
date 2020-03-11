@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/10 12:57:12 by jesmith        #+#    #+#                */
-/*   Updated: 2020/03/10 12:57:29 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/11 11:40:43 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ static void		put_pixel(t_wolf *wolf, t_point point, int color)
 	{
 		index = ((int)point.y * wolf->size_line) + ((int)point.x *
 			wolf->bits_ppixel / 8);
-		wolf->addr_str2[index] = color;
+		wolf->vis.addr_str2[index] = color;
 		index++;
-		wolf->addr_str2[index] = color >> 8;
+		wolf->vis.addr_str2[index] = color >> 8;
 		index++;
-		wolf->addr_str2[index] = color >> 16;
+		wolf->vis.addr_str2[index] = color >> 16;
 	}
 }
 

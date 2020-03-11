@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/10 12:34:56 by jesmith        #+#    #+#                */
-/*   Updated: 2020/03/10 18:03:50 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/11 11:32:22 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,14 @@ typedef	struct		s_line //delete later
 	double			error_y;
 	double			delta_alt;
 }					t_line;
+
+typedef struct		s_vis
+{
+	void			*win_ptr2;
+	void			*mlx_ptr2;
+	void			*image_ptr2;
+	char			*addr_str2;
+}					t_vis;
 
 void				print_map(int **map_values, t_wolf *wolf);
 void				print_map_coordinates(t_item *item);

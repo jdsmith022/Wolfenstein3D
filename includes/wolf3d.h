@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:12:46 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/03/10 18:03:52 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/11 11:40:14 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 # define PI 3.14159265359
 # define FOV 60 * (PI / 180)
 
-# define SPEED 25
+# define SPEED 20
 
 # define ESC 53
 # define W 13
@@ -44,6 +44,8 @@
 # define D 2
 
 # define MOUSE_PRESS 1
+
+typedef struct 		s_vis	t_vis;
 
 typedef	struct		s_texture
 {
@@ -73,6 +75,7 @@ typedef struct		s_project
 	int				height;
 	double			offset;
 	int				x;
+	int				delta;
 }					t_project;
 
 typedef	struct		s_point {
@@ -109,10 +112,6 @@ typedef struct		s_player
 }					t_player;
 
 typedef struct		s_wolf {
-	void			*win_ptr2; //remove from here
-	void			*mlx_ptr2;
-	void			*image_ptr2;
-	char			*addr_str2; // to here
 	void			*win_ptr;
 	void			*mlx_ptr;
 	void			*image_ptr;
@@ -132,6 +131,7 @@ typedef struct		s_wolf {
 	double			dir_angle;
 	double			dist_to_plane;
 	double			ray_angle;
+	t_vis			vis;
 	t_point			intersect;
 	t_point			pos;
 	t_event			event;
@@ -159,7 +159,8 @@ double				clamp_angle(double angle);
 t_point				find_intersect(t_wolf *wolf, t_item ray,\
 						int prev_height, double angle);
 
-void				draw_column(t_wolf *wolf, t_project wall, int x);
+void				draw_column(t_wolf *wolf, t_project wall, \
+						int x, size_t texdex);
 
 void				mlx_mouse(t_wolf *wolf);
 void				mlx_key(t_wolf *wolf);

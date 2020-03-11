@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/10 19:09:56 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/03/10 18:00:00 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/11 11:25:29 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ static int		intersect_direction(t_wolf *wolf,
 		angle += wolf->ray_angle;
 		x++;
 	}
-	printf("dis: %f	angle: %f\n", wolf->intersect.obj_dist, angle);
-	if (wolf->intersect.obj_dist <= 50 || pos.x < 0 || pos.y < 0 || pos.x > MAX_WIDTH|| pos.y > MAX_HEIGHT)
+	if (wolf->intersect.obj_dist <= 50 || pos.x < 0 || pos.y < 0 \
+		|| pos.x > MAX_WIDTH || pos.y > MAX_HEIGHT)
 		return (1);
 	return (0);
 }
