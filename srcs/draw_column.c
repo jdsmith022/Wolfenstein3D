@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 14:46:31 by jesmith        #+#    #+#                */
-/*   Updated: 2020/03/11 16:40:59 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/11 18:02:54 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,28 +31,28 @@
 // 	put_pixel(wolf, 0xffffff, x, y); //white
 // }
 
-// static void	draw_floor(t_wolf *wolf, size_t texdex,
-// 				int index, double wall_index)
-// {
-// 	int color;
-// 	int new;
-// 	int red;
-// 	int blue;
-// 	int green;
+static void	draw_floor(t_wolf *wolf, size_t texdex,
+				int index, double wall_index)
+{
+	int color;
+	int new;
+	int red;
+	int blue;
+	int green;
 
-// 	(void)texdex;
+	(void)texdex;
 
-// 	color = wolf->img[1].addr_str[(size_t)wall_index];
-// 	red = (color >> 16) & 0xFF;
-// 	green = (color >> 8) & 0xFF;
-// 	blue = (color & 0xFF);
-// 	new = (red << 16 | green << 8 | blue);
-// 	wolf->addr_str[index] = new;
-// 	index++;
-// 	wolf->addr_str[index] = new >> 8;
-// 	index++;
-// 	wolf->addr_str[index] = new >> 16;
-// }
+	color = wolf->img[1].addr_str[(size_t)wall_index];
+	red = (color >> 16) & 0xFF;
+	green = (color >> 8) & 0xFF;
+	blue = (color & 0xFF);
+	new = (red << 16 | green << 8 | blue);
+	wolf->addr_str[index] = new;
+	index++;
+	wolf->addr_str[index] = new >> 8;
+	index++;
+	wolf->addr_str[index] = new >> 16;
+}
 
 // static void	draw_ceiling(t_wolf *wolf, int x, int y)
 // {
@@ -113,12 +113,12 @@ void			draw_column(t_wolf *wolf, t_project plane, int x, size_t texdex)
 			wall_index = ((int)wall_y * wolf->img[texdex].size_line) + (plane.offset * wolf->img[texdex].bits_ppixel / 8) * 4;
 			draw_wall(wolf, texdex, index, wall_index);
 		}
-		// else if (y > plane.y_end)
-		// {
-		// 	wall_y = (double)((HEIGHT / 2)) / (y - plane.y_start) * wolf->dist_to_plane;
-		// 	wall_index = ((int)wall_y * wolf->img[1].size_line) + (y * wolf->img[1].bits_ppixel / 8);
-		// 	draw_floor(wolf, texdex, index, wall_index);
-		// }
+		else if (y > plane.y_end)
+		{
+			wall_y = (double)(wolf->wall_height / 2) / (y - HEIGHT / 2) * wolf->dist_to_plane;
+			wall_index = ((int)wall_y * wolf->img[1].size_line) + (wall_y * wolf->img[1].bits_ppixel / 8);
+			draw_floor(wolf, texdex, index, wall_index);
+		}
 		y++;
 	}
 }
