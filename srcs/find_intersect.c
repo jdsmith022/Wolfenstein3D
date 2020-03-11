@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/28 14:44:47 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/03/10 15:45:51 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/11 12:46:26 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ t_point				find_intersection_point(t_point start_a, t_point end_a,
 	t_point			slope_a;
 	t_point			slope_b;
 
-	intersect.x = 0;
-	intersect.y = 0;
+	intersect.x = 0.0;
+	intersect.y = 0.0;
 	slope_a.x = end_a.x - start_a.x;
 	slope_a.y = end_a.y - start_a.y;
 	slope_b.x = end_b.x - start_b.x;

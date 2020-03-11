@@ -6,11 +6,19 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 11:40:53 by jesmith        #+#    #+#                */
-/*   Updated: 2020/03/11 12:07:43 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/11 13:00:23 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
+
+static int		rounder(double dbl)
+{
+	int rounded;
+
+	rounded = (int)(dbl + 0.5);
+	return (rounded);
+}
 
 static size_t	texture_index(t_point intersect, t_point pos, int delta)
 {
@@ -39,25 +47,16 @@ static void		project_on_plane(t_wolf *wolf, t_point intersect,
 		wolf->wall_height / intersect.obj_dist * wolf->dist_to_plane;
 	plane->y_start = HEIGHT / 2 - plane->height / 2;
 	plane->y_end = HEIGHT / 2 + plane->height / 2;
-	if ((int)wolf->intersect.x % wolf->module == 0)
+	if (rounder(wolf->intersect.x) % wolf->module == 0)
 	{
-		plane->offset = (int)wolf->intersect.y % wolf->module;
+		plane->offset = rounder(wolf->intersect.y) % wolf->module;
 		plane->delta = 1;
 	}
 	else
-		plane->offset = (int)wolf->intersect.x % wolf->module;
+		plane->offset = rounder(wolf->intersect.x) % wolf->module;
 }
 
-double			clamp_angle(double angle)
-{
-	if (angle > 360 * (PI / 180))
-		angle -= 360 * (PI / 180);
-	else if (angle < 0)
-		angle += 360 * (PI / 180);
-	return (angle);
-}
-
-static void			wolf_render(t_wolf *wolf)
+static void		wolf_render(t_wolf *wolf)
 {
 	int			x;
 	double		angle;
@@ -83,7 +82,7 @@ static void			wolf_render(t_wolf *wolf)
 	}
 }
 
-int					wolf_engine(t_wolf *wolf)
+int				wolf_engine(t_wolf *wolf)
 {
 	wolf_render(wolf);
 	mlx_key(wolf);

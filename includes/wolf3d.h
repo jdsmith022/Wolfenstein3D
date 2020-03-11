@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:12:46 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/03/11 12:00:03 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/11 12:59:59 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,17 +143,11 @@ void				init_mlx(t_wolf *wolf);
 
 void				load_textures(t_wolf *wolf);
 
-int					wolf_success_exit(t_wolf *wolf);
-int					wolf_failure_exit(t_wolf *wolf,\
-					int **map_values, char *exit_message);
-void				lst_del(t_item **item, void (ft_del)(void*, size_t));
-void				lst_addback(t_item **item_list, t_item *item);
 
 int					**save_map_values(t_wolf *wolf, char *file_name);
 void				save_map_coordinates(t_wolf *wolf);
 
 int					wolf_engine(t_wolf *wolf);
-double				clamp_angle(double angle);
 t_point				find_intersect(t_wolf *wolf, t_item ray,\
 						int prev_height, double angle);
 
@@ -164,5 +158,13 @@ void				mlx_mouse(t_wolf *wolf);
 void				mlx_key(t_wolf *wolf);
 void				key_player_movement(t_wolf *wolf, int key, \
 						t_point *pos, double *move_angle);
+
+int					wolf_success_exit(t_wolf *wolf);
+int					wolf_failure_exit(t_wolf *wolf,\
+						int **map_values, char *exit_message);
+
+void				lst_del(t_item **item, void (ft_del)(void*, size_t));
+void				lst_addback(t_item **item_list, t_item *item);
+double				clamp_angle(double angle);
 
 #endif

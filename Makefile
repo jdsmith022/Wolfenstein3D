@@ -6,7 +6,7 @@
 #    By: mminkjan <mminkjan@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/02/03 20:54:24 by mminkjan       #+#    #+#                 #
-#    Updated: 2020/03/11 11:50:36 by jesmith       ########   odam.nl          #
+#    Updated: 2020/03/11 13:00:36 by jesmith       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,10 +26,10 @@ PT_FILES =  printers 2d_vis init_mlx_vis draw_line
 
 SRCS = ./srcs/
 
-SRCS_FILES = main init_wolf utilities init_mlx \
+SRCS_FILES = main init_wolf utilities init_mlx exit \
 			save_map_values save_map_coordinates wolf_engine find_intersect \
 			mouse_events draw_column key_events key_player_movement \
-			load_textures
+			load_textures 
 
 
 CFILES = $(SRCS_FILES:%=$(SRCS)%.c) $(PT_FILES:%=$(PRINT)%.c) 

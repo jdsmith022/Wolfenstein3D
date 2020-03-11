@@ -6,13 +6,13 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/05 13:14:43 by jesmith        #+#    #+#                */
-/*   Updated: 2020/03/09 14:16:00 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/11 12:59:41 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
 
-void	lst_del(t_item **item, void (ft_del)(void*, size_t))
+void		lst_del(t_item **item, void (ft_del)(void*, size_t))
 {
 	t_item *list;
 
@@ -31,7 +31,7 @@ void	lst_del(t_item **item, void (ft_del)(void*, size_t))
 	(*item) = NULL;
 }
 
-void	lst_addback(t_item **item_list, t_item *item)
+void		lst_addback(t_item **item_list, t_item *item)
 {
 	t_item *temp;
 
@@ -46,37 +46,11 @@ void	lst_addback(t_item **item_list, t_item *item)
 	temp->next = item;
 }
 
-static void	free_values(void **values)
+double			clamp_angle(double angle)
 {
-	size_t	y;
-
-	y = 0;
-	while (values[y] != NULL)
-	{
-		free(values[y]);
-		y++;
-	}
-	free(values);
-}
-
-int		wolf_success_exit(t_wolf *wolf)
-{
-	close(wolf->fd);
-	lst_del(&wolf->item, ft_del);
-	ft_bzero(wolf, sizeof(t_wolf));
-	exit(EXIT_SUCCESS);
-	return (0);
-}
-
-int		wolf_failure_exit(t_wolf *wolf, int **map_values, char *exit_message)
-{
-	close(wolf->fd);
-	ft_putendl(exit_message);
-	if (map_values)
-		free_values((void**)map_values);
-	if (wolf->item)
-		lst_del(&wolf->item, ft_del);
-	ft_bzero(wolf, sizeof(t_wolf));
-	exit(EXIT_FAILURE);
-	return (-1);
+	if (angle > 360 * (PI / 180))
+		angle -= 360 * (PI / 180);
+	else if (angle < 0)
+		angle += 360 * (PI / 180);
+	return (angle);
 }
