@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 17:15:28 by jesmith        #+#    #+#                */
-/*   Updated: 2020/03/11 14:27:36 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/11 16:46:05 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static int	mouse_press(int key, int x, int y, t_wolf *wolf)
 
 void		mlx_mouse(t_wolf *wolf)
 {
-	mlx_hook(wolf->win_ptr, 4, 0, mouse_press, wolf);
-	mlx_hook(wolf->win_ptr, 6, 0, mouse_move, wolf);
-	mlx_hook(wolf->win_ptr, 5, 0, mouse_release, wolf);
+	mlx_hook(wolf->graphics.win_ptr, 4, 0, mouse_press, wolf);
+	mlx_hook(wolf->graphics.win_ptr, 6, 0, mouse_move, wolf);
+	mlx_hook(wolf->graphics.win_ptr, 5, 0, mouse_release, wolf);
 }

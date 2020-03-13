@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   mlx_init_vis.c                                     :+:    :+:            */
+/*   init_mlx_vis.c                                     :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/09 19:32:24 by jesmith        #+#    #+#                */
-/*   Updated: 2020/03/11 11:50:45 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/11 16:33:22 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	init_mlx_vis(t_wolf *wolf)
 	if (wolf->vis.image_ptr2 == NULL)
 		wolf_failure_exit(wolf, NULL, MALLOC_ERR);
 	wolf->vis.addr_str2 = \
-		mlx_get_data_addr(wolf->vis.image_ptr2, &wolf->bits_ppixel,
-		&wolf->size_line, &endian);
+		mlx_get_data_addr(wolf->vis.image_ptr2, &wolf->graphics.bits_ppixel,
+		&wolf->graphics.size_line, &endian);
 	if (wolf->vis.addr_str2 == NULL)
 		wolf_failure_exit(wolf, NULL, MALLOC_ERR);
 }

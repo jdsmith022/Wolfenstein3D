@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/10 12:57:12 by jesmith        #+#    #+#                */
-/*   Updated: 2020/03/11 11:48:54 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/11 16:47:49 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static void		put_pixel(t_wolf *wolf, t_point point, int color)
 	if (point.x >= 0 && point.x < WIDTH && point.y >= 0
 	&& point.y < HEIGHT)
 	{
-		index = ((int)point.y * wolf->size_line) + ((int)point.x *
-			wolf->bits_ppixel / 8);
+		index = ((int)point.y * wolf->graphics.size_line) + ((int)point.x *
+			wolf->graphics.bits_ppixel / 8);
 		wolf->vis.addr_str2[index] = color;
 		index++;
 		wolf->vis.addr_str2[index] = color >> 8;

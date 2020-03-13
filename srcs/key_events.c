@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/10 19:09:56 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/03/11 11:25:29 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/11 16:46:31 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,6 @@ static int		key_events(int key, t_wolf *wolf)
 
 void			mlx_key(t_wolf *wolf)
 {
-	mlx_hook(wolf->win_ptr, 2, 0, key_events, wolf);
-	mlx_hook(wolf->win_ptr, 17, 0, wolf_success_exit, wolf);
+	mlx_hook(wolf->graphics.win_ptr, 2, 0, key_events, wolf);
+	mlx_hook(wolf->graphics.win_ptr, 17, 0, wolf_success_exit, wolf);
 }

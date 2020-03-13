@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:12:46 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/03/11 12:59:59 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/11 17:42:12 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@
 
 typedef	struct		s_texture
 {
-	void			*image_ptr;
+	void			*image_ptr;//
 	char			*addr_str;
 	int				bits_ppixel;
 	int				size_line;
@@ -109,13 +109,21 @@ typedef struct		s_player
 	double			y;
 }					t_player;
 
-typedef struct		s_wolf {
+typedef struct		s_graphics {
 	void			*win_ptr;
 	void			*mlx_ptr;
 	void			*image_ptr;
 	int				bits_ppixel;
 	int				size_line;
 	char			*addr_str;
+	t_texture		*wall[10];
+	t_texture		sprite;
+	t_texture		floor;
+	t_texture		ceiling;
+}					t_graphics;
+
+typedef struct		s_wolf {
+	
 	int				**map;
 	int				max_x;
 	int				max_y;
@@ -129,13 +137,13 @@ typedef struct		s_wolf {
 	double			dir_angle;
 	double			dist_to_plane;
 	double			ray_angle;
+	t_graphics		graphics;
 	t_vis			vis;
 	t_point			intersect;
 	t_point			pos;
 	t_event			event;
 	t_item			*item;
 	t_form			form;
-	t_texture		img[10];
 }					t_wolf;
 
 t_wolf				init_wolf(void);

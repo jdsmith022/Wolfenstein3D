@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/22 14:10:44 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/03/11 11:40:57 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/11 16:46:54 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int			flat_draw(t_wolf *wolf)
 {
 	draw_map(wolf, wolf->item);
 	mlx_put_image_to_window(wolf->vis.mlx_ptr2,
-		wolf->win_ptr, wolf->vis.image_ptr2, WIDTH, 0);
-	ft_bzero(wolf->vis.addr_str2, HEIGHT * WIDTH * (wolf->bits_ppixel / 8));
+		wolf->graphics.win_ptr, wolf->vis.image_ptr2, WIDTH, 0);
+	ft_bzero(wolf->vis.addr_str2, HEIGHT * WIDTH * (wolf->graphics.bits_ppixel / 8));
 	return (0);
 }
