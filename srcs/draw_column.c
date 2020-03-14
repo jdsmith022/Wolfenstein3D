@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 14:46:31 by jesmith        #+#    #+#                */
-/*   Updated: 2020/03/13 16:55:18 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/03/14 17:16:58 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ void			draw_column(t_wolf *wolf, t_project plane, int x, size_t texdex)
 			draw_ceiling(wolf, x, y);
 		if (y >= plane.y_start && y <= plane.y_end)
 		{
-			wall_y = (double)(wolf->wall_height / plane.height) * (y - plane.y_start) * 4;
-			wall_index = ((int)wall_y * wolf->graphics.wall[texdex]->size_line) + (plane.offset * wolf->graphics.wall[texdex]->bits_ppixel / 8) * 4;
+			wall_y = (double)(wolf->wall_height / plane.height) * (y - plane.y_start) / 2.5;
+			wall_index = ((int)wall_y * wolf->graphics.wall[texdex]->size_line) + (plane.offset * wolf->graphics.wall[texdex]->bits_ppixel / 8);
 			draw_wall(wolf, texdex, index, wall_index);
 		}
 		else if (y > plane.y_end)

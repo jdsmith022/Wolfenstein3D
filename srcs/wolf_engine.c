@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 11:40:53 by jesmith        #+#    #+#                */
-/*   Updated: 2020/03/13 14:56:43 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/03/14 16:57:24 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@ static size_t	texture_index(t_point intersect, t_point pos, int delta)
 	size_t index;
 
 	index = 0;
+	if (intersect.texture == 2)
+        index += 4;
+    if (intersect.texture == 3)
+        index += 8;
+    if (intersect.texture == 4)
+        index += 12;
 	if (intersect.y > pos.y && delta == 0)
 		return (index);
 	else if (intersect.y < pos.y && delta == 0)
