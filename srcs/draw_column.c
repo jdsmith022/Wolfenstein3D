@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 14:46:31 by jesmith        #+#    #+#                */
-/*   Updated: 2020/03/14 17:43:53 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/03/14 18:55:53 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 static void	put_pixel(t_wolf *wolf, int color, int x, int y)
 {
 	size_t	index;
+
 	if (x >= 0 && x < WIDTH && y < HEIGHT && y >= 0)
 	{
-		index = (y * wolf->graphics.size_line) + (x * wolf->graphics.bits_ppixel / 8);
+		index = (y * wolf->graphics.size_line) + \
+			(x * wolf->graphics.bits_ppixel / 8);
 		wolf->graphics.addr_str[index] = color;
 		index++;
 		wolf->graphics.addr_str[index] = color >> 8;
@@ -48,12 +50,20 @@ static void	draw_ceiling(t_wolf *wolf, int x, int y)
 static void	draw_wall(t_wolf *wolf, size_t texdex,
 				int index, double wall_index)
 {
-	wolf->graphics.addr_str[index] = wolf->graphics.wall[texdex]->addr_str[(size_t)wall_index];
-	wolf->graphics.addr_str[index + 1] = wolf->graphics.wall[texdex]->addr_str[(size_t)wall_index + 1];
-	wolf->graphics.addr_str[index + 2] = wolf->graphics.wall[texdex]->addr_str[(size_t)wall_index + 2];
+	wolf->graphics.addr_str[index] = \
+		wolf->graphics.wall[texdex]->addr_str[(size_t)wall_index];
+	index++;
+	wall_index++;
+	wolf->graphics.addr_str[index] = \
+		wolf->graphics.wall[texdex]->addr_str[(size_t)wall_index];
+	index++;
+	wall_index++;
+	wolf->graphics.addr_str[index] = \
+		wolf->graphics.wall[texdex]->addr_str[(size_t)wall_index];
 }
 
-void			draw_column(t_wolf *wolf, t_project plane, int x, size_t texdex)
+void		draw_column(t_wolf *wolf, t_project plane,
+				int x, size_t texdex)
 {
 	int		index;
 	int		y;
@@ -63,7 +73,8 @@ void			draw_column(t_wolf *wolf, t_project plane, int x, size_t texdex)
 	y = 0;
 	while (y < HEIGHT)
 	{
-		index = (y * wolf->graphics.size_line) + (x * wolf->graphics.bits_ppixel / 8);
+		index = (y * wolf->graphics.size_line) + \
+			(x * wolf->graphics.bits_ppixel / 8);
 		if (y < plane.y_start)
 			draw_ceiling(wolf, x, y);
 		if (y >= plane.y_start && y <= plane.y_end)

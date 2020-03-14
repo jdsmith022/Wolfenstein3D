@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 11:40:53 by jesmith        #+#    #+#                */
-/*   Updated: 2020/03/14 17:40:14 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/03/14 18:46:12 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ int				wolf_engine(t_wolf *wolf)
 	flat_draw(wolf);
 	mlx_put_image_to_window(wolf->graphics.mlx_ptr,
 		wolf->graphics.win_ptr, wolf->graphics.image_ptr, 0, 0);
-	ft_memset(wolf->graphics.addr_str, 0, (wolf->graphics.bits_ppixel / 8) * HEIGHT * WIDTH);
+	ft_memset(wolf->graphics.addr_str, 0, \
+		(wolf->graphics.bits_ppixel / 8) * HEIGHT * WIDTH);
 	return (0);
 }

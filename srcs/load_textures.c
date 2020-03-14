@@ -6,11 +6,33 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/10 17:07:11 by jesmith        #+#    #+#                */
-/*   Updated: 2020/03/14 18:01:23 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/03/14 19:04:17 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
+
+static void	load_addr_str3(t_wolf *wolf, int endian)
+{
+	wolf->graphics.wall[10]->addr_str = mlx_get_data_addr(\
+		wolf->graphics.wall[10], &wolf->graphics.wall[10]->bits_ppixel,\
+		&wolf->graphics.wall[10]->size_line, &endian);
+	wolf->graphics.wall[11]->addr_str = mlx_get_data_addr(\
+		wolf->graphics.wall[11], &wolf->graphics.wall[11]->bits_ppixel,\
+		&wolf->graphics.wall[11]->size_line, &endian);
+	wolf->graphics.wall[12]->addr_str = mlx_get_data_addr(\
+		wolf->graphics.wall[12], &wolf->graphics.wall[12]->bits_ppixel,\
+		&wolf->graphics.wall[12]->size_line, &endian);
+	wolf->graphics.wall[13]->addr_str = mlx_get_data_addr(\
+		wolf->graphics.wall[13], &wolf->graphics.wall[13]->bits_ppixel,\
+		&wolf->graphics.wall[13]->size_line, &endian);
+	wolf->graphics.wall[14]->addr_str = mlx_get_data_addr(\
+		wolf->graphics.wall[14], &wolf->graphics.wall[14]->bits_ppixel,\
+		&wolf->graphics.wall[14]->size_line, &endian);
+	wolf->graphics.wall[15]->addr_str = mlx_get_data_addr(\
+		wolf->graphics.wall[15], &wolf->graphics.wall[15]->bits_ppixel,\
+		&wolf->graphics.wall[15]->size_line, &endian);
+}
 
 static void	load_addr_str2(t_wolf *wolf, int endian)
 {
@@ -29,9 +51,10 @@ static void	load_addr_str2(t_wolf *wolf, int endian)
 	wolf->graphics.wall[9]->addr_str = mlx_get_data_addr(\
 		wolf->graphics.wall[9], &wolf->graphics.wall[9]->bits_ppixel,\
 		&wolf->graphics.wall[9]->size_line, &endian);
+	load_addr_str3(wolf, endian);
 }
 
-static void	load_addr_str(t_wolf *wolf)
+void		load_addr_str(t_wolf *wolf)
 {
 	int		endian;
 
@@ -53,10 +76,30 @@ static void	load_addr_str(t_wolf *wolf)
 	load_addr_str2(wolf, endian);
 }
 
-static void	load_image_ptr(t_wolf *wolf, int width, int height)
+static void	load_image_ptr2(t_wolf *wolf, int width, int height)
+{
+	wolf->graphics.wall[8] = mlx_xpm_file_to_image(wolf->graphics.mlx_ptr,\
+		"textures/head.xpm", &width, &height);
+	wolf->graphics.wall[9] = mlx_xpm_file_to_image(wolf->graphics.mlx_ptr,\
+		"textures/head.xpm", &width, &height);
+	wolf->graphics.wall[10] = mlx_xpm_file_to_image(wolf->graphics.mlx_ptr,\
+		"textures/head.xpm", &width, &height);
+	wolf->graphics.wall[11] = mlx_xpm_file_to_image(wolf->graphics.mlx_ptr,\
+		"textures/head.xpm", &width, &height);
+	wolf->graphics.wall[12] = mlx_xpm_file_to_image(wolf->graphics.mlx_ptr,\
+		"textures/head.xpm", &width, &height);
+	wolf->graphics.wall[13] = mlx_xpm_file_to_image(wolf->graphics.mlx_ptr,\
+		"textures/head.xpm", &width, &height);
+	wolf->graphics.wall[14] = mlx_xpm_file_to_image(wolf->graphics.mlx_ptr,\
+		"textures/head.xpm", &width, &height);
+	wolf->graphics.wall[15] = mlx_xpm_file_to_image(wolf->graphics.mlx_ptr,\
+		"textures/head.xpm", &width, &height);
+}
+
+void		load_image_ptr(t_wolf *wolf, int width, int height)
 {
 	wolf->graphics.wall[0] = mlx_xpm_file_to_image(wolf->graphics.mlx_ptr,\
-		"textures/bricks.xpm", &width, &height);
+		"textures/mossy.xpm", &width, &height);
 	wolf->graphics.wall[1] = mlx_xpm_file_to_image(wolf->graphics.mlx_ptr,\
 		"textures/dark_blue.xpm", &width, &height);
 	wolf->graphics.wall[2] = mlx_xpm_file_to_image(wolf->graphics.mlx_ptr,\
@@ -64,37 +107,12 @@ static void	load_image_ptr(t_wolf *wolf, int width, int height)
 	wolf->graphics.wall[3] = mlx_xpm_file_to_image(wolf->graphics.mlx_ptr,\
 		"textures/wood.xpm", &width, &height);
 	wolf->graphics.wall[4] = mlx_xpm_file_to_image(wolf->graphics.mlx_ptr,\
-		"textures/head.xpm", &width, &height);
+		"textures/redbrick.xpm", &width, &height);
 	wolf->graphics.wall[5] = mlx_xpm_file_to_image(wolf->graphics.mlx_ptr,\
-		"textures/head.xpm", &width, &height);
+		"textures/greystone.xpm", &width, &height);
 	wolf->graphics.wall[6] = mlx_xpm_file_to_image(wolf->graphics.mlx_ptr,\
-		"textures/head.xpm", &width, &height);
+		"textures/bricks.xpm", &width, &height);
 	wolf->graphics.wall[7] = mlx_xpm_file_to_image(wolf->graphics.mlx_ptr,\
 		"textures/head.xpm", &width, &height);
-	wolf->graphics.wall[8] = mlx_xpm_file_to_image(wolf->graphics.mlx_ptr,\
-		"textures/head.xpm", &width, &height);
-	wolf->graphics.wall[9] = mlx_xpm_file_to_image(wolf->graphics.mlx_ptr,\
-		"textures/head.xpm", &width, &height);
-}
-
-void	load_textures(t_wolf *wolf)
-{
-	int		width;
-	int		height;
-	int		index;
-
-	width = wolf->module;
-	height = wolf->wall_height;
-	load_image_ptr(wolf, width, height);
-	index = 0;
-	while (index < 10 && wolf->graphics.wall[index] != NULL)
-		index++;
-	if (index < 10)
-		wolf_failure_exit(wolf, NULL, MALLOC_ERR);
-	load_addr_str(wolf);
-	index = 0;
-	while (index < 10 && wolf->graphics.wall[index]->addr_str != NULL)
-		index++;
-	if (index < 10)
-		wolf_failure_exit(wolf, NULL, MALLOC_ERR);
+	load_image_ptr2(wolf, width, height);
 }
