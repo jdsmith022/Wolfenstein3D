@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/05 13:14:09 by jesmith        #+#    #+#                */
-/*   Updated: 2020/03/11 11:21:38 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/14 17:37:04 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ t_wolf	init_wolf(void)
 	wolf.pos.y = 150;
 	wolf.dir_angle = 180 * (PI / 180);
 	wolf.dist_to_plane = (WIDTH / 2) / tan(FOV / 2);
-	wolf.module = 300;
+	wolf.module = 64;
 	wolf.height = 0;
-	wolf.wall_height = 250;
+	wolf.wall_height = 64;
 	wolf.ray_angle = FOV / WIDTH;
 	wolf.obj_height = 70; //seperate func assignment
 	return (wolf);

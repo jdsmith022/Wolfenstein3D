@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/10 17:07:11 by jesmith        #+#    #+#                */
-/*   Updated: 2020/03/14 17:01:46 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/03/14 18:01:23 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,13 @@ static void	load_addr_str(t_wolf *wolf)
 static void	load_image_ptr(t_wolf *wolf, int width, int height)
 {
 	wolf->graphics.wall[0] = mlx_xpm_file_to_image(wolf->graphics.mlx_ptr,\
-		"textures/dark_blue.xpm", &width, &height);
+		"textures/bricks.xpm", &width, &height);
 	wolf->graphics.wall[1] = mlx_xpm_file_to_image(wolf->graphics.mlx_ptr,\
-		"textures/dark_brick.xpm", &width, &height);
+		"textures/dark_blue.xpm", &width, &height);
 	wolf->graphics.wall[2] = mlx_xpm_file_to_image(wolf->graphics.mlx_ptr,\
 		"textures/light_blue.xpm", &width, &height);
 	wolf->graphics.wall[3] = mlx_xpm_file_to_image(wolf->graphics.mlx_ptr,\
-		"textures/light_brick.xpm", &width, &height);
+		"textures/wood.xpm", &width, &height);
 	wolf->graphics.wall[4] = mlx_xpm_file_to_image(wolf->graphics.mlx_ptr,\
 		"textures/head.xpm", &width, &height);
 	wolf->graphics.wall[5] = mlx_xpm_file_to_image(wolf->graphics.mlx_ptr,\
