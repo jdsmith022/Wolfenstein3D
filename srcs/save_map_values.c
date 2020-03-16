@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/05 13:35:03 by jesmith        #+#    #+#                */
-/*   Updated: 2020/03/09 19:31:13 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/16 20:55:51 by jessicasmit   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static void	set_max_ray(t_wolf *wolf)
 	int map_width;
 	int map_length;
 
-	map_width = wolf->max_x * wolf->module;
-	map_length = wolf->max_y * wolf->module;
+	map_width = wolf->max_x * wolf->wall_width;
+	map_length = wolf->max_y * wolf->wall_width;
 	wolf->max_ray = sqrt(map_width * map_width + map_length * map_length);
 }
 
