@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/28 14:44:47 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/03/11 12:46:26 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/16 11:56:13 by jessicasmit   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,7 @@ static double		find_intersect_distance(t_point intersect,
 	return (distance);
 }
 
-t_point				find_intersect(t_wolf *wolf, t_item ray,
-						int prev_height, double angle)
+t_point				find_intersect(t_wolf *wolf, t_item ray, double angle)
 {
 	t_point			intersect;
 	t_point			min_intersect;
@@ -74,7 +73,6 @@ t_point				find_intersect(t_wolf *wolf, t_item ray,
 	double			distance;
 	double			min_distance;
 
-	(void)prev_height;
 	object = wolf->item;
 	min_distance = INFINITY;
 	while (object != NULL)

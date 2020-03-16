@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/10 19:09:56 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/03/11 16:46:31 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/03/16 11:56:39 by jessicasmit   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int		intersect_direction(t_wolf *wolf,
 		angle = clamp_angle(angle);
 		ray.end.x = ray.start.x + wolf->max_ray * cos(angle);
 		ray.end.y = ray.start.y + wolf->max_ray * sin(angle);
-		wolf->intersect = find_intersect(wolf, ray, wolf->height, angle);
+		wolf->intersect = find_intersect(wolf, ray, angle);
 		angle += wolf->ray_angle;
 		x++;
 	}
