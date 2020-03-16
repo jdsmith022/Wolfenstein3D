@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:12:46 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/03/14 18:51:52 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/16 10:44:28 by jessicasmit   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 
 # define MAX_SIZE 100
 # define MAX_TEXTURES 7
-# define MAX_WIDTH WIDTH * wolf->module
-# define MAX_HEIGHT HEIGHT * wolf->module
+# define MAX_WIDTH WIDTH * wolf->wall_width
+# define MAX_HEIGHT HEIGHT * wolf->wall_width
 
 # define PI 3.14159265359
 # define FOV 60 * (PI / 180)
@@ -127,8 +127,7 @@ typedef struct		s_wolf {
 	int				max_x;
 	int				max_y;
 	int				fd;
-	int				module;
-	int				height;
+	int				wall_width;
 	double			wall_height;
 	int				obj_height;
 	int				bound;
@@ -155,8 +154,7 @@ int					**save_map_values(t_wolf *wolf, char *file_name);
 void				save_map_coordinates(t_wolf *wolf);
 
 int					wolf_engine(t_wolf *wolf);
-t_point				find_intersect(t_wolf *wolf, t_item ray,\
-						int prev_height, double angle);
+t_point				find_intersect(t_wolf *wolf, t_item ray, double angle);
 
 void				draw_column(t_wolf *wolf, t_project wall, \
 						int x, size_t texdex);

@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 11:40:53 by jesmith        #+#    #+#                */
-/*   Updated: 2020/03/14 18:46:12 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/16 11:38:05 by jessicasmit   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,18 @@ static size_t	texture_index(t_point intersect, t_point pos, int delta)
 	index = 0;
 	if (intersect.texture == 2)
         index += 4;
-    if (intersect.texture == 3)
+    else if (intersect.texture == 3)
         index += 8;
-    if (intersect.texture == 4)
+    else if (intersect.texture == 4)
         index += 12;
-	if (intersect.y > pos.y && delta == 0)
+	if (intersect.y >= pos.y && delta == 0)
 		return (index);
-	else if (intersect.y < pos.y && delta == 0)
-		index = 1;
-	else if (intersect.x > pos.x && delta == 1)
-		index = 2;
-	else if (intersect.x < pos.x && delta == 1)
-		index = 3;
+	else if (intersect.y <= pos.y && delta == 0)
+		index += 1;
+	else if (intersect.x >= pos.x && delta == 1)
+		index += 2;
+	else if (intersect.x <= pos.x && delta == 1)
+		index += 3;
 	return (index);
 }
 
@@ -53,13 +53,13 @@ static void		project_on_plane(t_wolf *wolf, t_point intersect,
 		wolf->wall_height / intersect.obj_dist * wolf->dist_to_plane;
 	plane->y_start = HEIGHT / 2 - plane->height / 2;
 	plane->y_end = HEIGHT / 2 + plane->height / 2;
-	if (rounder(wolf->intersect.x) % wolf->module == 0)
+	if (rounder(wolf->intersect.x) % wolf->wall_width == 0)
 	{
-		plane->offset = rounder(wolf->intersect.y) % wolf->module;
+		plane->offset = rounder(wolf->intersect.y) % wolf->wall_width;
 		plane->delta = 1;
 	}
 	else
-		plane->offset = rounder(wolf->intersect.x) % wolf->module;
+		plane->offset = rounder(wolf->intersect.x) % wolf->wall_width;
 }
 
 static void		wolf_render(t_wolf *wolf)
@@ -79,7 +79,7 @@ static void		wolf_render(t_wolf *wolf)
 		angle = clamp_angle(angle);
 		ray.end.x = ray.start.x + wolf->max_ray * cos(angle);
 		ray.end.y = ray.start.y + wolf->max_ray * sin(angle);
-		wolf->intersect = find_intersect(wolf, ray, wolf->height, angle);
+		wolf->intersect = find_intersect(wolf, ray, angle);
 		project_on_plane(wolf, wolf->intersect, &plane, x);
 		texdex = texture_index(wolf->intersect, wolf->pos, plane.delta);
 		draw_column(wolf, plane, x, texdex);
