@@ -6,11 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/08 14:14:17 by mminkjan       #+#    #+#                */
-<<<<<<< HEAD
-/*   Updated: 2020/03/17 16:44:43 by Malou         ########   odam.nl         */
-=======
-/*   Updated: 2020/03/16 20:55:51 by jessicasmit   ########   odam.nl         */
->>>>>>> c74bf6d9fd117211f6f64b48b466fd69d3edb353
+/*   Updated: 2020/03/17 18:27:43 by Malou         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,12 +142,15 @@ static t_item *init_item(t_wolf *wolf, t_i i, int **map_values, char dir)
 	item->start.y = i.y * wolf->wall_width;
 	item->end.x = item->start.x;
 	item->end.y = item->start.y;
-	if (dir == 'h' && i.y + 1 < wolf->max_y && i.y - 1 >= 0 && 
-			map_values[i.y + 1][i.x] == map_values[i.y - 1][i.x])ç
-		item->texture = map_values[i.y + 1][i.x];
-	else if (dir == 'v' && i.x + 1 < wolf->max_y && i.x - 1 >= 0 &&
-			map_values[i.y][i.x + 1] == map_values[i.y][i.x + 1])
+	item->texture = map_values[i.y][i.x];
+	if (dir == 'h' && item->texture != map_values[i.y][i.x + 1] 
+			&& ((i.y - 1 >= 0 && map_values[i.y - 1][i.x] == item->texture)
+			|| (i.y + 1 < wolf->max_y && map_values[i.y + 1][i.x] == item->texture)))
 		item->texture = map_values[i.y][i.x + 1];
+	else if (dir == 'v' && item->texture != map_values[i.y + 1][i.x]
+			&& ((i.x - 1 >= 0 && map_values[i.y][i.x - 1] == item->texture) 
+			|| (i.x + 1 < wolf->max_x && map_values[i.y][i.x + 1] == item->texture)))
+		item->texture = map_values[i.y + 1][i.x];
 	return (item);
 }
 

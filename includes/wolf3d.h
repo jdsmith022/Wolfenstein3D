@@ -6,11 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:12:46 by mminkjan       #+#    #+#                */
-<<<<<<< HEAD
-/*   Updated: 2020/03/16 15:29:27 by Malou         ########   odam.nl         */
-=======
-/*   Updated: 2020/03/16 21:11:00 by jessicasmit   ########   odam.nl         */
->>>>>>> c74bf6d9fd117211f6f64b48b466fd69d3edb353
+/*   Updated: 2020/03/16 15:29:27 by mminkjan         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
