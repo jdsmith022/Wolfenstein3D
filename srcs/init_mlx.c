@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:34:26 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/03/14 18:47:49 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/16 12:33:49 by Malou         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	load_textures(t_wolf *wolf)
 	int		height;
 	int		index;
 
-	width = wolf->module;
+	width = wolf->wall_width;
 	height = wolf->wall_height;
 	load_image_ptr(wolf, width, height);
 	index = 0;

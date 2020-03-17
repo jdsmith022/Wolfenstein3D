@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/10 12:08:56 by jesmith        #+#    #+#                */
-/*   Updated: 2020/03/10 12:34:34 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/16 15:22:42 by Malou         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	print_map_coordinates(t_item *item)
 {
 	t_item	*temp;
 
+	printf("%d\n", 1);
 	temp = item;
 	while (temp != NULL)
 	{

@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/08 14:14:17 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/03/16 19:33:28 by Malou         ########   odam.nl         */
+/*   Updated: 2020/03/17 16:44:43 by Malou         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@
 
 // }
 
-static t_item *init_item(t_wolf *wolf, t_i i, int **map_values)
+static t_item *init_item(t_wolf *wolf, t_i i, int **map_values, char dir)
 {
 	t_item *item;
 
@@ -142,16 +142,21 @@ static t_item *init_item(t_wolf *wolf, t_i i, int **map_values)
 	item->start.y = i.y * wolf->wall_width;
 	item->end.x = item->start.x;
 	item->end.y = item->start.y;
-	item->texture = map_values[i.y][i.x];
+	if (dir == 'h' && i.y + 1 < wolf->max_y && i.y - 1 >= 0 && 
+			map_values[i.y + 1][i.x] == map_values[i.y - 1][i.x])ç
+		item->texture = map_values[i.y + 1][i.x];
+	else if (dir == 'v' && i.x + 1 < wolf->max_y && i.x - 1 >= 0 &&
+			map_values[i.y][i.x + 1] == map_values[i.y][i.x + 1])
+		item->texture = map_values[i.y][i.x + 1];
 	return (item);
 }
 
-static t_i	vertical_coordinates(t_wolf *wolf, int **map_values, t_i i)
+static t_i	check_vertical_coordinates(t_wolf *wolf, int **map_values, t_i i)
 {
 	int value;
 	t_item *item;
 
-	item = init_item(wolf, i , map_values);
+	item = init_item(wolf, i , map_values, 'v');
 	value = map_values[i.y][i.x];
 	if (i.y + 1 < wolf->max_x && map_values[i.y + 1][i.x] == value)
 	{
@@ -174,7 +179,7 @@ static t_i	horizontal_coordinates(t_wolf *wolf, int **map_values, t_i i)
 	int value;
 	t_item *item;
 
-	item = init_item(wolf, i , map_values);
+	item = init_item(wolf, i , map_values, 'h');
 	value = map_values[i.y][i.x];
 	if (i.x + 1 < wolf->max_x && map_values[i.y][i.x + 1] == value)
 	{
@@ -192,9 +197,15 @@ static t_i	horizontal_coordinates(t_wolf *wolf, int **map_values, t_i i)
 	return(i);
 }
 
-t_i		big_long_if_statement(t_wolf *wolf, t_i iterate)
+static void		check_horizontal_coordinates(t_wolf *wolf)
 {
-	if (wolf->map[iterate.y][iterate.x] != 0 &&
+	t_i iterate;
+	
+	iterate.y = 0;
+	iterate.x = 0;
+	while (iterate.y < wolf->max_y)
+	{
+		if (wolf->map[iterate.y][iterate.x] != 0 &&
 			(((iterate.x + 1 < wolf->max_x &&
 			wolf->map[iterate.y][iterate.x + 1] != 0) ||
 			iterate.x + 1  == wolf->max_x) ||
@@ -205,33 +216,28 @@ t_i		big_long_if_statement(t_wolf *wolf, t_i iterate)
 			wolf->map[iterate.y - 1][iterate.x] == 0) ||
 			iterate.y - 1 == 0))))
 				iterate = horizontal_coordinates(wolf, wolf->map, iterate);
-	return (iterate);
+			iterate.x++;
+			if (iterate.x >= wolf->max_x - 1)
+			{
+				iterate.y++;
+				iterate.x = 0;
+			}
+	}
 }
 
 void	save_map_coordinates(t_wolf *wolf)
 {
 	t_i		iterate;
 
-	iterate.y = 0;
 	iterate.x = 0;
-	while (iterate.y < wolf->max_y)
-	{
-		iterate = big_long_if_statement(wolf, iterate);
-		iterate.x++;
-		if (iterate.x >= wolf->max_x - 1)
-		{
-			iterate.y++;
-			iterate.x = 0;
-		}
-	}
 	iterate.y = 0;
+	check_horizontal_coordinates(wolf);
 	while (iterate.x < wolf->max_x)
 	{
-		if (wolf->map[iterate.y][iterate.x] != 0 &&
-			((iterate.y + 1 < wolf->max_y &&
-			wolf->map[iterate.y + 1][iterate.x] != 0) ||
-			iterate.y + 1 == wolf->max_y))
-				iterate = vertical_coordinates(wolf, wolf->map, iterate);
+		if (wolf->map[iterate.y][iterate.x] != 0 && 
+			((iterate.y + 1 < wolf->max_y && wolf->map[iterate.y + 1][iterate.x] != 0)
+			|| iterate.y + 1 == wolf->max_y))
+				iterate = check_vertical_coordinates(wolf, wolf->map, iterate);
 		iterate.y++;
 		if (iterate.y >= wolf->max_y - 1)
 		{
