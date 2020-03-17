@@ -6,7 +6,11 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/08 14:14:17 by mminkjan       #+#    #+#                */
+<<<<<<< HEAD
 /*   Updated: 2020/03/17 16:44:43 by Malou         ########   odam.nl         */
+=======
+/*   Updated: 2020/03/16 20:55:51 by jessicasmit   ########   odam.nl         */
+>>>>>>> c74bf6d9fd117211f6f64b48b466fd69d3edb353
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +26,9 @@
 // 		wolf_failure_exit(wolf, map_values, MALLOC_ERR);
 // 	item->start = start;
 // 	if (i->y + 1 == wolf->max_y)
-// 		item->end.y = (i->y - 1) * wolf->module + 64;
+// 		item->end.y = (i->y - 1) * wolf->wall_width + 64;
 // 	else
-// 		item->end.y = i->y * wolf->module + 64;
+// 		item->end.y = i->y * wolf->wall_width + 64;
 // 	item->end.x = start.x;
 // 	item->texture = map_values[i->y][i->x];
 // 	item->next = NULL;
@@ -38,9 +42,9 @@
 // 	i->y = 0;
 // 	ft_bzero(&start, sizeof(t_point));
 // 	if ((i->x + 1 == wolf->max_x) || (i->x > 1))
-// 		start.x = (i->x - 1) * wolf->module + 64;
+// 		start.x = (i->x - 1) * wolf->wall_width + 64;
 // 	else
-// 		start.x = i->x * wolf->module + 64;
+// 		start.x = i->x * wolf->wall_width + 64;
 // 	while (i->y < wolf->max_y)
 // 	{
 // 		if (values[i->y][i->x] > 0 && values[i->y][i->x] < 5)
@@ -53,7 +57,7 @@
 // 				(i->x + 1 == wolf->max_x))
 // 				save_vertical_item(wolf, start, i, values);
 // 		}
-// 		start.y = i->y * wolf->module + 64;
+// 		start.y = i->y * wolf->wall_width + 64;
 // 		i->y++;
 // 	}
 // }
@@ -68,11 +72,11 @@
 // 		wolf_failure_exit(wolf, map_values, MALLOC_ERR);
 // 	item->start = start;
 // 	if (i->x + 1 == wolf->max_x)
-// 		item->end.x = (i->x - 1) * wolf->module + 64;
+// 		item->end.x = (i->x - 1) * wolf->wall_width + 64;
 // 	else if (map_values[i->y][i->x] > 4)
 // 		item->end.x = (i->x + 1) * 70;
 // 	else
-// 		item->end.x = i->x * wolf->module + 64;
+// 		item->end.x = i->x * wolf->wall_width + 64;
 // 	item->end.y = start.y;
 // 	item->texture = map_values[i->y][i->x];
 // 	item->next = NULL;
@@ -88,9 +92,9 @@
 // 	hold_x = 0;
 // 	ft_bzero(&start, sizeof(t_point));
 // 	if (i->y + 1 == wolf->max_y)
-// 		start.y = (i->y - 1) * wolf->module + 64;
+// 		start.y = (i->y - 1) * wolf->wall_width + 64;
 // 	else
-// 		start.y = i->y * wolf->module + 64;
+// 		start.y = i->y * wolf->wall_width + 64;
 // 	while (i->x < wolf->max_x - 1)
 // 	{
 // 		if (values[(int)i->y][(int)i->x] != 0)
@@ -102,7 +106,7 @@
 // 				(i->y + 1 == wolf->max_y) || (i->y == 0) || (hold_x != i->x))
 // 				save_horizontal_item(wolf, start, i, values);
 // 		}
-// 		start.x = i->x * wolf->module + 64;
+// 		start.x = i->x * wolf->wall_width + 64;
 // 		if (i->y != 0)
 // 			i->x++;
 // 		hold_x = i->x;

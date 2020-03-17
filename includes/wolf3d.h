@@ -6,7 +6,11 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:12:46 by mminkjan       #+#    #+#                */
+<<<<<<< HEAD
 /*   Updated: 2020/03/16 15:29:27 by Malou         ########   odam.nl         */
+=======
+/*   Updated: 2020/03/16 21:11:00 by jessicasmit   ########   odam.nl         */
+>>>>>>> c74bf6d9fd117211f6f64b48b466fd69d3edb353
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +151,8 @@ typedef struct		s_wolf {
 t_wolf				init_wolf(void);
 void				init_mlx(t_wolf *wolf);
 
-void				load_addr_str(t_wolf *wolf);
+void				
+load_addr_str(t_wolf *wolf);
 void				load_image_ptr(t_wolf *wolf, int width, int height);
 
 int					**save_map_values(t_wolf *wolf, char *file_name);
