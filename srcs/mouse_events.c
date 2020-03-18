@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 17:15:28 by jesmith        #+#    #+#                */
-/*   Updated: 2020/03/18 13:35:29 by jessicasmit   ########   odam.nl         */
+/*   Updated: 2020/03/18 17:19:00 by Malou         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	mouse_release(int key, int x, int y, t_wolf *wolf)
 
 static int	mouse_press(int key, int x, int y, t_wolf *wolf)
 {
-	if (key == MOUSE_PRESS)
+	if (key == MOUSE_PRESS && y > 0 && x > 0)
 	{
 		wolf->event.mouse_press = 1;
 		wolf->event.hold_x = x;
