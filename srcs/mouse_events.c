@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/24 17:15:28 by jesmith        #+#    #+#                */
-/*   Updated: 2020/03/18 17:19:00 by Malou         ########   odam.nl         */
+/*   Updated: 2020/03/18 17:28:30 by jessicasmit   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ static int	mouse_move(int x, int y, t_wolf *wolf)
 		}
 	}
 	wolf->event.hold_x = x;
-	wolf->event.hold_y = y;
 	return (0);
 }
 
@@ -52,7 +51,6 @@ static int	mouse_press(int key, int x, int y, t_wolf *wolf)
 	{
 		wolf->event.mouse_press = 1;
 		wolf->event.hold_x = x;
-		wolf->event.hold_y = y;
 	}
 	return (0);
 }

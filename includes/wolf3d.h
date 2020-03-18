@@ -97,7 +97,6 @@ typedef	struct		s_event {
 	int				hold_angle;
 	int				colors;
 	int				hold_x;
-	int				hold_y; // needed?
 }					t_event;
 
 typedef struct		s_i {
