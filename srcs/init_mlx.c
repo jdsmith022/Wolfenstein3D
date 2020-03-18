@@ -22,15 +22,15 @@ static void	load_textures(t_wolf *wolf)
 	height = wolf->wall_height;
 	load_image_ptr(wolf, width, height);
 	index = 0;
-	while (index < 10 && wolf->graphics.wall[index] != NULL)
+	while (index < 15 && wolf->graphics.wall[index] != NULL)
 		index++;
-	if (index < 10)
+	if (index < 15)
 		wolf_failure_exit(wolf, NULL, MALLOC_ERR);
 	load_addr_str(wolf);
 	index = 0;
-	while (index < 10 && wolf->graphics.wall[index]->addr_str != NULL)
+	while (index < 15 && wolf->graphics.wall[index]->addr_str != NULL)
 		index++;
-	if (index < 10)
+	if (index < 15)
 		wolf_failure_exit(wolf, NULL, MALLOC_ERR);
 }
 

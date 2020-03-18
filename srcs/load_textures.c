@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/10 17:07:11 by jesmith        #+#    #+#                */
-/*   Updated: 2020/03/14 19:04:17 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/03/18 15:17:05 by Malou         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ void		load_image_ptr(t_wolf *wolf, int width, int height)
 		"textures/wood.xpm", &width, &height);
 	wolf->graphics.wall[4] = mlx_xpm_file_to_image(wolf->graphics.mlx_ptr,\
 		"textures/redbrick.xpm", &width, &height);
+	wolf->graphics.wall[4] = NULL;
 	wolf->graphics.wall[5] = mlx_xpm_file_to_image(wolf->graphics.mlx_ptr,\
 		"textures/greystone.xpm", &width, &height);
 	wolf->graphics.wall[6] = mlx_xpm_file_to_image(wolf->graphics.mlx_ptr,\

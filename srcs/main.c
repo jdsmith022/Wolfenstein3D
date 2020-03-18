@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:21:28 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/03/16 15:29:41 by Malou         ########   odam.nl         */
+/*   Updated: 2020/03/18 16:58:39 by Malou         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,11 @@ int		main(int argc, char **argv)
 {
 	t_wolf	wolf;
 
-	if (argc != 2)
-		wolf_failure_exit(&wolf, NULL, USAGE_ERR);
+	if (argc != 2 || ft_strcmp(argv[0], argv[1]) == 0)
+	{
+		ft_putendl(USAGE_ERR);
+		exit(EXIT_FAILURE);
+	}
 	wolf = init_wolf();
 	wolf.map = save_map_values(&wolf, argv[1]);
 	print_map(wolf.map, &wolf);
