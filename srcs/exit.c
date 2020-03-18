@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/11 12:57:21 by jesmith        #+#    #+#                */
-/*   Updated: 2020/03/18 16:56:33 by Malou         ########   odam.nl         */
+/*   Updated: 2020/03/18 17:09:42 by Malou         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,6 @@ int			wolf_failure_exit(t_wolf *wolf, int **map_values,
 	while (wolf->graphics.wall[i] && wolf->graphics.wall[i]->addr_str)
 	{
 		free(wolf->graphics.wall[i]->addr_str);
-		i++;
-	}
-	i = 0;
-	while (wolf->graphics.wall[i])
-	{
 		free(wolf->graphics.wall[i]);
 		i++;
 	}
@@ -55,9 +50,18 @@ int			wolf_failure_exit(t_wolf *wolf, int **map_values,
 
 int			wolf_success_exit(t_wolf *wolf)
 {
+	size_t i;
+	
 	close(wolf->fd);
 	free_values((void**)wolf->map);
 	lst_del(&wolf->item, ft_del);
+	i = 0;
+	while (i < 15)
+	{
+		free(wolf->graphics.wall[i]->addr_str);
+		free(wolf->graphics.wall[i]);
+		i++;
+	}
 	ft_bzero(wolf, sizeof(t_wolf));
 	exit(EXIT_SUCCESS);
 	return (0);
