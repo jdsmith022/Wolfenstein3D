@@ -120,6 +120,8 @@ typedef struct		s_graphics {
 	char			*addr_str;
 	int				color[16];
 	t_texture		*wall[16];
+	size_t			texdex;
+	size_t			index;
 	t_texture		sprite;
 	t_texture		floor;
 	t_texture		ceiling;
@@ -160,7 +162,7 @@ int					wolf_engine(t_wolf *wolf);
 t_point				find_intersect(t_wolf *wolf, t_item ray, double angle);
 
 void				draw_column(t_wolf *wolf, t_project wall, \
-						int x, size_t texdex);
+						int x);
 
 void				mlx_mouse(t_wolf *wolf);
 void				mlx_key(t_wolf *wolf);

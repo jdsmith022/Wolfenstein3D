@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 14:46:31 by jesmith        #+#    #+#                */
-/*   Updated: 2020/03/18 10:09:03 by JessicaSmit   ########   odam.nl         */
+/*   Updated: 2020/03/18 11:20:02 by jessicasmit   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,27 +28,8 @@ static void	put_pixel(t_wolf *wolf, int color, int x, int y)
 	}
 }
 
-// static void	draw_object(t_wolf *wolf, int x, int y)
-// {
-// 	put_pixel(wolf, 0xffffff, x, y); //white
-// }
-
-// static void	draw_floor(t_wolf *wolf, size_t texdex,
-// 				int index, double wall_index)
-// {
-// 	// (void)texdex;
-// 	wolf->graphics.addr_str[index] = wolf->graphics.wall[texdex]->addr_str[(size_t)wall_index];
-// 	wolf->graphics.addr_str[index + 1] = wolf->graphics.wall[texdex]->addr_str[(size_t)wall_index + 1];
-// 	wolf->graphics.addr_str[index + 2] = wolf->graphics.wall[texdex]->addr_str[(size_t)wall_index + 2];
-// }
-
-// static void	draw_ceiling(t_wolf *wolf, int x, int y)
-// {
-// 	put_pixel(wolf, 0xd57016, x, y);
-// }
-
-static void	draw_wall(t_wolf *wolf, size_t texdex,
-				int index, double wall_index)
+static void	draw_wall(t_wolf *wolf, size_t index, size_t texdex,
+				double wall_index)
 {
 	wolf->graphics.addr_str[index] = \
 		wolf->graphics.wall[texdex]->addr_str[(size_t)wall_index];
@@ -62,34 +43,45 @@ static void	draw_wall(t_wolf *wolf, size_t texdex,
 		wolf->graphics.wall[texdex]->addr_str[(size_t)wall_index];
 }
 
-void		draw_column(t_wolf *wolf, t_project plane,
-				int x, size_t texdex)
+static void	wall_texture(t_wolf *wolf, t_project plane,
+				int x, int y)
 {
-	int		index;
-	int		y;
-	double	wall_y;
-	double	wall_index;
-	int		color;
+	t_graphics	graphics;
+	double		wall_y;
+	double		wall_index;
+	size_t		texdex;
+	int			color;
 
-	y = 0;
+	texdex = wolf->graphics.texdex;
 	color = wolf->graphics.color[texdex];
+	graphics = wolf->graphics;
+	if (wolf->event.colors == 1)
+		put_pixel(wolf, color, x, y);
+	else
+	{
+		wall_y = (double)(wolf->wall_height / plane.height) * \
+			(y - plane.y_start);
+		wall_index = ((int)wall_y * \
+			graphics.wall[texdex]->size_line) + \
+			(plane.offset * graphics.wall[texdex]->bits_ppixel / 8);
+		draw_wall(wolf, graphics.index, texdex, wall_index);
+	}
+}
+
+void		draw_column(t_wolf *wolf, t_project plane, int x)
+{
+	t_graphics	*graphics;
+	int			y;
+
+	graphics = &wolf->graphics;
+	y = 0;
 	while (y < HEIGHT)
 	{
-		index = (y * wolf->graphics.size_line) + \
-			(x * wolf->graphics.bits_ppixel / 8);
+		graphics->index = (y * graphics->size_line) + (x * graphics->bits_ppixel / 8);
 		if (y < plane.y_start)
 			put_pixel(wolf, 0xd57016, x, y);
 		if (y >= plane.y_start && y <= plane.y_end)
-		{
-			if (wolf->event.colors == 1)
-				put_pixel(wolf, color, x, y);
-			else
-			{
-				wall_y = (double)(wolf->wall_height / plane.height) * (y - plane.y_start);
-				wall_index = ((int)wall_y * wolf->graphics.wall[texdex]->size_line) + (plane.offset * wolf->graphics.wall[texdex]->bits_ppixel / 8);
-				draw_wall(wolf, texdex, index, wall_index);
-			}
-		}
+			wall_texture(wolf, plane, x, y);
 		else if (y > plane.y_end)
 		{
 			put_pixel(wolf, 0xd58973, x, y);
