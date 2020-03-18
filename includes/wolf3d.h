@@ -130,7 +130,6 @@ typedef struct		s_wolf {
 	int				wall_width;
 	double			wall_height;
 	int				obj_height;
-	int				bound;
 	double			max_ray;
 	double			dir_angle;
 	double			dist_to_plane;
