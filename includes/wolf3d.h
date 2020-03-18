@@ -38,6 +38,7 @@
 # define SPEED 20
 
 # define ESC 53
+# define ALT 261
 # define W 13
 # define S 1
 # define A 0
@@ -94,6 +95,7 @@ typedef	struct		s_event {
 	int				key_press;
 	int				mouse_press;
 	int				hold_angle;
+	int				colors;
 	int				hold_x;
 	int				hold_y; // needed?
 }					t_event;
@@ -116,6 +118,7 @@ typedef struct		s_graphics {
 	int				bits_ppixel;
 	int				size_line;
 	char			*addr_str;
+	int				color[16];
 	t_texture		*wall[16];
 	t_texture		sprite;
 	t_texture		floor;
@@ -146,8 +149,8 @@ typedef struct		s_wolf {
 t_wolf				init_wolf(void);
 void				init_mlx(t_wolf *wolf);
 
-void				
-load_addr_str(t_wolf *wolf);
+void 				load_color(t_wolf *wolf);
+void				load_addr_str(t_wolf *wolf);
 void				load_image_ptr(t_wolf *wolf, int width, int height);
 
 int					**save_map_values(t_wolf *wolf, char *file_name);

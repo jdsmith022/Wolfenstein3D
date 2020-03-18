@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/10 19:09:56 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/03/16 11:56:39 by jessicasmit   ########   odam.nl         */
+/*   Updated: 2020/03/18 10:10:32 by JessicaSmit   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,23 @@ static void		key_player_position(t_wolf *wolf, int key)
 			wolf->pos = pos;
 }
 
-static void		key_window_handling(t_wolf *wolf, int key)
+static void		key_handling(t_wolf *wolf, int key)
 {
+	if (key == ALT)
+	{
+		if (wolf->event.colors == 0)
+			wolf->event.colors = 1;
+		else
+			wolf->event.colors = 0;
+	}
 	if (key == ESC)
 		wolf_success_exit(wolf);
 }
 
 static int		key_events(int key, t_wolf *wolf)
 {
-	key_window_handling(wolf, key);
 	key_player_position(wolf, key);
+	key_handling(wolf, key);
 	return (0);
 }
 

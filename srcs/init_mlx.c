@@ -54,4 +54,5 @@ void		init_mlx(t_wolf *wolf)
 	if (wolf->graphics.addr_str == NULL)
 		wolf_failure_exit(wolf, NULL, MALLOC_ERR);
 	load_textures(wolf);
+	load_color(wolf);
 }
