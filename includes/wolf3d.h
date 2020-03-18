@@ -28,7 +28,7 @@
 # define HEIGHT 600
 
 # define MAX_SIZE 100
-# define MAX_TEXTURES 7
+# define MAX_TEXTURES 4
 # define MAX_WIDTH WIDTH * wolf->wall_width
 # define MAX_HEIGHT HEIGHT * wolf->wall_width
 
