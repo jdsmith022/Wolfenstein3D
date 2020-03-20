@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/10 17:07:11 by jesmith        #+#    #+#                */
-/*   Updated: 2020/03/18 17:10:47 by Malou         ########   odam.nl         */
+/*   Updated: 2020/03/20 10:47:40 by jessicasmit   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,21 +79,21 @@ void		load_addr_str(t_wolf *wolf)
 static void	load_image_ptr2(t_wolf *wolf, int width, int height)
 {
 	wolf->graphics.wall[8] = mlx_xpm_file_to_image(wolf->graphics.mlx_ptr,\
-		"textures/head.xpm", &width, &height);
+		"textures/space_storage_01.xpm", &width, &height);
 	wolf->graphics.wall[9] = mlx_xpm_file_to_image(wolf->graphics.mlx_ptr,\
-		"textures/head.xpm", &width, &height);
+		"textures/space_storage_02.xpm", &width, &height);
 	wolf->graphics.wall[10] = mlx_xpm_file_to_image(wolf->graphics.mlx_ptr,\
-		"textures/head.xpm", &width, &height);
+		"textures/space_storage_03.xpm", &width, &height);
 	wolf->graphics.wall[11] = mlx_xpm_file_to_image(wolf->graphics.mlx_ptr,\
-		"textures/head.xpm", &width, &height);
+		"textures/space_storage_04.xpm", &width, &height);
 	wolf->graphics.wall[12] = mlx_xpm_file_to_image(wolf->graphics.mlx_ptr,\
-		"textures/head.xpm", &width, &height);
+		"textures/gemOv1.xpm", &width, &height);
 	wolf->graphics.wall[13] = mlx_xpm_file_to_image(wolf->graphics.mlx_ptr,\
-		"textures/head.xpm", &width, &height);
+		"textures/gemOv2.xpm", &width, &height);
 	wolf->graphics.wall[14] = mlx_xpm_file_to_image(wolf->graphics.mlx_ptr,\
-		"textures/head.xpm", &width, &height);
+		"textures/gemOv3.xpm", &width, &height);
 	wolf->graphics.wall[15] = mlx_xpm_file_to_image(wolf->graphics.mlx_ptr,\
-		"textures/head.xpm", &width, &height);
+		"textures/gemOv4.xpm", &width, &height);
 }
 
 void		load_image_ptr(t_wolf *wolf, int width, int height)
@@ -113,6 +113,6 @@ void		load_image_ptr(t_wolf *wolf, int width, int height)
 	wolf->graphics.wall[6] = mlx_xpm_file_to_image(wolf->graphics.mlx_ptr,\
 		"textures/bricks.xpm", &width, &height);
 	wolf->graphics.wall[7] = mlx_xpm_file_to_image(wolf->graphics.mlx_ptr,\
-		"textures/head.xpm", &width, &height);
+		"textures/bookshelf.xpm", &width, &height);
 	load_image_ptr2(wolf, width, height);
 }
