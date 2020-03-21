@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/08 14:14:17 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/03/17 18:27:43 by Malou         ########   odam.nl         */
+/*   Updated: 2020/03/21 10:50:12 by Malou         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,7 @@ static t_item *init_item(t_wolf *wolf, t_i i, int **map_values, char dir)
 	item = (t_item*)ft_memalloc(sizeof(t_item));
 	if (item == NULL)
 		wolf_failure_exit(wolf, map_values, MALLOC_ERR);
+	item->dir = dir;
 	item->start.x = i.x * wolf->wall_width;
 	item->start.y = i.y * wolf->wall_width;
 	item->end.x = item->start.x;

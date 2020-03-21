@@ -74,13 +74,13 @@ typedef struct		s_project
 	int				height;
 	double			offset;
 	int				x;
-	int				delta;
 }					t_project;
 
 typedef	struct		s_point {
 	double			x;
 	double			y;
 	int				texture;
+	char			dir;
 	double			obj_dist;
 }					t_point;
 
@@ -88,6 +88,7 @@ typedef	struct		s_item {
 	t_point			start;
 	t_point			end;
 	int				texture;
+	char			dir;
 	struct s_item	*next;
 }					t_item;
 

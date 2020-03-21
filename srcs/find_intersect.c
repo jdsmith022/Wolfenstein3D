@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/28 14:44:47 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/03/16 11:56:13 by jessicasmit   ########   odam.nl         */
+/*   Updated: 2020/03/21 10:54:08 by Malou         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ static t_point		calculate_intersect_point(t_point start_a, t_point start_b,
 		intersect.x = start_a.x + (t * slope_a.x);
 		intersect.y = start_a.y + (t * slope_a.y);
 	}
+	intersect.x = fabs(intersect.x);
+	intersect.y = fabs(intersect.y);
 	return (intersect);
 }
 
@@ -80,13 +82,14 @@ t_point				find_intersect(t_wolf *wolf, t_item ray, double angle)
 		intersect = find_intersection_point(ray.start, ray.end,\
 			object->start, object->end);
 		distance = find_intersect_distance(intersect, ray, angle);
-		if (distance < min_distance)
+		if (distance < min_distance && distance > 0)
 		{
 			min_distance = distance;
 			min_intersect.x = intersect.x;
 			min_intersect.y = intersect.y;
 			min_intersect.obj_dist = distance;
 			min_intersect.texture = object->texture;
+			min_intersect.dir = object->dir;
 			draw_ray(wolf, ray.start, intersect, 0xfc03ad);// red
 		}
 		object = object->next;

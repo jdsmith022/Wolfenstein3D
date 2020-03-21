@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 14:46:31 by jesmith        #+#    #+#                */
-/*   Updated: 2020/03/18 11:20:02 by jessicasmit   ########   odam.nl         */
+/*   Updated: 2020/03/20 14:29:48 by Malou         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,11 @@ void		draw_column(t_wolf *wolf, t_project plane, int x)
 	while (y < HEIGHT)
 	{
 		graphics->index = (y * graphics->size_line) + (x * graphics->bits_ppixel / 8);
-		if (y < plane.y_start)
+		if (y <= plane.y_start)
 			put_pixel(wolf, 0xd57016, x, y);
-		if (y >= plane.y_start && y <= plane.y_end)
+		if (y > plane.y_start && y < plane.y_end)
 			wall_texture(wolf, plane, x, y);
-		else if (y > plane.y_end)
+		else
 		{
 			put_pixel(wolf, 0xd58973, x, y);
 			// wall_y = (double)(wolf->wall_height / 2) / (y - HEIGHT / 2) * wolf->dist_to_plane;
