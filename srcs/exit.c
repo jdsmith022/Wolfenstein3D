@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/11 12:57:21 by jesmith        #+#    #+#                */
-/*   Updated: 2020/03/23 21:10:30 by JessicaSmit   ########   odam.nl         */
+/*   Updated: 2020/03/23 21:29:00 by JessicaSmit   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	free_values(void **values)
 
 static void	mlx_free(t_graphics graphics)
 {
-		if (graphics.mlx_ptr)
+	if (graphics.mlx_ptr)
 	{
 		ft_bzero(graphics.mlx_ptr, sizeof(graphics.mlx_ptr));
 		free(graphics.mlx_ptr);
@@ -37,10 +37,15 @@ static void	mlx_free(t_graphics graphics)
 		ft_bzero(graphics.win_ptr, sizeof(graphics.win_ptr));
 		free(graphics.win_ptr);
 	}
-		if (graphics.image_ptr)
+	if (graphics.image_ptr)
 	{
 		ft_bzero(graphics.image_ptr, sizeof(graphics.image_ptr));
 		free(graphics.image_ptr);
+	}
+	if (graphics.addr_str)
+	{
+		ft_bzero(graphics.addr_str, sizeof(graphics.addr_str));
+		free(graphics.addr_str);
 	}
 }
 
@@ -83,7 +88,7 @@ int			wolf_success_exit(t_wolf *wolf)
 		free(wolf->graphics.wall[i]);
 		i++;
 	}
-	mlx_free(wolf);
+	mlx_free(wolf->graphics);
 	ft_bzero(wolf, sizeof(t_wolf));
 	return (0);
 }
