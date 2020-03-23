@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/10 19:09:56 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/03/18 10:10:32 by JessicaSmit   ########   odam.nl         */
+/*   Updated: 2020/03/23 14:48:52 by JessicaSmit   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int		intersect_direction(t_wolf *wolf,
 		angle += wolf->ray_angle;
 		x++;
 	}
-	if (wolf->intersect.obj_dist <= 50 || pos.x < 0 || pos.y < 0 \
+	if (wolf->intersect.obj_dist <= 20 || pos.x < 0 || pos.y < 0 \
 		|| pos.x > MAX_WIDTH || pos.y > MAX_HEIGHT)
 		return (1);
 	return (0);
@@ -45,9 +45,8 @@ static void		key_player_position(t_wolf *wolf, int key)
 
 	pos = wolf->pos;
 	key_player_movement(wolf, key, &pos, &move_angle);
-	if (key == W || key == S || key == A || key == D)
-		if (intersect_direction(wolf, move_angle, pos) == 0)
-			wolf->pos = pos;
+	if (intersect_direction(wolf, move_angle, pos) == 0)
+		wolf->pos = pos;
 }
 
 static void		key_handling(t_wolf *wolf, int key)
@@ -65,8 +64,10 @@ static void		key_handling(t_wolf *wolf, int key)
 
 static int		key_events(int key, t_wolf *wolf)
 {
-	key_player_position(wolf, key);
-	key_handling(wolf, key);
+	if (key == W || key == S || key == A || key == D)
+		key_player_position(wolf, key);
+	if (key == ALT || key == ESC)
+		key_handling(wolf, key);
 	return (0);
 }
 
