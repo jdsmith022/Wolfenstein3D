@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/11 12:57:21 by jesmith        #+#    #+#                */
-/*   Updated: 2020/03/20 13:49:50 by Malou         ########   odam.nl         */
+/*   Updated: 2020/03/23 20:59:51 by JessicaSmit   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,25 @@ static void	free_values(void **values)
 		y++;
 	}
 	free(values);
+}
+
+static void	mlx_free(t_wolf *wolf)
+{
+		if (wolf->graphics.mlx_ptr)
+	{
+		ft_bzero(wolf->graphics.mlx_ptr, sizeof(wolf->graphics.mlx_ptr));
+		free(wolf->graphics.mlx_ptr);
+	}
+	if (wolf->graphics.win_ptr)
+	{
+		ft_bzero(wolf->graphics.win_ptr, sizeof(wolf->graphics.win_ptr));
+		free(wolf->graphics.win_ptr);
+	}
+		if (wolf->graphics.image_ptr)
+	{
+		ft_bzero(wolf->graphics.image_ptr, sizeof(wolf->graphics.image_ptr));
+		free(wolf->graphics.image_ptr);
+	}
 }
 
 int			wolf_failure_exit(t_wolf *wolf, int **map_values,
@@ -43,6 +62,7 @@ int			wolf_failure_exit(t_wolf *wolf, int **map_values,
 		free(wolf->graphics.wall[i]);
 		i++;
 	}
+	mlx_free(wolf);
 	ft_bzero(wolf, sizeof(t_wolf));
 	exit(EXIT_FAILURE);
 	return (-1);
@@ -63,6 +83,7 @@ int			wolf_success_exit(t_wolf *wolf)
 		free(wolf->graphics.wall[i]);
 		i++;
 	}
+	mlx_free(wolf);
 	ft_bzero(wolf, sizeof(t_wolf));
 	return (0);
 }
