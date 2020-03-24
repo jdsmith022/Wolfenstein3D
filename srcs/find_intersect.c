@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/28 14:44:47 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/03/21 10:54:08 by Malou         ########   odam.nl         */
+/*   Updated: 2020/03/23 13:12:05 by Malou         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ t_point				find_intersect(t_wolf *wolf, t_item ray, double angle)
 			min_intersect.obj_dist = distance;
 			min_intersect.texture = object->texture;
 			min_intersect.dir = object->dir;
-			draw_ray(wolf, ray.start, intersect, 0xfc03ad);// red
+			// draw_ray(wolf, ray.start, intersect, 0xfc03ad);// red
 		}
 		object = object->next;
 	}
