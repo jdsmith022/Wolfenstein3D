@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 14:46:31 by jesmith        #+#    #+#                */
-/*   Updated: 2020/03/20 14:29:48 by Malou         ########   odam.nl         */
+/*   Updated: 2020/03/24 19:16:59 by jessicasmit   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	put_pixel(t_wolf *wolf, int color, int x, int y)
 	}
 }
 
-static void	draw_wall(t_wolf *wolf, size_t index, size_t texdex,
+static void	texture_to_str(t_wolf *wolf, size_t index, size_t texdex,
 				double wall_index)
 {
 	wolf->graphics.addr_str[index] = \
@@ -41,6 +41,22 @@ static void	draw_wall(t_wolf *wolf, size_t index, size_t texdex,
 	wall_index++;
 	wolf->graphics.addr_str[index] = \
 		wolf->graphics.wall[texdex]->addr_str[(size_t)wall_index];
+}
+
+static void	draw_floor(t_wolf *wolf, t_project plane, int y, int x)
+{
+	t_graphics	graphics;
+	double		floor_y;
+	double		floor_index;
+	size_t		texdex;
+
+  (void)x;
+	texdex = wolf->graphics.texdex;
+	graphics = wolf->graphics;
+    texdex = 1;
+	floor_y = ((double)(wolf->wall_height / 2) / (y - HEIGHT / 2)) * wolf->dist_to_plane / plane.offset;
+	floor_index = ((int)floor_y * wolf->graphics.wall[texdex]->size_line) + (x * wolf->graphics.wall[texdex]->bits_ppixel / 8);
+	texture_to_str(wolf, graphics.index, texdex, floor_index);
 }
 
 static void	wall_texture(t_wolf *wolf, t_project plane,
@@ -64,7 +80,7 @@ static void	wall_texture(t_wolf *wolf, t_project plane,
 		wall_index = ((int)wall_y * \
 			graphics.wall[texdex]->size_line) + \
 			(plane.offset * graphics.wall[texdex]->bits_ppixel / 8);
-		draw_wall(wolf, graphics.index, texdex, wall_index);
+		texture_to_str(wolf, graphics.index, texdex, wall_index);
 	}
 }
 
@@ -82,13 +98,11 @@ void		draw_column(t_wolf *wolf, t_project plane, int x)
 			put_pixel(wolf, 0xd57016, x, y);
 		if (y > plane.y_start && y < plane.y_end)
 			wall_texture(wolf, plane, x, y);
-		else
-		{
-			put_pixel(wolf, 0xd58973, x, y);
-			// wall_y = (double)(wolf->wall_height / 2) / (y - HEIGHT / 2) * wolf->dist_to_plane;
-			// wall_index = ((int)wall_y * wolf->graphics.wall[texdex]->size_line) + (wall_y * wolf->graphics.wall[texdex]->bits_ppixel / 8);
-			// draw_floor(wolf, texdex, index, wall_index);
-		}
+		else if (y > plane.y_end)
+		// {
+		// 	// put_pixel(wolf, 0xd58973, x, y);
+			draw_floor(wolf, plane, y, x);
+		// }
 		y++;
 	}
 }

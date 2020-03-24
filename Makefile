@@ -6,7 +6,7 @@
 #    By: mminkjan <mminkjan@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/02/03 20:54:24 by mminkjan       #+#    #+#                 #
-#    Updated: 2020/03/18 09:35:37 by JessicaSmit   ########   odam.nl          #
+#    Updated: 2020/03/24 19:31:07 by jessicasmit   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,8 @@ MLXFLAGS = -lmlx -framework OpenGL -framework AppKit
 LIBFT = ./libft/
 
 PRINT = ./printers/
+
+PRINTF = ./ft_printf/
 
 PT_FILES =  printers 2d_vis init_mlx_vis draw_line
 
@@ -47,12 +49,14 @@ all: $(NAME)
 
 $(NAME) : $(OFILES)
 	@make re -C $(LIBFT)
-	@gcc -g -I $(MLX) -L $(MLX) $(MLXFLAGS) -I $(LIBFT) -L $(LIBFT) -lft \
-	$(CFILES) $(FLAGS) $(NAME)
+	@make re -C $(PRINTF)
+	@gcc -g -I $(MLX) -L $(MLX) $(MLXFLAGS) -L $(PRINTF) -lftprintf \
+	-I $(LIBFT) -L $(LIBFT) -lft $(CFILES) $(FLAGS) $(NAME)
 	@rm -f $(OFILES)
 
 clean :
 	@make clean -C $(LIBFT)
+	@make clean -C $(PRINTF)
 	@rm -f $(OFILES)
 	@rm -f *#
 	@rm -f *~
@@ -61,12 +65,13 @@ clean :
 
 fclean : clean
 	@make fclean -C $(LIBFT)
+	@make fclean -C $(PRINTF)
 	@rm -f $(NAME)
 
 re : fclean all
 
 add : fclean
-	@git add $(MLX) $(LIBFT) $(CFILES) $(HEADERS) $(ADD_FILES)
+	@git add $(MLX) $(LIBFT) $(CFILES) $(HEADERS) $(ADD_FILES) $(PRINTF)
 	@git status
 
 push :

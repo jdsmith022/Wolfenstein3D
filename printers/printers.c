@@ -6,27 +6,27 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/10 12:08:56 by jesmith        #+#    #+#                */
-/*   Updated: 2020/03/16 15:22:42 by Malou         ########   odam.nl         */
+/*   Updated: 2020/03/24 19:16:13 by jessicasmit   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
-#include <stdio.h>
+#include "../ft_printf/ft_printf.h"
 
 void	print_map_coordinates(t_item *item)
 {
 	t_item	*temp;
 
-	printf("%d\n", 1);
+	ft_printf("%d\n", 1);
 	temp = item;
 	while (temp != NULL)
 	{
-		printf("texture = %d | start.x = %f	start.y = %f	|\
+		ft_printf("texture = %d | start.x = %f	start.y = %f	|\
 		end.x = %f	end.y = %f\n", temp->texture, temp->start.x,\
 		temp->start.y, temp->end.x, temp->end.y);
 		temp = temp->next;
 	}
-	printf("\n");
+	ft_printf("\n");
 }
 
 void	print_map(int **map_values, t_wolf *wolf)
@@ -41,11 +41,11 @@ void	print_map(int **map_values, t_wolf *wolf)
 		x = 0;
 		while (x < wolf->max_x)
 		{
-			printf("|%d|", map_values[y][x]);
+			ft_printf("|%d|", map_values[y][x]);
 			x++;
 		}
-		printf("\n");
+		ft_printf("\n");
 		y++;
 	}
-	printf("\n");
+	ft_printf("\n");
 }
