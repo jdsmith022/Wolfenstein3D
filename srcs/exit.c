@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/03/11 12:57:21 by jesmith        #+#    #+#                */
-/*   Updated: 2020/03/23 21:29:00 by JessicaSmit   ########   odam.nl         */
+/*   Created: 2020/03/11 12:57:21 by jesmith       #+#    #+#                 */
+/*   Updated: 2020/04/06 17:12:08 by JessicaSmit   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int			wolf_failure_exit(t_wolf *wolf, int **map_values,
 int			wolf_success_exit(t_wolf *wolf)
 {
 	size_t i;
-	
+
 	exit(EXIT_SUCCESS);
 	close(wolf->fd);
 	free_values((void**)wolf->map);
@@ -92,4 +92,3 @@ int			wolf_success_exit(t_wolf *wolf)
 	ft_bzero(wolf, sizeof(t_wolf));
 	return (0);
 }
-

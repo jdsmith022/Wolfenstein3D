@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/05 13:14:43 by jesmith       #+#    #+#                 */
-/*   Updated: 2020/04/06 11:10:42 by JessicaSmit   ########   odam.nl         */
+/*   Updated: 2020/04/06 17:14:33 by JessicaSmit   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void		lst_addback(t_item **item_list, t_item *item)
 	temp->next = item;
 }
 
-double			clamp_angle(double angle)
+double		clamp_angle(double angle)
 {
 	if (angle > 360 * (PI / 180))
 		angle -= 360 * (PI / 180);
