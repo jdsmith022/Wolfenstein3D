@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 11:40:53 by jesmith       #+#    #+#                 */
-/*   Updated: 2020/04/06 10:45:14 by JessicaSmit   ########   odam.nl         */
+/*   Updated: 2020/04/06 10:55:59 by JessicaSmit   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static size_t	texture_index(t_point intersect, t_point pos)
 
 static void		project_on_plane(t_wolf *wolf, t_point intersect,
 					t_project *plane, int x)
-{
+{	
 	intersect.obj_dist *= cos(wolf->ray_angle * x - FOV / 2);
 	plane->height = \
 		wolf->wall_height / intersect.obj_dist * wolf->dist_to_plane;
@@ -66,8 +66,7 @@ static void		wolf_render(t_wolf *wolf)
 
 	x = 0;
 	angle = wolf->dir_angle - (FOV / 2);
-	ray.start.x = wolf->pos.x;
-	ray.start.y = wolf->pos.y;
+	ray.start = wolf->pos;
 	while (x < WIDTH)
 	{
 		angle = clamp_angle(angle);
