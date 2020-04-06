@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 14:46:31 by jesmith       #+#    #+#                 */
-/*   Updated: 2020/04/06 10:49:13 by JessicaSmit   ########   odam.nl         */
+/*   Updated: 2020/04/06 11:06:24 by JessicaSmit   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ static void	put_row(t_wolf *wolf, int x, int y, double text_x, double text_y)
 	else
 	{
 		current_dist = (double)HEIGHT /(2 * (double)y - (double)HEIGHT);
-		cur_floor_x = current_dist / wolf->dist_to_plane * (ray.end.x * plane.offset) + (1 - (current_dist / wolf->dist_to_plane)) * wolf->pos.x;
-		cur_floor_y = current_dist / wolf->dist_to_plane * (ray.end.y * plane.offset) + (1 - (current_dist / wolf->dist_to_plane)) * wolf->pos.y;
+		cur_floor_x = current_dist / wolf->dist_to_plane * ray.end.x + (1 - (current_dist / wolf->dist_to_plane)) * wolf->pos.x;
+		cur_floor_y = current_dist / wolf->dist_to_plane * ray.end.y + (1 - (current_dist / wolf->dist_to_plane)) * wolf->pos.y;
 		text_x = (int)(cur_floor_x * 64) % 64;
 		text_y = (int)(cur_floor_y * 64) % 64;
 		put_row(wolf, x, y, text_x, text_y);
