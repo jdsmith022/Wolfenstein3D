@@ -140,6 +140,7 @@ typedef struct		s_wolf {
 	double			dir_angle;
 	double			dist_to_plane;
 	double			ray_angle;
+	double			angle;
 	t_graphics		graphics;
 	t_vis			vis;
 	t_point			intersect;
@@ -164,6 +165,7 @@ t_point				find_intersect(t_wolf *wolf, t_item ray, double angle);
 
 void				draw_column(t_wolf *wolf, t_project wall, \
 						int x, t_item ray);
+ void				draw_row(t_wolf *wolf, t_item ray, int y, int xs);
 
 void				mlx_mouse(t_wolf *wolf);
 void				mlx_key(t_wolf *wolf);

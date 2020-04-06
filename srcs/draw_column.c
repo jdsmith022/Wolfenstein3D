@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 14:46:31 by jesmith       #+#    #+#                 */
-/*   Updated: 2020/04/06 11:06:24 by JessicaSmit   ########   odam.nl         */
+/*   Updated: 2020/04/06 11:23:45 by JessicaSmit   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,48 +43,6 @@ static void	put_wall(t_wolf *wolf, size_t index, size_t tex_dex,
 		wolf->graphics.wall[tex_dex]->addr_str[(size_t)wall_index];
 }
 
-static void	put_row(t_wolf *wolf, int x, int y, double text_x, double text_y)
-{
-	size_t addr_dex;
-	size_t wall_dex;
-	size_t row_dex;
-
-	addr_dex = 4 * (WIDTH * y + x);
-	wall_dex = 4 * (64 * (int)text_y + (int)text_x);
-	row_dex = wolf->graphics.row_dex;
-	wolf->graphics.addr_str[addr_dex] = wolf->graphics.wall[row_dex]->addr_str[wall_dex];
-	addr_dex++;
-	wall_dex++;
-	wolf->graphics.addr_str[addr_dex] = wolf->graphics.wall[row_dex]->addr_str[wall_dex];
-	addr_dex++;
-	wall_dex++;
-	wolf->graphics.addr_str[addr_dex] = wolf->graphics.wall[row_dex]->addr_str[wall_dex];
-}
-
- void	draw_row(t_wolf *wolf, t_item ray, int y, int x, t_project plane)
-{
-
-	double	current_dist;
-	double	cur_floor_x;
-	double	cur_floor_y;
-	double	text_x;
-	double	text_y;
-
-	if (wolf->event.colors == 1 && y <= plane.y_start)
-		put_pixel(wolf, 0xd57016, x, y);
-	else if (wolf->event.colors == 1 && y > plane.y_end)
-		put_pixel(wolf, 0xd57016, x, y);
-	else
-	{
-		current_dist = (double)HEIGHT /(2 * (double)y - (double)HEIGHT);
-		cur_floor_x = current_dist / wolf->dist_to_plane * ray.end.x + (1 - (current_dist / wolf->dist_to_plane)) * wolf->pos.x;
-		cur_floor_y = current_dist / wolf->dist_to_plane * ray.end.y + (1 - (current_dist / wolf->dist_to_plane)) * wolf->pos.y;
-		text_x = (int)(cur_floor_x * 64) % 64;
-		text_y = (int)(cur_floor_y * 64) % 64;
-		put_row(wolf, x, y, text_x, text_y);
-	}
-}
-
 static void	wall_texture(t_wolf *wolf, t_project plane,
 				int x, int y)
 {
@@ -119,18 +77,19 @@ void		draw_column(t_wolf *wolf, t_project plane, int x, t_item ray)
 	y = 0;
 	while (y < HEIGHT)
 	{
-		graphics->index = (y * graphics->size_line) + (x * graphics->bits_ppixel / 8);
+		graphics->index = \
+			(y * graphics->size_line) + (x * graphics->bits_ppixel / 8);
 		if (y <= plane.y_start)
 		{
 			wolf->graphics.row_dex = 0;
-			draw_row(wolf, ray, y, x, plane);
+			draw_row(wolf, ray, y, x);
 		}
 		if (y > plane.y_start && y < plane.y_end)
 			wall_texture(wolf, plane, x, y);
 		else if (y > plane.y_end)
 		{
 			wolf->graphics.row_dex = 5;
-			draw_row(wolf, ray, y, x, plane);
+			draw_row(wolf, ray, y, x);
 		}
 		y++;
 	}
