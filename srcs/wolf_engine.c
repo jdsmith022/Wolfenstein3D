@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/19 11:40:53 by jesmith        #+#    #+#                */
-/*   Updated: 2020/03/23 13:11:08 by Malou         ########   odam.nl         */
+/*   Created: 2020/02/19 11:40:53 by jesmith       #+#    #+#                 */
+/*   Updated: 2020/04/06 10:45:14 by JessicaSmit   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ static void		wolf_render(t_wolf *wolf)
 		ray.end.y = ray.start.y + wolf->max_ray * sin(angle);
 		wolf->intersect = find_intersect(wolf, ray, angle);
 		project_on_plane(wolf, wolf->intersect, &plane, x);
-		wolf->graphics.texdex = texture_index(wolf->intersect, wolf->pos);
-		draw_column(wolf, plane, x);
+		wolf->graphics.tex_dex = texture_index(wolf->intersect, wolf->pos);
+		draw_column(wolf, plane, x, ray);
 		angle += wolf->ray_angle;
 		x++;
 	}
@@ -87,7 +87,6 @@ int				wolf_engine(t_wolf *wolf)
 	wolf_render(wolf);
 	mlx_key(wolf);
 	mlx_mouse(wolf);
-	// flat_draw(wolf);
 	mlx_put_image_to_window(wolf->graphics.mlx_ptr,
 		wolf->graphics.win_ptr, wolf->graphics.image_ptr, 0, 0);
 	ft_memset(wolf->graphics.addr_str, 0, \
