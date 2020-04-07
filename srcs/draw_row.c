@@ -6,13 +6,13 @@
 /*   By: JessicaSmith <JessicaSmith@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/06 11:07:45 by JessicaSmit   #+#    #+#                 */
-/*   Updated: 2020/04/07 16:25:39 by JessicaSmit   ########   odam.nl         */
+/*   Updated: 2020/04/07 16:26:30 by JessicaSmit   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
 
-static void	put_pixel(t_wolf *wolf, int color, int x, int y)
+static void		put_pixel(t_wolf *wolf, int color, int x, int y)
 {
 	size_t	index;
 

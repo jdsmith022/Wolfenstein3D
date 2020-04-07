@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/24 17:15:28 by jesmith        #+#    #+#                */
-/*   Updated: 2020/03/18 17:28:30 by jessicasmit   ########   odam.nl         */
+/*   Created: 2020/02/24 17:15:28 by jesmith       #+#    #+#                 */
+/*   Updated: 2020/04/06 17:12:34 by JessicaSmit   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ static int	mouse_move(int x, int y, t_wolf *wolf)
 	radian = PI / 180;
 	if (wolf->event.mouse_press == 1)
 	{
-		if (x > wolf->event.hold_x && y <= HEIGHT && y >=0)
+		if (x > wolf->event.hold_x && y <= HEIGHT && y >= 0)
 		{
 			wolf->dir_angle += 2 * radian;
 			if (wolf->dir_angle > 360 * radian)
 				wolf->dir_angle -= 360 * radian;
 		}
-		else if (x < wolf->event.hold_x && y <= HEIGHT && y >=0)
+		else if (x < wolf->event.hold_x && y <= HEIGHT && y >= 0)
 		{
 			wolf->dir_angle -= 2 * radian;
 			if (wolf->dir_angle < 0)

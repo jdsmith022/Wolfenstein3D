@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/05 13:35:03 by jesmith        #+#    #+#                */
-/*   Updated: 2020/03/24 10:40:05 by Malou         ########   odam.nl         */
+/*   Created: 2020/02/05 13:35:03 by jesmith       #+#    #+#                 */
+/*   Updated: 2020/04/06 17:14:09 by JessicaSmit   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ static int	validate_map_edges(t_wolf *wolf, int **values)
 				return (-1);
 		}
 		while (y < wolf->max_y \
-			&& values[y][0] != 0 && values[y][wolf->max_x - 1] != 0 && values[y][x] < 5)
+			&& values[y][0] != 0 && values[y][wolf->max_x - 1] != 0 && \
+				values[y][x] < 5)
 			y++;
 		if (y != wolf->max_y)
 			return (-1);
