@@ -6,7 +6,7 @@
 /*   By: JessicaSmith <JessicaSmith@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/06 11:07:45 by JessicaSmit   #+#    #+#                 */
-/*   Updated: 2020/04/07 16:22:32 by JessicaSmit   ########   odam.nl         */
+/*   Updated: 2020/04/07 16:25:39 by JessicaSmit   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ static void	put_row(t_wolf *wolf, int x, int y, t_i text)
 
 void	draw_row(t_wolf *wolf, t_item ray, int y, int x)
 {
+
 	double	dist;
 	double	floor_x;
 	double	floor_y;
