@@ -6,7 +6,7 @@
 #    By: mminkjan <mminkjan@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/02/03 20:54:24 by mminkjan      #+#    #+#                  #
-#    Updated: 2020/04/06 11:20:27 by JessicaSmit   ########   odam.nl          #
+#    Updated: 2020/04/12 18:06:12 by Malou         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,10 +44,7 @@ ADD_FILES = Makefile author ./maps ./textures
 
 all: $(NAME)
 
-%.o: %.c
-	@gcc -g -c $(FLAGS) $@ $<
-
-$(NAME) : $(OFILES)
+$(NAME) :
 	@make re -C $(LIBFT)
 	@make re -C $(PRINTF)
 	@gcc -g -I $(MLX) -L $(MLX) $(MLXFLAGS) -L $(PRINTF) -lftprintf \
