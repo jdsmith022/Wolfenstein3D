@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 11:40:53 by jesmith       #+#    #+#                 */
-/*   Updated: 2020/05/11 11:58:06 by jessicasmit   ########   odam.nl         */
+/*   Updated: 2020/05/11 12:37:44 by jessicasmit   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ static void		project_on_plane(t_wolf *wolf, t_point intersect,
 static void		wolf_render(t_wolf *wolf)
 {
 	int			x;
-	// double		angle;
 	t_item		ray;
 	t_project	plane;
 
