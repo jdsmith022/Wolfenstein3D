@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 11:40:53 by jesmith       #+#    #+#                 */
-/*   Updated: 2020/04/06 17:11:13 by JessicaSmit   ########   odam.nl         */
+/*   Updated: 2020/05/11 11:58:06 by jessicasmit   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,23 +60,23 @@ static void		project_on_plane(t_wolf *wolf, t_point intersect,
 static void		wolf_render(t_wolf *wolf)
 {
 	int			x;
-	double		angle;
+	// double		angle;
 	t_item		ray;
 	t_project	plane;
 
 	x = 0;
-	angle = wolf->dir_angle - (FOV / 2);
+	wolf->angle = wolf->dir_angle - (FOV / 2);
 	ray.start = wolf->pos;
 	while (x < WIDTH)
 	{
-		angle = clamp_angle(angle);
-		ray.end.x = ray.start.x + wolf->max_ray * cos(angle);
-		ray.end.y = ray.start.y + wolf->max_ray * sin(angle);
-		wolf->intersect = find_intersect(wolf, ray, angle);
+		wolf->angle = clamp_angle(wolf->angle);
+		ray.end.x = ray.start.x + wolf->max_ray * cos(wolf->angle);
+		ray.end.y = ray.start.y + wolf->max_ray * sin(wolf->angle);
+		wolf->intersect = find_intersect(wolf, ray, wolf->angle);
 		project_on_plane(wolf, wolf->intersect, &plane, x);
 		wolf->graphics.tex_dex = texture_index(wolf->intersect, wolf->pos);
 		draw_column(wolf, plane, x, ray);
-		angle += wolf->ray_angle;
+		wolf->angle += wolf->ray_angle;
 		x++;
 	}
 }

@@ -140,6 +140,7 @@ typedef struct		s_wolf {
 	double			dir_angle;
 	double			dist_to_plane;
 	double			ray_angle;
+	double			angle;
 	t_graphics		graphics;
 	t_vis			vis;
 	t_point			intersect;
