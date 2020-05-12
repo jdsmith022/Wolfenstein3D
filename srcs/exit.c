@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/11 12:57:21 by jesmith       #+#    #+#                 */
-/*   Updated: 2020/04/06 17:12:08 by JessicaSmit   ########   odam.nl         */
+/*   Updated: 2020/05/12 14:19:39 by jessicasmit   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ int			wolf_success_exit(t_wolf *wolf)
 {
 	size_t i;
 
-	exit(EXIT_SUCCESS);
 	close(wolf->fd);
 	free_values((void**)wolf->map);
 	lst_del(&wolf->item, ft_del);
@@ -90,5 +89,6 @@ int			wolf_success_exit(t_wolf *wolf)
 	}
 	mlx_free(wolf->graphics);
 	ft_bzero(wolf, sizeof(t_wolf));
+	exit(EXIT_SUCCESS);
 	return (0);
 }

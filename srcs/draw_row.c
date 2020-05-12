@@ -65,9 +65,9 @@ void	draw_row(t_wolf *wolf, t_item ray, int y, int x)
 		// dist /= cos(wolf->angle);
 		dist = (double)HEIGHT / (2 * (double)y - (double)HEIGHT);
 		// printf("dist: %f\n", dist);
-		floor_x = dist / wolf->dist_to_plane * ray.end.x - dist / wolf->dist_to_plane * wolf->pos.x;
-		floor_y = dist / ray.end.y + dist * wolf->pos.y;
-		// printf("1: %f, %f\n", floor_x, floor_y);
+		// floor_x = dist / wolf->dist_to_plane * ray.end.x - dist / wolf->dist_to_plane * wolf->pos.x;
+		// floor_y = dist / ray.end.y + dist * wolf->pos.y;
+		// // printf("1: %f, %f\n", floor_x, floor_y);
 		floor_x = dist / wolf->dist_to_plane * ray.end.x + (1 - (dist / wolf->dist_to_plane)) * wolf->pos.x;
 		floor_y = dist / wolf->dist_to_plane * ray.end.y + (1 - (dist / wolf->dist_to_plane)) * wolf->pos.y;
 		// printf("2: %f, %f\n", floor_x, floor_y);
