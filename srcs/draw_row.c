@@ -6,73 +6,70 @@
 /*   By: JessicaSmith <JessicaSmith@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/04/06 11:07:45 by JessicaSmit   #+#    #+#                 */
-/*   Updated: 2020/05/11 12:47:06 by jessicasmit   ########   odam.nl         */
+/*   Updated: 2020/05/12 18:39:35 by jessicasmit   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
 
-static void		put_pixel(t_wolf *wolf, int color, int x, int y)
-{
-	size_t	index;
-
-	if (x >= 0 && x < WIDTH && y < HEIGHT && y >= 0)
-	{
-		index = (y * wolf->graphics.size_line) + \
-			(x * wolf->graphics.bits_ppixel / 8);
-		wolf->graphics.addr_str[index] = color;
-		index++;
-		wolf->graphics.addr_str[index] = color >> 8;
-		index++;
-		wolf->graphics.addr_str[index] = color >> 16;
-	}
-}
-
-static void	put_row(t_wolf *wolf, int x, int y, t_i text)
+static void	put_row(t_wolf *wolf, size_t wall_index)
 {
 	size_t addr_dex;
-	size_t wall_dex;
-	size_t row_dex;
 
-	addr_dex = 4 * (WIDTH * y + x);
-	wall_dex = 4 * (64 * (int)text.y + (int)text.x);
-	row_dex = wolf->graphics.row_dex;
+	addr_dex = wolf->graphics.index;
 	wolf->graphics.addr_str[addr_dex] = \
-		wolf->graphics.wall[row_dex]->addr_str[wall_dex];
+		wolf->graphics.wall[0]->addr_str[(size_t)wall_index];
 	addr_dex++;
-	wall_dex++;
+	wall_index++;
 	wolf->graphics.addr_str[addr_dex] = \
-		wolf->graphics.wall[row_dex]->addr_str[wall_dex];
+		wolf->graphics.wall[0]->addr_str[(size_t)wall_index];
 	addr_dex++;
-	wall_dex++;
+	wall_index++;
 	wolf->graphics.addr_str[addr_dex] = \
-		wolf->graphics.wall[row_dex]->addr_str[wall_dex];
+		wolf->graphics.wall[0]->addr_str[(size_t)wall_index];
 }
 
-void	draw_row(t_wolf *wolf, t_item ray, int y, int x)
+void	draw_ceiling(t_wolf *wolf, int y)
 {
 	double	dist;
-	double	floor_x;
-	double	floor_y;
-	t_i		text;
+	t_point	floor;
+	t_point	texture;
+	size_t	wall_index;
+	t_graphics	*graphics;
 
-	(void)ray;
-	if (wolf->event.colors == 1)
-		put_pixel(wolf, 0xd57016, x, y);
-	else
-	{
-		// dist = (double)32 / (y - HEIGHT / 2) * wolf->dist_to_plane;
-		// dist /= cos(wolf->angle);
-		dist = (double)HEIGHT / (2 * (double)y - (double)HEIGHT);
-		// printf("dist: %f\n", dist);
-		// floor_x = dist / wolf->dist_to_plane * ray.end.x - dist / wolf->dist_to_plane * wolf->pos.x;
-		// floor_y = dist / ray.end.y + dist * wolf->pos.y;
-		// // printf("1: %f, %f\n", floor_x, floor_y);
-		floor_x = dist / wolf->dist_to_plane * ray.end.x + (1 - (dist / wolf->dist_to_plane)) * wolf->pos.x;
-		floor_y = dist / wolf->dist_to_plane * ray.end.y + (1 - (dist / wolf->dist_to_plane)) * wolf->pos.y;
-		// printf("2: %f, %f\n", floor_x, floor_y);
-		text.x = (int)(floor_x * 64) % 64;
-		text.y = (int)(floor_y * 64) % 64;
-		put_row(wolf, x, y, text);
-	}
+	graphics = &wolf->graphics;
+	dist = (wolf->wall_height - (double)32) / ((HEIGHT / 2) - y);
+	dist *= wolf->dist_to_plane;
+	// dist *= cos(wolf->ray_adjacent / (x - FOV / 2));
+	floor.x = dist * cos(wolf->angle);
+	floor.y = dist * sin(wolf->angle);
+	floor.x += wolf->pos.x;
+	floor.y += wolf->pos.y;
+	texture.x = (int)floor.x % 64;
+	texture.y = (int)floor.y % 64;
+	wall_index = ((texture.y * graphics->wall[0]->size_line) + (texture.x * graphics->wall[0]->bits_ppixel / 8));
+	put_row(wolf, wall_index);
 }
+
+void	draw_floor(t_wolf *wolf, int y)
+{
+	double	dist;
+	t_point	floor;
+	t_point	texture;
+	size_t	wall_index;
+	t_graphics	*graphics;
+
+	graphics = &wolf->graphics;
+	dist = (double)32 / (y - (HEIGHT / 2));
+	dist *= wolf->dist_to_plane;
+	// dist *= cos(wolf->ray_adjacent / (x - FOV / 2));
+	floor.x = dist * cos(wolf->angle);
+	floor.y = dist * sin(wolf->angle);
+	floor.x += wolf->pos.x;
+	floor.y += wolf->pos.y;
+	texture.x = (int)floor.x % 64;
+	texture.y = (int)floor.y % 64;
+	wall_index = ((texture.y * graphics->wall[0]->size_line) + (texture.x * graphics->wall[0]->bits_ppixel / 8));
+	put_row(wolf, wall_index);
+}
+

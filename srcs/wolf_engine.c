@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 11:40:53 by jesmith       #+#    #+#                 */
-/*   Updated: 2020/05/11 12:37:44 by jessicasmit   ########   odam.nl         */
+/*   Updated: 2020/05/12 18:28:51 by jessicasmit   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static void		wolf_render(t_wolf *wolf)
 		wolf->intersect = find_intersect(wolf, ray, wolf->angle);
 		project_on_plane(wolf, wolf->intersect, &plane, x);
 		wolf->graphics.tex_dex = texture_index(wolf->intersect, wolf->pos);
-		draw_column(wolf, plane, x, ray);
+		draw_column(wolf, plane, x);
 		wolf->angle += wolf->ray_angle;
 		x++;
 	}

@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 14:46:31 by jesmith       #+#    #+#                 */
-/*   Updated: 2020/04/15 12:05:07 by jessicasmit   ########   odam.nl         */
+/*   Updated: 2020/05/12 18:50:50 by jessicasmit   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void	wall_texture(t_wolf *wolf, t_project plane,
 	}
 }
 
-void		draw_column(t_wolf *wolf, t_project plane, int x, t_item ray)
+void		draw_column(t_wolf *wolf, t_project plane, int x)
 {
 	t_graphics	*graphics;
 	int			y;
@@ -78,17 +78,19 @@ void		draw_column(t_wolf *wolf, t_project plane, int x, t_item ray)
 	while (y < HEIGHT)
 	{
 		graphics->index = \
-			(y * graphics->size_line) + (x * graphics->bits_ppixel / 8);
-		if (y > plane.y_start && y < plane.y_end)
+			(y * graphics->size_line) + (x * graphics->bits_ppixel / 8);		
+		if (y < plane.y_end)
 			wall_texture(wolf, plane, x, y);
 		else
-		{
-			if (y <= plane.y_start)
-				wolf->graphics.row_dex = 0;
-			else if (y > plane.y_end)
-				wolf->graphics.row_dex = 5;
-			draw_row(wolf, ray, y, x);
-		}
+			draw_floor(wolf, y);
 		y++;
+	}
+	y = plane.y_start;
+	while (y >= 0)
+	{
+		graphics->index = \
+			(y * graphics->size_line) + (x * graphics->bits_ppixel / 8);
+		draw_ceiling(wolf, y);
+		y--;
 	}
 }

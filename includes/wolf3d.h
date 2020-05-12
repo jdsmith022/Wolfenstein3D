@@ -163,9 +163,10 @@ void				save_map_coordinates(t_wolf *wolf);
 int					wolf_engine(t_wolf *wolf);
 t_point				find_intersect(t_wolf *wolf, t_item ray, double angle);
 
-void				draw_column(t_wolf *wolf, t_project wall, \
-						int x, t_item ray);
- void				draw_row(t_wolf *wolf, t_item ray, int y, int xs);
+void				draw_column(t_wolf *wolf, t_project wall, int x);
+void				draw_floor(t_wolf *wolf, int y);
+void				draw_ceiling(t_wolf *wolf, int y);
+
 
 void				mlx_mouse(t_wolf *wolf);
 void				mlx_key(t_wolf *wolf);
