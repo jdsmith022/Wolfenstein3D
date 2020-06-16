@@ -6,7 +6,7 @@
 #    By: mminkjan <mminkjan@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/02/03 20:54:24 by mminkjan      #+#    #+#                  #
-#    Updated: 2020/06/16 16:45:10 by Malou         ########   odam.nl          #
+#    Updated: 2020/06/16 18:17:57 by Malou         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,10 +20,6 @@ MLXFLAGS = -lmlx -framework OpenGL -framework AppKit
 
 LIBFT = ./libft/
 
-PRINT = ./printers/
-
-PRINTF = ./ft_printf/
-
 SRCS = ./srcs/
 
 SRCS_FILES = main init_wolf utilities init_mlx exit \
@@ -36,7 +32,7 @@ CFILES = $(SRCS_FILES:%=$(SRCS)%.c)
 
 OFILES = $(CFILES:%.c=%.o)
 
-HEADERS = includes/wolf3d.h includes/printers.h
+HEADERS = includes/wolf3d.h
 
 ADD_FILES = Makefile author ./maps ./textures
 
@@ -44,14 +40,11 @@ all: $(NAME)
 
 $(NAME) :
 	@make re -C $(LIBFT)
-	@make re -C $(PRINTF)
-	@gcc -g -I $(MLX) -L $(MLX) $(MLXFLAGS) -L $(PRINTF) -lftprintf \
+	@gcc -I $(MLX) -L $(MLX) $(MLXFLAGS) \
 	-I $(LIBFT) -L $(LIBFT) -lft $(CFILES) $(FLAGS) $(NAME)
-	@rm -f $(OFILES)
 
 clean :
 	@make clean -C $(LIBFT)
-	@make clean -C $(PRINTF)
 	@rm -f $(OFILES)
 	@rm -f *#
 	@rm -f *~
@@ -60,13 +53,12 @@ clean :
 
 fclean : clean
 	@make fclean -C $(LIBFT)
-	@make fclean -C $(PRINTF)
 	@rm -f $(NAME)
 
 re : fclean all
 
 add : fclean
-	@git add $(MLX) $(LIBFT) $(CFILES) $(HEADERS) $(ADD_FILES) $(PRINTF)
+	@git add $(MLX) $(LIBFT) $(CFILES) $(HEADERS) $(ADD_FILES)
 	@git status
 
 push :
