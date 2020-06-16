@@ -3,34 +3,20 @@
 #                                                         ::::::::             #
 #    Makefile                                           :+:    :+:             #
 #                                                      +:+                     #
-#    By: jesmith <jesmith@studentodam.nl>           +#+                      #
+#    By: jesmith <jesmith@studentodam.nl>             +#+                      #
 #                                                    +#+                       #
-#    Created: 2019/01/13 12:32:27 by jesmith        #+#    #+#                 #
-#    Updated: 2019/09/06 12:44:57 by jesmith       ########   odam.nl          #
+#    Created: 2019/01/13 12:32:27 by jesmith       #+#    #+#                  #
+#    Updated: 2020/06/16 19:05:50 by Malou         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := libft.a
 CFLAGS := -Wall -Werror -Wextra
 HEAD := libft.h
-SRCS := lstmap lstdelone lstiter lstadd lstnew islower \
-		lstdel strsplit wrdcount strndup strnstr \
-		strstr itoa putnbr_fd putendl_fd isupper putstr_fd \
-		putchar_fd strtrim strjoin strsub intlen strncmp \
-		strnequ strequ strmapi strmap striteri striter \
-		strclr strdel strnew memdel memalloc memset \
-		bzero memcpy memccpy memmove memchr memcmp \
-		strlen strdup strcpy strncpy strcmp strcat \
-		strncat strlcat strchr strrchr isalpha isdigit \
-		isalnum isascii isprint toupper tolower isspace \
-		atoi putchar putstr putendl putnbr isupper \
-		islower stralloc strrev lstaddback del strdel \
-		strsubsize count_if free_strarray \
-		foreach range sqrt recursive_factorial \
-		div_mod swap is_negative print_alphabet \
-		print_numbers strclen ull_length atoi_base \
-		itoa_base exit isnumber_base has_prefix isdigit_base \
-		iswhitespace
+SRCS := atoi_base bzero del free_strarray isnumber_base itoa_base \
+		memalloc memset putchar putendl putstr strcmp strsplit has_prefix \
+		isdigit_base iswhitespace lstnew strchr strdel strdup strjoin strlen \
+		strsub memcpy memdel stralloc toupper
 
 CFILES := $(SRCS:%=./ft_%.c) get_next_line.c
 
