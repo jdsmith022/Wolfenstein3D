@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/05 13:35:03 by jesmith       #+#    #+#                 */
-/*   Updated: 2020/04/06 17:14:09 by JessicaSmit   ########   odam.nl         */
+/*   Updated: 2020/06/16 17:57:48 by Malou         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,13 @@ static int	validate_map_edges(t_wolf *wolf, int **values)
 		if (y == 0 || y == wolf->max_y)
 		{
 			x = 0;
-			while (x < wolf->max_x && values[y][x] > 0 && values[y][x] < 5)
+			while (x < wolf->max_x && values[y][x] > 0)
 				x++;
 			if (x != wolf->max_x)
 				return (-1);
 		}
 		while (y < wolf->max_y \
-			&& values[y][0] != 0 && values[y][wolf->max_x - 1] != 0 && \
-				values[y][x] < 5)
+			&& values[y][0] != 0 && values[y][wolf->max_x - 1] != 0)
 			y++;
 		if (y != wolf->max_y)
 			return (-1);
@@ -66,10 +65,8 @@ static int	*save_values(t_wolf *wolf, char *map_line)
 
 	x = 0;
 	map_array = ft_strsplit(map_line, ' ');
-	if (map_array == NULL)
-		return (NULL);
 	values = malloc(sizeof(int) * MAX_SIZE);
-	if (values == NULL)
+	if (map_array == NULL || values == NULL)
 		return (NULL);
 	while (map_array[x] != '\0' && ft_isnumber_base(map_array[x], 10) == 1)
 	{
@@ -84,6 +81,7 @@ static int	*save_values(t_wolf *wolf, char *map_line)
 		wolf->max_x = x;
 	if (x == wolf->max_x)
 		return (values);
+	free(values);
 	return (NULL);
 }
 

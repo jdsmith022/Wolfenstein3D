@@ -5,8 +5,8 @@
 /*                                                     +:+                    */
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/03 20:12:46 by mminkjan       #+#    #+#                */
-/*   Updated: 2020/03/16 15:29:27 by mminkjan         ########   odam.nl         */
+/*   Created: 2020/02/03 20:12:46 by mminkjan      #+#    #+#                 */
+/*   Updated: 2020/06/16 17:47:23 by Malou         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,9 @@
 # define WOLF3D_H
 
 # include "../libft/libft.h"
-# include "./printers.h"
 # include "../minilibx_macos/mlx.h"
 # include <math.h>
 # include <fcntl.h>
-
-# include <stdio.h> //remove later
 
 # define USAGE_ERR "usage: input valid wolf3d map"
 # define MALLOC_ERR "error: malloc"
@@ -29,11 +26,9 @@
 
 # define MAX_SIZE 100
 # define MAX_TEXTURES 4
-# define MAX_WIDTH WIDTH * wolf->wall_width
-# define MAX_HEIGHT HEIGHT * wolf->wall_width
 
 # define PI 3.14159265359
-# define FOV 60 * (PI / 180)
+# define FOV 1.0471975512
 
 # define SPEED 20
 
@@ -142,7 +137,6 @@ typedef struct		s_wolf {
 	double			ray_angle;
 	double			angle;
 	t_graphics		graphics;
-	t_vis			vis;
 	t_point			intersect;
 	t_point			pos;
 	t_event			event;
@@ -153,7 +147,7 @@ typedef struct		s_wolf {
 t_wolf				init_wolf(void);
 void				init_mlx(t_wolf *wolf);
 
-void 				load_color(t_wolf *wolf);
+void				load_color(t_wolf *wolf);
 void				load_addr_str(t_wolf *wolf);
 void				load_image_ptr(t_wolf *wolf, int width, int height);
 
@@ -167,7 +161,6 @@ void				draw_ceiling(t_wolf *wolf, t_project plane, int x);
 void				draw_column(t_wolf *wolf, t_project wall, int x);
 void				draw_floor(t_wolf *wolf, int y, int x);
 
-
 void				mlx_mouse(t_wolf *wolf);
 void				mlx_key(t_wolf *wolf);
 void				key_player_movement(t_wolf *wolf, int key, \
@@ -179,6 +172,6 @@ int					wolf_failure_exit(t_wolf *wolf,\
 
 void				lst_del(t_item **item, void (ft_del)(void*, size_t));
 void				lst_addback(t_item **item_list, t_item *item);
-double			clamp_angle(double angle);
+double				clamp_angle(double angle);
 
 #endif

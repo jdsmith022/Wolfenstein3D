@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   load_color.c                                       :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: JessicaSmith <JessicaSmith@student.coda      +#+                     */
+/*   By: Malou <Malou@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/03/18 09:20:30 by JessicaSmit   #+#    #+#                 */
-/*   Updated: 2020/04/06 17:25:47 by JessicaSmit   ########   odam.nl         */
+/*   Created: 2020/06/16 17:40:51 by Malou         #+#    #+#                 */
+/*   Updated: 2020/06/16 17:40:55 by Malou         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 

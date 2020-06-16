@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/10 19:09:56 by mminkjan      #+#    #+#                 */
-/*   Updated: 2020/04/06 17:11:34 by JessicaSmit   ########   odam.nl         */
+/*   Updated: 2020/06/16 17:50:24 by Malou         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ static int		intersect_direction(t_wolf *wolf,
 		x++;
 	}
 	if (wolf->intersect.obj_dist <= 20 || pos.x < 0 || pos.y < 0 \
-		|| pos.x > MAX_WIDTH || pos.y > MAX_HEIGHT)
+		|| pos.x > wolf->max_x * wolf->wall_width || \
+		pos.y > wolf->max_y * wolf->wall_width)
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/08 14:14:17 by mminkjan      #+#    #+#                 */
-/*   Updated: 2020/04/07 16:29:14 by JessicaSmit   ########   odam.nl         */
+/*   Updated: 2020/06/16 17:39:35 by Malou         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,13 @@ static t_item	*init_item(t_wolf *wolf, t_i i,
 	item->texture = map_values[i.y][i.x];
 	if (dir == 'h' && item->texture != map_values[i.y][i.x + 1]
 			&& ((i.y - 1 >= 0 && map_values[i.y - 1][i.x] == item->texture)
-			|| (i.y + 1 < wolf->max_y && map_values[i.y + 1][i.x] == item->texture)))
+			|| (i.y + 1 < wolf->max_y && \
+			map_values[i.y + 1][i.x] == item->texture)))
 		item->texture = map_values[i.y][i.x + 1];
 	else if (dir == 'v' && item->texture != map_values[i.y + 1][i.x]
 			&& ((i.x - 1 >= 0 && map_values[i.y][i.x - 1] == item->texture)
-			|| (i.x + 1 < wolf->max_x && map_values[i.y][i.x + 1] == item->texture)))
+			|| (i.x + 1 < wolf->max_x && \
+			map_values[i.y][i.x + 1] == item->texture)))
 		item->texture = map_values[i.y + 1][i.x];
 	return (item);
 }

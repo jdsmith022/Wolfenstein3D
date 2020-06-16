@@ -6,7 +6,7 @@
 #    By: mminkjan <mminkjan@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/02/03 20:54:24 by mminkjan      #+#    #+#                  #
-#    Updated: 2020/04/12 18:06:12 by Malou         ########   odam.nl          #
+#    Updated: 2020/06/16 16:45:10 by Malou         ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,6 @@ PRINT = ./printers/
 
 PRINTF = ./ft_printf/
 
-PT_FILES =  printers 2d_vis init_mlx_vis draw_line
-
 SRCS = ./srcs/
 
 SRCS_FILES = main init_wolf utilities init_mlx exit \
@@ -34,7 +32,7 @@ SRCS_FILES = main init_wolf utilities init_mlx exit \
 			load_textures load_color draw_row
 
 
-CFILES = $(SRCS_FILES:%=$(SRCS)%.c) $(PT_FILES:%=$(PRINT)%.c) 
+CFILES = $(SRCS_FILES:%=$(SRCS)%.c)
 
 OFILES = $(CFILES:%.c=%.o)
 

@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   draw_row.c                                         :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: JessicaSmith <JessicaSmith@student.coda      +#+                     */
+/*   By: Malou <Malou@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/04/06 11:07:45 by JessicaSmit   #+#    #+#                 */
-/*   Updated: 2020/05/13 12:16:09 by jessicasmit   ########   odam.nl         */
+/*   Created: 2020/06/16 17:41:14 by Malou         #+#    #+#                 */
+/*   Updated: 2020/06/16 17:41:17 by Malou         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ static void	row_calculations(t_wolf *wolf, double dist)
 	floor.y += wolf->pos.y;
 	texture.x = (int)floor.x % 64;
 	texture.y = (int)floor.y % 64;
-	wall_index = ((texture.y * graphics->wall[0]->size_line) + (texture.x * bpp));
+	wall_index = ((texture.y * graphics->wall[0]->size_line) + \
+		(texture.x * bpp));
 	put_row(wolf, wall_index);
 }
 
@@ -58,7 +59,8 @@ void		draw_ceiling(t_wolf *wolf, t_project plane, int x)
 	while (y >= 0)
 	{
 		wolf->graphics.index = \
-			(y * wolf->graphics.size_line) + (x * wolf->graphics.bits_ppixel / 8);
+			(y * wolf->graphics.size_line) + \
+			(x * wolf->graphics.bits_ppixel / 8);
 		dist = (wolf->wall_height - (double)32) / ((HEIGHT / 2) - y);
 		dist *= wolf->dist_to_plane;
 		dist *= cos(wolf->ray_angle / (x - FOV / 2));
