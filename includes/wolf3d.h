@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:12:46 by mminkjan      #+#    #+#                 */
-/*   Updated: 2020/06/16 17:47:23 by Malou         ########   odam.nl         */
+/*   Updated: 2020/06/17 15:56:08 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,8 @@ void				save_map_coordinates(t_wolf *wolf);
 
 int					wolf_engine(t_wolf *wolf);
 t_point				find_intersect(t_wolf *wolf, t_item ray, double angle);
+t_point				find_intersection_point(t_point start_a, t_point end_a,
+						t_point start_b, t_point end_b);
 
 void				draw_ceiling(t_wolf *wolf, t_project plane, int x);
 void				draw_column(t_wolf *wolf, t_project wall, int x);

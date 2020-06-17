@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 14:46:31 by jesmith       #+#    #+#                 */
-/*   Updated: 2020/06/16 17:36:41 by Malou         ########   odam.nl         */
+/*   Updated: 2020/06/17 19:57:26 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	wall_texture(t_wolf *wolf, t_project plane,
 	graphics = wolf->graphics;
 	if (wolf->event.colors == 1)
 		put_pixel(wolf, color, x, y);
-	else
+	else if (x >= 0 && x < WIDTH && y < HEIGHT && y >= 0)
 	{
 		wall_y = (double)(wolf->wall_height / plane.height) * \
 			(y - plane.y_start);

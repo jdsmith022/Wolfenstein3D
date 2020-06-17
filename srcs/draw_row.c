@@ -6,7 +6,7 @@
 /*   By: Malou <Malou@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/16 17:41:14 by Malou         #+#    #+#                 */
-/*   Updated: 2020/06/16 17:41:17 by Malou         ########   odam.nl         */
+/*   Updated: 2020/06/17 18:57:00 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@ static void	put_row(t_wolf *wolf, size_t wall_index)
 
 	addr_dex = wolf->graphics.index;
 	wolf->graphics.addr_str[addr_dex] = \
-		wolf->graphics.wall[0]->addr_str[(size_t)wall_index];
+	wolf->graphics.wall[0]->addr_str[(size_t)wall_index];
 	addr_dex++;
 	wall_index++;
 	wolf->graphics.addr_str[addr_dex] = \
-		wolf->graphics.wall[0]->addr_str[(size_t)wall_index];
+	wolf->graphics.wall[0]->addr_str[(size_t)wall_index];
 	addr_dex++;
 	wall_index++;
 	wolf->graphics.addr_str[addr_dex] = \
-		wolf->graphics.wall[0]->addr_str[(size_t)wall_index];
+	wolf->graphics.wall[0]->addr_str[(size_t)wall_index];
 }
 
 static void	row_calculations(t_wolf *wolf, double dist)
@@ -63,7 +63,7 @@ void		draw_ceiling(t_wolf *wolf, t_project plane, int x)
 			(x * wolf->graphics.bits_ppixel / 8);
 		dist = (wolf->wall_height - (double)32) / ((HEIGHT / 2) - y);
 		dist *= wolf->dist_to_plane;
-		dist *= cos(wolf->ray_angle / (x - FOV / 2));
+		dist /= cos(wolf->ray_angle / (x - FOV / 2));
 		row_calculations(wolf, dist);
 		y--;
 	}
@@ -73,8 +73,11 @@ void		draw_floor(t_wolf *wolf, int y, int x)
 {
 	double	dist;
 
-	dist = (double)32 / (y - (HEIGHT / 2));
-	dist *= wolf->dist_to_plane;
-	dist *= cos(wolf->ray_angle / (x - FOV / 2));
-	row_calculations(wolf, dist);
+	if (y < HEIGHT)
+	{
+		dist = (double)32 / (y - (HEIGHT / 2));
+		dist *= wolf->dist_to_plane;
+		dist /= cos(wolf->ray_angle / (x - FOV / 2));
+		row_calculations(wolf, dist);
+	}
 }

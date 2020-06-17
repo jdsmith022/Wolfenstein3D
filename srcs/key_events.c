@@ -6,52 +6,61 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/10 19:09:56 by mminkjan      #+#    #+#                 */
-/*   Updated: 2020/06/16 17:50:24 by Malou         ########   odam.nl         */
+/*   Updated: 2020/06/17 19:20:25 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
 
-static int		intersect_direction(t_wolf *wolf,
-					double move_angle, t_point pos)
+static int		intersect_with_object(t_wolf *wolf, t_point start, t_point end)
 {
-	double		angle;
-	t_item		ray;
-	int			x;
+	t_item	*object;
+	t_point intersect;
 
-	x = 0;
-	angle = move_angle - (FOV / 2);
-	ray.start.x = pos.x;
-	ray.start.y = pos.y;
-	while (x < WIDTH)
+	object = wolf->item;
+	while (object != NULL)
 	{
-		angle = clamp_angle(angle);
-		ray.end.x = ray.start.x + wolf->max_ray * cos(angle);
-		ray.end.y = ray.start.y + wolf->max_ray * sin(angle);
-		wolf->intersect = find_intersect(wolf, ray, angle);
-		angle += wolf->ray_angle;
-		x++;
+		intersect = find_intersection_point(start, end,\
+			object->start, object->end);
+		if (isnan(intersect.x) == 0 || isnan(intersect.y) == 0)
+			return (-1);
+		object = object->next;
 	}
-	if (wolf->intersect.obj_dist <= 20 || pos.x < 0 || pos.y < 0 \
-		|| pos.x > wolf->max_x * wolf->wall_width || \
-		pos.y > wolf->max_y * wolf->wall_width)
-		return (1);
 	return (0);
 }
 
-static void		key_player_position(t_wolf *wolf, int key)
+static void		move_player_rl(t_wolf *wolf, double direction)
 {
 	t_point pos;
-	double	move_angle;
 
 	pos = wolf->pos;
-	key_player_movement(wolf, key, &pos, &move_angle);
-	if (intersect_direction(wolf, move_angle, pos) == 0)
+	pos.x += SPEED * cos(wolf->dir_angle + direction);
+	pos.y += SPEED * sin(wolf->dir_angle + direction);
+	if (intersect_with_object(wolf, wolf->pos, pos) == 0)
 		wolf->pos = pos;
 }
 
-static void		key_handling(t_wolf *wolf, int key)
+static void		move_player_fw(t_wolf *wolf, int direction)
 {
+	t_point pos;
+
+	pos = wolf->pos;
+	pos.x += direction * cos(wolf->dir_angle);
+	pos.y += direction * sin(wolf->dir_angle);
+	if (intersect_with_object(wolf, wolf->pos, pos) == 0)
+		wolf->pos = pos;
+}
+
+static int		key_events(int key, t_wolf *wolf)
+{
+	if (key == W)
+		move_player_fw(wolf, SPEED);
+	else if (key == S)
+		move_player_fw(wolf, -SPEED);
+	else if (key == A)
+		move_player_rl(wolf, (double)(-90 * PI / 180));
+	else if (key == D)
+		move_player_rl(wolf, (double)(90 * PI / 180));
 	if (key == ALT)
 	{
 		if (wolf->event.colors == 0)
@@ -61,14 +70,6 @@ static void		key_handling(t_wolf *wolf, int key)
 	}
 	if (key == ESC)
 		wolf_success_exit(wolf);
-}
-
-static int		key_events(int key, t_wolf *wolf)
-{
-	if (key == W || key == S || key == A || key == D)
-		key_player_position(wolf, key);
-	if (key == ALT || key == ESC)
-		key_handling(wolf, key);
 	return (0);
 }
 

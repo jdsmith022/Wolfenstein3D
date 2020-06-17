@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/05 13:14:09 by jesmith       #+#    #+#                 */
-/*   Updated: 2020/06/16 17:36:18 by Malou         ########   odam.nl         */
+/*   Updated: 2020/06/17 18:26:37 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_wolf	init_wolf(void)
 	wolf.item = NULL;
 	wolf.pos.x = 10;
 	wolf.pos.y = 10;
-	wolf.dir_angle = 145 * (PI / 180);
+	wolf.dir_angle = 90;
 	wolf.dist_to_plane = (WIDTH / 2) / tan(FOV / 2);
 	wolf.wall_width = 64;
 	wolf.wall_height = 64;

@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   utilities.c                                        :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
+/*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2020/02/05 13:14:43 by jesmith       #+#    #+#                 */
-/*   Updated: 2020/04/06 17:14:33 by JessicaSmit   ########   odam.nl         */
+/*   Created: 2020/06/17 14:37:03 by mminkjan      #+#    #+#                 */
+/*   Updated: 2020/06/17 14:37:05 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ void		lst_addback(t_item **item_list, t_item *item)
 
 double		clamp_angle(double angle)
 {
-	if (angle > 360 * (PI / 180))
+	if (angle >= 360 * (PI / 180))
 		angle -= 360 * (PI / 180);
-	else if (angle < 0)
+	else if (angle <= 0)
 		angle += 360 * (PI / 180);
 	return (angle);
 }
