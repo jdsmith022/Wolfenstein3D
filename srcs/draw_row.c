@@ -6,12 +6,12 @@
 /*   By: Malou <Malou@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/16 17:41:14 by Malou         #+#    #+#                 */
-/*   Updated: 2020/06/28 13:12:27 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/06/28 14:06:03 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
-
+#include <stdio.h>
 static void	put_row(t_wolf *wolf, size_t wall_index, size_t tex_dex)
 {
 	size_t addr_dex;
@@ -50,14 +50,12 @@ static void	row_calculations(t_wolf *wolf, double dist, size_t tex_dex)
 	put_row(wolf, wall_index, tex_dex);
 }
 
-void		draw_ceiling(t_wolf *wolf, t_project plane, int x)
+void		draw_ceiling(t_wolf *wolf, int y, int x)
 {
 	double	dist;
 	size_t	tex_dex;
 	int		color;
-	int		y;
-
-	y = plane.y_start;
+	
 	tex_dex = 0;
 	color = wolf->graphics.color[4];
 	while (y >= 0)
@@ -82,16 +80,13 @@ void		draw_floor(t_wolf *wolf, int y, int x)
 	size_t	tex_dex;
 	int		color;
 
-	color = wolf->graphics.color[5];
 	tex_dex = 4;
-	if (y < HEIGHT)
-	{
-		dist = (double)PLAYER_HEIGHT / (y - (HEIGHT / 2));
-		dist *= wolf->dist_to_plane;
-		dist /= cos(wolf->ray_angle * x - FOV / 2);
-		if (wolf->event.colors == 1)
-			put_pixel(wolf, color, x, y);
-		else
-			row_calculations(wolf, dist, tex_dex);
-	}
+	color = wolf->graphics.color[5];
+	dist = (double)PLAYER_HEIGHT / (y - (HEIGHT / 2));
+	dist *= wolf->dist_to_plane;
+	dist /= cos(wolf->ray_angle * x - FOV / 2);
+	if (wolf->event.colors == 1)
+		put_pixel(wolf, color, x, y);
+	else
+		row_calculations(wolf, dist, tex_dex);
 }
