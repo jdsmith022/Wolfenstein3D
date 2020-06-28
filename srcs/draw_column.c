@@ -6,27 +6,11 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 14:46:31 by jesmith       #+#    #+#                 */
-/*   Updated: 2020/06/17 19:57:26 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/06/28 13:46:19 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
-
-static void	put_pixel(t_wolf *wolf, int color, int x, int y)
-{
-	size_t	index;
-
-	if (x >= 0 && x < WIDTH && y < HEIGHT && y >= 0)
-	{
-		index = (y * wolf->graphics.size_line) + \
-			(x * wolf->graphics.bits_ppixel / 8);
-		wolf->graphics.addr_str[index] = color;
-		index++;
-		wolf->graphics.addr_str[index] = color >> 8;
-		index++;
-		wolf->graphics.addr_str[index] = color >> 16;
-	}
-}
 
 static void	put_wall(t_wolf *wolf, size_t index, size_t tex_dex,
 				double wall_index)
@@ -75,15 +59,15 @@ void		draw_column(t_wolf *wolf, t_project plane, int x)
 
 	graphics = &wolf->graphics;
 	y = 0;
+	draw_ceiling(wolf, plane, x);
 	while (y < HEIGHT)
 	{
 		graphics->index = \
 			(y * graphics->size_line) + (x * graphics->bits_ppixel / 8);
-		if (y < plane.y_end)
+		if (y <= plane.y_end && y >= plane.y_start)
 			wall_texture(wolf, plane, x, y);
-		else
+		else if (y > plane.y_end)
 			draw_floor(wolf, y, x);
 		y++;
 	}
-	draw_ceiling(wolf, plane, x);
 }

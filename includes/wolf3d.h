@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:12:46 by mminkjan      #+#    #+#                 */
-/*   Updated: 2020/06/28 12:06:48 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/06/28 12:55:54 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@
 # define D 2
 
 # define MOUSE_PRESS 1
+
+# define TEXTURE_SIZE 64
 # define PLAYER_HEIGHT 32
 
 typedef	struct		s_texture
@@ -173,6 +175,8 @@ int					wolf_success_exit(t_wolf *wolf);
 int					wolf_failure_exit(t_wolf *wolf,\
 						int **map_values, char *exit_message);
 
+
+void				put_pixel(t_wolf *wolf, int color, int x, int y);
 void				lst_del(t_item **item, void (ft_del)(void*, size_t));
 void				lst_addback(t_item **item_list, t_item *item);
 double				clamp_angle(double angle);

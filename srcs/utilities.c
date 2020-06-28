@@ -6,11 +6,27 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/17 14:37:03 by mminkjan      #+#    #+#                 */
-/*   Updated: 2020/06/17 14:37:05 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/06/28 12:20:35 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
+
+void		put_pixel(t_wolf *wolf, int color, int x, int y)
+{
+	size_t	index;
+
+	if (x >= 0 && x < WIDTH && y < HEIGHT && y >= 0)
+	{
+		index = (y * wolf->graphics.size_line) + \
+			(x * wolf->graphics.bits_ppixel / 8);
+		wolf->graphics.addr_str[index] = color;
+		index++;
+		wolf->graphics.addr_str[index] = color >> 8;
+		index++;
+		wolf->graphics.addr_str[index] = color >> 16;
+	}
+}
 
 void		lst_del(t_item **item, void (ft_del)(void*, size_t))
 {

@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/03/10 17:07:11 by jesmith       #+#    #+#                 */
-/*   Updated: 2020/04/06 17:08:55 by JessicaSmit   ########   odam.nl         */
+/*   Updated: 2020/06/28 13:09:24 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,27 +87,27 @@ static void	load_image_ptr2(t_wolf *wolf, int width, int height)
 	wolf->graphics.wall[11] = mlx_xpm_file_to_image(wolf->graphics.mlx_ptr,\
 		"textures/space_storage_04.xpm", &width, &height);
 	wolf->graphics.wall[12] = mlx_xpm_file_to_image(wolf->graphics.mlx_ptr,\
-		"textures/gemOv1.xpm", &width, &height);
+		"textures/mossy.xpm", &width, &height);
 	wolf->graphics.wall[13] = mlx_xpm_file_to_image(wolf->graphics.mlx_ptr,\
-		"textures/gemOv2.xpm", &width, &height);
+		"textures/dark_blue.xpm", &width, &height);
 	wolf->graphics.wall[14] = mlx_xpm_file_to_image(wolf->graphics.mlx_ptr,\
-		"textures/gemOv3.xpm", &width, &height);
+		"textures/light_blue.xpm", &width, &height);
 	wolf->graphics.wall[15] = mlx_xpm_file_to_image(wolf->graphics.mlx_ptr,\
-		"textures/gemOv4.xpm", &width, &height);
+		"textures/wood.xpm", &width, &height);
 }
 
 void		load_image_ptr(t_wolf *wolf, int width, int height)
 {
 	wolf->graphics.wall[0] = mlx_xpm_file_to_image(wolf->graphics.mlx_ptr,\
-		"textures/mossy.xpm", &width, &height);
+		"textures/Boxed_Stones_Light.xpm", &width, &height);
 	wolf->graphics.wall[1] = mlx_xpm_file_to_image(wolf->graphics.mlx_ptr,\
-		"textures/dark_blue.xpm", &width, &height);
+		"textures/Boxed_Stones.xpm", &width, &height);
 	wolf->graphics.wall[2] = mlx_xpm_file_to_image(wolf->graphics.mlx_ptr,\
-		"textures/light_blue.xpm", &width, &height);
+		"textures/Ore_Sapphires.xpm", &width, &height);
 	wolf->graphics.wall[3] = mlx_xpm_file_to_image(wolf->graphics.mlx_ptr,\
-		"textures/wood.xpm", &width, &height);
+		"textures/Ore_Emerald.xpm", &width, &height);
 	wolf->graphics.wall[4] = mlx_xpm_file_to_image(wolf->graphics.mlx_ptr,\
-		"textures/redbrick.xpm", &width, &height);
+		"textures/Dirt.xpm", &width, &height);
 	wolf->graphics.wall[5] = mlx_xpm_file_to_image(wolf->graphics.mlx_ptr,\
 		"textures/greystone.xpm", &width, &height);
 	wolf->graphics.wall[6] = mlx_xpm_file_to_image(wolf->graphics.mlx_ptr,\
