@@ -6,7 +6,7 @@
 #    By: jesmith <jesmith@studentodam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/01/13 12:32:27 by jesmith       #+#    #+#                  #
-#    Updated: 2020/06/16 19:05:50 by Malou         ########   odam.nl          #
+#    Updated: 2020/06/28 12:11:10 by jesmith       ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,11 @@ $(NAME):
 	@ranlib	$(NAME)
 
 clean:
-	@/bin/rm -f $(SRCO) *~
+	@/bin/rm -f $(SRCO)
+	@/bin/rm -f *#
+	@/bin/rm -f *~
+	@/bin/rm -f *.DS_Store
+	@/bin/rm -Rf .vscode
 
 fclean:
 	@/bin/rm -f $(SRCO) libft.a

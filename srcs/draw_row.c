@@ -6,7 +6,7 @@
 /*   By: Malou <Malou@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/16 17:41:14 by Malou         #+#    #+#                 */
-/*   Updated: 2020/06/17 18:57:00 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/06/28 12:08:24 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ void		draw_ceiling(t_wolf *wolf, t_project plane, int x)
 		wolf->graphics.index = \
 			(y * wolf->graphics.size_line) + \
 			(x * wolf->graphics.bits_ppixel / 8);
-		dist = (wolf->wall_height - (double)32) / ((HEIGHT / 2) - y);
+		dist = (wolf->wall_height - (double)PLAYER_HEIGHT) / ((HEIGHT / 2) - y);
 		dist *= wolf->dist_to_plane;
-		dist /= cos(wolf->ray_angle / (x - FOV / 2));
+		dist /= cos(wolf->ray_angle * x - FOV / 2);
 		row_calculations(wolf, dist);
 		y--;
 	}
@@ -75,9 +75,9 @@ void		draw_floor(t_wolf *wolf, int y, int x)
 
 	if (y < HEIGHT)
 	{
-		dist = (double)32 / (y - (HEIGHT / 2));
+		dist = (double)PLAYER_HEIGHT / (y - (HEIGHT / 2));
 		dist *= wolf->dist_to_plane;
-		dist /= cos(wolf->ray_angle / (x - FOV / 2));
+		dist /= cos(wolf->ray_angle * x - FOV / 2);
 		row_calculations(wolf, dist);
 	}
 }
