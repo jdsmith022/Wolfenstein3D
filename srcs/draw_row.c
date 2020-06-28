@@ -6,12 +6,12 @@
 /*   By: Malou <Malou@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/16 17:41:14 by Malou         #+#    #+#                 */
-/*   Updated: 2020/06/28 14:06:03 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/06/28 14:08:53 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
-#include <stdio.h>
+
 static void	put_row(t_wolf *wolf, size_t wall_index, size_t tex_dex)
 {
 	size_t addr_dex;
@@ -55,7 +55,7 @@ void		draw_ceiling(t_wolf *wolf, int y, int x)
 	double	dist;
 	size_t	tex_dex;
 	int		color;
-	
+
 	tex_dex = 0;
 	color = wolf->graphics.color[4];
 	while (y >= 0)
