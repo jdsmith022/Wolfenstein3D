@@ -6,11 +6,12 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:21:28 by mminkjan      #+#    #+#                 */
-/*   Updated: 2020/06/16 16:56:35 by Malou         ########   odam.nl         */
+/*   Updated: 2020/06/30 14:48:55 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
+#include <stdio.h>
 
 int		main(int argc, char **argv)
 {
@@ -20,6 +21,8 @@ int		main(int argc, char **argv)
 
 	filename = argv[1];
 	exe = argv[0];
+	if (ft_strcmp(argv[1], "--help") == 0)
+		print_help_menu();
 	if (argc != 2 || ft_strcmp(exe, filename) == 0 || \
 		ft_strcmp(&exe[2], filename) == 0)
 	{
