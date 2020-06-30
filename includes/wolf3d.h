@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:12:46 by mminkjan      #+#    #+#                 */
-/*   Updated: 2020/06/28 13:57:25 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/06/30 14:13:32 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,6 @@ void				key_player_movement(t_wolf *wolf, int key, \
 int					wolf_success_exit(t_wolf *wolf);
 int					wolf_failure_exit(t_wolf *wolf,\
 						int **map_values, char *exit_message);
-
 
 void				put_pixel(t_wolf *wolf, int color, int x, int y);
 void				lst_del(t_item **item, void (ft_del)(void*, size_t));
