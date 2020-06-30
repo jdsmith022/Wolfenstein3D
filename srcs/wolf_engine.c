@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 11:40:53 by jesmith       #+#    #+#                 */
-/*   Updated: 2020/06/30 16:48:38 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/06/30 16:53:26 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static size_t	texture_index(t_point intersect, t_point pos)
 	int		texture;
 
 	texture = intersect.texture - 1;
-	if (texture <= 0)
+	if (texture == 0)
 		index = 0;
 	else if (intersect.texture == 1)
 		index = 4;
