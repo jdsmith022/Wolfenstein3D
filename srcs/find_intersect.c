@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/28 14:44:47 by mminkjan      #+#    #+#                 */
-/*   Updated: 2020/06/30 15:51:20 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/06/30 16:48:33 by mminkjan      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ t_point				find_intersect(t_wolf *wolf, t_item ray, double angle)
 		intersect = find_intersection_point(ray.start, ray.end,\
 			object->start, object->end);
 		distance = find_intersect_distance(intersect, ray, angle);
-		if (distance < min_distance && distance > 0)
+		if (distance < min_distance && distance > 0 && object->texture > 0)
 		{
 			min_distance = distance;
 			min_intersect.x = intersect.x;
