@@ -6,12 +6,11 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:21:28 by mminkjan      #+#    #+#                 */
-/*   Updated: 2020/06/30 14:48:55 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/06/30 16:54:57 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
-#include <stdio.h>
 
 int		main(int argc, char **argv)
 {
