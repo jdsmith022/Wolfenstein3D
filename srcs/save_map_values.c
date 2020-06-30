@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/05 13:35:03 by jesmith       #+#    #+#                 */
-/*   Updated: 2020/06/30 14:56:24 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/06/30 14:57:10 by jesmith       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static int	*save_values(t_wolf *wolf, char *map_line)
 		x++;
 	}
 	ft_free_strarray(map_array);
-	if (wolf->max_x == 0)ß
+	if (wolf->max_x == 0)
 		wolf->max_x = x;
 	if (x == wolf->max_x)
 		return (values);
