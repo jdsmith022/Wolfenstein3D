@@ -34,9 +34,9 @@ The executable name is fdf. A directory in the repository named maps has a list 
 ```
 $ ls -la maps/
 ```
-![ls-la display](https://github.com/jdsmith022/fdf_/blob/master/pictures/ls-la.png)
+![ls-la display](https://github.com/jdsmith022/Wolfenstein3D/blob/master/images/ls.png)
 
-However, a relief map from the local computer can be used as long as the path to the file is given as parameter.
+However, a map from the local computer can be used as long as the path to the file is given as parameter.
 ```
 $ ./wolf3d [path-to-map]
 ```
@@ -46,7 +46,12 @@ $ ./wolf3d [path-to-map]
 $ ./wolf3d maps/map24
 ```
 
-As a bonus feature, the program can take color as parameter from the map file. The largest maps, julia.fdf and fractol.fdf, have this feature and, as a result, takes longer to process. If color is given with map, colors cannot be changed via the user interface.
+A map cam be created by the user and used by following the same usage as above. In order ensure a valid map is created enter the following for usage:
+```
+$ ./wolf3d --help
+```
+![usage display](https://github.com/jdsmith022/Wolfenstein3D/blob/master/images/usage.png)
+
 
 If incorrect parameters are given or the map is invalid, a usage error will be given. The user interface provides information for the use and exit of the program. 
 
@@ -59,6 +64,15 @@ To delete executable and all object files from directory, run:
 ```
 $ make fclean
 ```
+
+### Gameplay:
+
+Settings and options can be display by entering the following in command line:
+```
+$ ./wolf3d --settings
+```
+![settings display](https://github.com/jdsmith022/Wolfenstein3D/blob/master/images/settings.png)
+
 
 
 ### Collaborator
