@@ -6,7 +6,7 @@
 
 ### Description
 
-For Wolf3D, my partner and I used ray casting paired with line intersect technique. Unlike other methods that use an algorithm  based on DDA or "Digital Differential Analysis", we used this technique to challenge ourselves futher and implement extra features such as thin walls.
+For Wolf3D, my partner and I used ray casting paired with line intersection technique. Unlike other methods that use an algorithm  based on DDA or "Digital Differential Analysis", we used this technique to challenge ourselves futher and implement extra features such as thin walls. Links for videos and tutorials for ray casting and line intersection, go to Wiki pages.
 
 Using a miniblix library provided for the project, Wold3D's objectives include: Rigor, use of C, use of basic algorithms, information research, data mining etc. As a graphic design project, Wolf3D is an exercies that solidifies the skills I have gained in the following areas thus far: windows, colors, events, fill shapes etc.
 
