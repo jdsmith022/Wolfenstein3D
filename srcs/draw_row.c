@@ -6,7 +6,7 @@
 /*   By: Malou <Malou@student.codam.nl>               +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/16 17:41:14 by Malou         #+#    #+#                 */
-/*   Updated: 2020/06/28 14:08:53 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/07/20 19:57:04 by JessicaSmit   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void		draw_ceiling(t_wolf *wolf, int y, int x)
 
 	tex_dex = 0;
 	color = wolf->graphics.color[4];
-	while (y >= 0)
+	while (y > 0)
 	{
 		wolf->graphics.index = \
 			(y * wolf->graphics.size_line) + \
@@ -82,11 +82,18 @@ void		draw_floor(t_wolf *wolf, int y, int x)
 
 	tex_dex = 4;
 	color = wolf->graphics.color[5];
-	dist = (double)PLAYER_HEIGHT / (y - (HEIGHT / 2));
-	dist *= wolf->dist_to_plane;
-	dist /= cos(wolf->ray_angle * x - FOV / 2);
-	if (wolf->event.colors == 1)
-		put_pixel(wolf, color, x, y);
-	else
-		row_calculations(wolf, dist, tex_dex);
+	while (y < HEIGHT)
+	{
+		wolf->graphics.index = \
+			(y * wolf->graphics.size_line) + \
+			(x * wolf->graphics.bits_ppixel / 8);
+		dist = (double)PLAYER_HEIGHT / (y - (HEIGHT / 2));
+		dist *= wolf->dist_to_plane;
+		dist /= cos(wolf->ray_angle * x - FOV / 2);
+		if (wolf->event.colors == 1)
+			put_pixel(wolf, color, x, y);
+		else
+			row_calculations(wolf, dist, tex_dex);
+		y++;
+	}
 }

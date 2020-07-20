@@ -6,7 +6,7 @@
 #    By: mminkjan <mminkjan@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2020/02/03 20:54:24 by mminkjan      #+#    #+#                  #
-#    Updated: 2020/07/20 19:04:51 by JessicaSmit   ########   odam.nl          #
+#    Updated: 2020/07/20 20:00:07 by JessicaSmit   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SRCS = ./srcs/
 
 SRCS_FILES = main init_wolf utilities init_mlx exit \
 			save_map_values save_map_coordinates wolf_engine find_intersect \
-			mouse_events draw_column key_events \
+			mouse_events draw_wall key_events \
 			load_textures load_color draw_row print_menu
 
 

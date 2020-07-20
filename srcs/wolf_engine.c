@@ -6,18 +6,17 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 11:40:53 by jesmith       #+#    #+#                 */
-/*   Updated: 2020/06/30 16:53:26 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/07/20 20:04:26 by JessicaSmit   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
 
-static int		rounder(double dbl)
+static void		draw_textures(t_wolf *wolf, t_project plane, int x)
 {
-	int rounded;
-
-	rounded = (int)(dbl + 0.5);
-	return (rounded);
+	draw_ceiling(wolf, plane.y_start, x);
+	draw_floor(wolf, plane.y_end, x);
+	draw_wall(wolf, plane, x);
 }
 
 static size_t	texture_index(t_point intersect, t_point pos)
@@ -52,9 +51,9 @@ static void		project_on_plane(t_wolf *wolf, t_point intersect,
 	plane->y_start = HEIGHT / 2 - plane->height / 2;
 	plane->y_end = HEIGHT / 2 + plane->height / 2;
 	if (intersect.dir == 'v')
-		plane->offset = rounder(wolf->intersect.y) % wolf->wall_width;
+		plane->offset = ft_rounder(wolf->intersect.y) % wolf->wall_width;
 	else if (intersect.dir == 'h')
-		plane->offset = rounder(wolf->intersect.x) % wolf->wall_width;
+		plane->offset = ft_rounder(wolf->intersect.x) % wolf->wall_width;
 }
 
 static void		wolf_render(t_wolf *wolf)
@@ -74,7 +73,7 @@ static void		wolf_render(t_wolf *wolf)
 		wolf->intersect = find_intersect(wolf, ray, wolf->angle);
 		project_on_plane(wolf, wolf->intersect, &plane, x);
 		wolf->graphics.tex_dex = texture_index(wolf->intersect, wolf->pos);
-		draw_column(wolf, plane, x);
+		draw_textures(wolf, plane, x);
 		wolf->angle += wolf->ray_angle;
 		x++;
 	}

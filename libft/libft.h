@@ -6,7 +6,7 @@
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/01/13 12:48:31 by jesmith       #+#    #+#                 */
-/*   Updated: 2020/06/16 19:35:40 by Malou         ########   odam.nl         */
+/*   Updated: 2020/07/20 20:04:04 by JessicaSmit   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void				ft_del(void *data, size_t size);
 int					ft_atoi_base(const char *str, int base);
 char				*ft_itoa_base(int n, int base);
 int					ft_intlen(int n);
+int					ft_rounder(double dbl);
 
 int					ft_isdigit_base(char c, int base);
 int					ft_iswhitespace(int c);

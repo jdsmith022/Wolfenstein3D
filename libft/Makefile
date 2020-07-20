@@ -6,7 +6,7 @@
 #    By: jesmith <jesmith@studentodam.nl>             +#+                      #
 #                                                    +#+                       #
 #    Created: 2019/01/13 12:32:27 by jesmith       #+#    #+#                  #
-#    Updated: 2020/06/28 12:11:10 by jesmith       ########   odam.nl          #
+#    Updated: 2020/07/20 20:04:09 by JessicaSmit   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ HEAD := libft.h
 SRCS := atoi_base bzero del free_strarray isnumber_base itoa_base \
 		memalloc memset putchar putendl putstr strcmp strsplit has_prefix \
 		isdigit_base iswhitespace lstnew strchr strdel strdup strjoin strlen \
-		strsub memcpy memdel stralloc toupper
+		strsub memcpy memdel stralloc toupper rounder
 
 CFILES := $(SRCS:%=./ft_%.c) get_next_line.c
 

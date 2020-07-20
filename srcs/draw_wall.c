@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   draw_column.c                                      :+:    :+:            */
+/*   draw_wall.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: jesmith <jesmith@student.codam.nl>           +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/19 14:46:31 by jesmith       #+#    #+#                 */
-/*   Updated: 2020/06/30 14:53:30 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/07/20 19:58:00 by JessicaSmit   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,22 +52,18 @@ static void	wall_texture(t_wolf *wolf, t_project plane,
 	}
 }
 
-void		draw_column(t_wolf *wolf, t_project plane, int x)
+void		draw_wall(t_wolf *wolf, t_project plane, int x)
 {
 	t_graphics	*graphics;
 	int			y;
 
 	graphics = &wolf->graphics;
-	y = 0;
-	draw_ceiling(wolf, plane.y_start, x);
-	while (y < HEIGHT)
+	y = plane.y_start;
+	while (y < plane.y_end)
 	{
 		graphics->index = \
 			(y * graphics->size_line) + (x * graphics->bits_ppixel / 8);
-		if (y < plane.y_end && y >= plane.y_start)
-			wall_texture(wolf, plane, x, y);
-		else if (y > plane.y_end)
-			draw_floor(wolf, y, x);
+		wall_texture(wolf, plane, x, y);
 		y++;
 	}
 }
