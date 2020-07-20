@@ -2,7 +2,7 @@
 
 ## Codam Coding College project Wolf3D
 
-![Demo of 42.fdf](https://github.com/jdsmith022/fdf_/blob/master/pictures/fdf.gif)
+![Demo of wold3d](https://github.com/jdsmith022/Wolfenstein3D/blob/master/images/wolf3d.gif)
 
 ### Description
 
