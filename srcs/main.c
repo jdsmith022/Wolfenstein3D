@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:21:28 by mminkjan      #+#    #+#                 */
-/*   Updated: 2020/06/30 17:03:17 by mminkjan      ########   odam.nl         */
+/*   Updated: 2020/07/20 19:03:36 by JessicaSmit   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int		main(int argc, char **argv)
 	check_valid_input(argc, filename, exe);
 	if (ft_strcmp(argv[1], "--help") == 0)
 		print_help_menu();
+	if (ft_strcmp(argv[1], "--settings") == 0)
+		print_settings_menu();
 	wolf = init_wolf();
 	wolf.map = save_map_values(&wolf, argv[1]);
 	save_map_coordinates(&wolf);

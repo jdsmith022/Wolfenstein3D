@@ -6,28 +6,11 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/06/17 14:37:03 by mminkjan      #+#    #+#                 */
-/*   Updated: 2020/07/20 18:47:45 by JessicaSmit   ########   odam.nl         */
+/*   Updated: 2020/07/20 19:01:41 by JessicaSmit   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
-
-void		print_help_menu(void)
-{
-	ft_putendl("A map must meet the following requirements to be valid:");
-	ft_putendl("00: A map must be least 5 x 5.");
-	ft_putendl("01: The map's boarder must contain a number between 1 and 4.");
-	ft_putendl("02: There must be a space between every number.");
-	ft_putendl("03: The length of every row must be the same.");
-	ft_putendl("04: The length of every column must be the same.");
-	ft_putendl("Example of a valid 6 x 5 map with only exterior walls:");
-	ft_putendl("1 1 1 1 1 1");
-	ft_putendl("1 0 0 0 0 1");
-	ft_putendl("1 0 0 0 0 1");
-	ft_putendl("1 0 0 0 0 1");
-	ft_putendl("1 1 1 1 1 1");
-	exit(0);
-}
 
 void		put_pixel(t_wolf *wolf, int color, int x, int y)
 {

@@ -6,7 +6,7 @@
 /*   By: mminkjan <mminkjan@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/02/03 20:12:46 by mminkjan      #+#    #+#                 */
-/*   Updated: 2020/06/30 14:46:04 by jesmith       ########   odam.nl         */
+/*   Updated: 2020/07/20 19:02:44 by JessicaSmit   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,6 +179,8 @@ void				put_pixel(t_wolf *wolf, int color, int x, int y);
 void				lst_del(t_item **item, void (ft_del)(void*, size_t));
 void				lst_addback(t_item **item_list, t_item *item);
 double				clamp_angle(double angle);
+
 void				print_help_menu(void);
+void				print_settings_menu(void);
 
 #endif
