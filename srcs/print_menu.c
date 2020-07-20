@@ -6,7 +6,7 @@
 /*   By: JessicaSmith <JessicaSmith@student.coda      +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/07/20 19:01:30 by JessicaSmit   #+#    #+#                 */
-/*   Updated: 2020/07/20 19:11:28 by JessicaSmit   ########   odam.nl         */
+/*   Updated: 2020/07/20 19:15:24 by JessicaSmit   ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void		print_settings_menu(void)
 {
 	ft_putendl("The following keys are used to move around the map:");
 	ft_putendl("Walk forward: w");
-	ft_putendl("Walk backgrounds: s");
+	ft_putendl("Walk backwards: s");
 	ft_putendl("Walk left: a");
 	ft_putendl("Walk right: d\n");
 	ft_putendl("To pan left or right, click and hold mouse then drag");
