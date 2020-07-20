@@ -5,7 +5,12 @@
 ![Demo of 42.fdf](https://github.com/jdsmith022/fdf_/blob/master/pictures/fdf.gif)
 
 ### Description
-This project’s objectives are similar to all this first year’s objectives: Rigor, use of C, use of basic algorithms, information research, data mining etc. As a graphic design project, Wolf3D will enable you to solidify your skills in this area: windows, colors, events, fill shapes etc.
+
+For Wolf3D, my partner and I used ray casting paired with line intersect technique. Unlike other methods that use an algorithm  based on DDA or "Digital Differential Analysis", we used this technique to challenge ourselves futher and implement extra features such as thin walls.
+
+Using a miniblix library provided for the project, Wold3D's objectives include: Rigor, use of C, use of basic algorithms, information research, data mining etc. As a graphic design project, Wolf3D is an exercies that solidifies the skills I have gained in the following areas thus far: windows, colors, events, fill shapes etc.
+
+
 
 For full pdf of project requirements click [here](https://github.com/jdsmith022/fdf/blob/master/wolf3d.en.pdf).
 
@@ -72,7 +77,6 @@ Settings and options can be display by entering the following in command line:
 $ ./wolf3d --settings
 ```
 ![settings display](https://github.com/jdsmith022/Wolfenstein3D/blob/master/images/settings.png)
-
 
 
 ### Collaborator
