@@ -78,7 +78,8 @@ $ ./wolf3d --settings
 ```
 ![settings display](https://github.com/jdsmith022/Wolfenstein3D/blob/master/images/settings.png)
 
-Example of key option alt: 
+Example of key option alt:
+
 ![Demo of color wold3d](https://github.com/jdsmith022/Wolfenstein3D/blob/master/images/color.gif)
 
 
