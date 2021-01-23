@@ -35,7 +35,7 @@ In terminal, go into the project directory. This program uses a makefile to comp
 $ make
 ```
 
-The executable name is fdf. A directory in the repository named maps has a list of landscape maps that can be used. To see names of maps available for use is maps directory of repository, from terminal and in git repository:
+The executable name is wolf3d. A directory in the repository named maps has a list of landscape maps that can be used. To see names of maps available for use is maps directory of repository, from terminal and in git repository:
 ```
 $ ls -la maps/
 ```
