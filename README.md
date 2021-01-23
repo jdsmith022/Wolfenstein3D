@@ -12,7 +12,7 @@ Using a miniblix library provided for the project, Wold3D's objectives include: 
 
 
 
-For full pdf of project requirements click [here](https://github.com/jdsmith022/fdf/blob/master/wolf3d.en.pdf).
+For full pdf of project requirements click [here](https://github.com/jdsmith022/Wolfenstein3D/blob/master/wolf3d.en.pdf).
 
 ### Prerequsites
 XQuartz
